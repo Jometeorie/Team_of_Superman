@@ -2,7 +2,7 @@
 项目管理课程大作业
 
 ## 项目简介
-本项目为一个简单的图书管理系统，分为Admin，Librarian和Reader三个模块
+本项目为一个简单的图书管理系统，分为Admin，Librarian和Reader三个模块，具体要求见Mandarin_2020XDU (optimized).pdf
 
 ## 技术实现
 目前前端打算采用静态页面，运用thymeleaf渲染，前端太难了（逃...，SpringBoot作为后端，MySQL作为数据库开发。
