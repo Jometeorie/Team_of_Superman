@@ -18,13 +18,15 @@
 <hr size="10px" color="grey">
 <br><br>
 <div style="width: 20%;margin-left: 40%;border: 1px solid black;background:honeydew" >
-  <form action="#" method="post"  >
-    身—份：<select>
-    <option>--请选择--</option>
-    <option value="admin">超管</option>
-    <option value="librarian">管理</option>
-    <option value="reader">读者</option>
-  </select><br>
+
+  <form action="#" method="post" >
+     身—份：<select name="identify">
+      <option value="123">--请选择--</option>
+      <option value="supermanager">超管</option>
+      <option value="manager">管理</option>
+     <option value="reader">读者</option>
+     </select><br>
+
     用户名：<input type="text"  name="username" placeholder="请输入用户名"><br>
     密—码：<input type="password" name="password" placeholder="请输入密码"><br>
     保证金：<input type="radio" name="money" value="yes" checked>是</input>
