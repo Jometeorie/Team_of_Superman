@@ -36,7 +36,9 @@ public class RegisterPageControl
             else {
                 System.out.println("Failed register admin!");
             }
+            mv.addObject("isRegister", isRegister);
         }
+
         return mv;
     }
 }
