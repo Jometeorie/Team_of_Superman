@@ -34,8 +34,14 @@
     性—别：<input type="radio" name="gender" value="male" checked>男</input>
     <input type="radio" name="gender" value="female">女</input><br>
     <input type="submit" value="注册"  style="margin-left: 46%" >
+      <span th:if="${isRegister}">
+        <script type="text/javascript">
+           alert("Registered Successfully");
+        </script>
+  </span>
   </form>
 </div><br><br>
+
 <button style="margin-left: 48%"><a href="./Mainpage.html" target="_self" >返回主页</a></button>
 </body>
 </html>
