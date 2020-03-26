@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 import com.example.library.database.src.team.library.demo.*;
 
-import java.util.Random;
+import javax.servlet.http.HttpSession;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -29,6 +29,8 @@ public class LoginPageControl
             boolean isLogin =new Librarian().LibrLogin(username,password);
             if (isLogin) {
                 System.out.println("Successed login librarian!");
+                HttpSession session = request.getSession();
+                session.setAttribute("username", username);
             }
             else {
                 System.out.println("Failed login librarian!");
@@ -40,6 +42,8 @@ public class LoginPageControl
             boolean isLogin =new Reader().ReaderLogin(username,password);
             if (isLogin) {
                 System.out.println("Successed login librarian!");
+                HttpSession session = request.getSession();
+                session.setAttribute("username", username);
             }
             else {
                 System.out.println("Failed login librarian!");
