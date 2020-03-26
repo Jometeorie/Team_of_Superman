@@ -90,7 +90,7 @@ public class Admin {
         PreparedStatement pstmt =null;
         try {
             conn= JdbcUtils.getConnection();
-            String sql="update Admin set STATE=? where ADMIN_ID=?";
+            String sql="update admin set STATE=? where ADMIN_ID=?";
             pstmt=conn.prepareStatement(sql);
             pstmt.setBoolean(1,flag);
             pstmt.setString(2,admin_id);
