@@ -27,6 +27,19 @@
     Username：<input type="text"  name="username" placeholder="please enter your user id"><br>
     Password：<input type="password" name="password" placeholder="please enter your password"><br>
     <input type="submit" value="LOGIN"  style="margin-left: 46%" >
+    <div th:switch = "${isLogin}">
+      <p th:case = "true" >
+        <script type="text/javascript">
+           alert("Login Succeeded");
+        </script>
+      </p>
+      <p th:case = "false" >
+        <script type="text/javascript">
+           alert("Login Failed");
+        </script>
+      </p>
+    </div>
+
   </form>
 </div><br><br>
 <button style="margin-left: 48%"><a href="./Mainpage.html" target="_self" >Back to homepage</a></button>
