@@ -5,36 +5,18 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Scanner;
+import org.junit.Test;
+import org.springframework.jdbc.core.JdbcTemplate;
 
 public class Reader {
-    /*
-     * 用于测试，可能有重复定义的变量
+    /**
+     * 登录测试
      * */
-   public static void main(String[] args)
-    {
-        Scanner in=new Scanner(System.in);
-        System.out.println("请输入账名！");
-        String id=in.nextLine();
-        System.out.println("请输入密码！");
-        String password=in.nextLine();
-        boolean flag =new Reader().ReaderLogin(id,password);
-        System.out.println("登录验证"+flag);
-        System.out.println("请输入修改后的名字！");
-        String name=in.nextLine();
-        Boolean flag2=new Reader().NameModify(id,name);
-        System.out.println("姓名修改验证"+flag2);
-        System.out.println("请输入修改后的邮箱！");
-        String e_mail=in.nextLine();
-        Boolean flag3=new Reader().E_mailModify(id,e_mail);
-        System.out.println("邮箱修改验证"+flag3);
-        System.out.println("请输入修改后的密码！");
-        password=in.nextLine();
-        Boolean flag4=new Reader().PasswordModify(id,password);
-        System.out.println("密码修改验证"+flag4);
-        boolean flag5=new Reader().ReaderLogout(id);
-        System.out.println("登出验证"+flag5);
+    @Test
+    public void test1(){
+        System.out.println(new Reader().ReaderLogin("13512345678","12345678"));//True
+        System.out.println(new Reader().ReaderLogin("1351234567","12345678"));//False
     }
-
     /**
      * 读者登录验证
      * @return 返回boolean值，false为登录失败，true为成功
@@ -64,28 +46,25 @@ public class Reader {
             ChangeState(reader_id,true);
         return flag;
     }
+
     /**
      * 修改状态
     **/
 
     private  boolean ChangeState(String reader_id,Boolean flag){
-        Connection conn=null;
-        PreparedStatement pstmt =null;
-        try {
-            conn= JdbcUtils.getConnection();
-            String sql="update reader set STATE=? where READER_ID=?";
-            pstmt=conn.prepareStatement(sql);
-            pstmt.setBoolean(1,flag);
-            pstmt.setString(2,reader_id);
-            int count=pstmt.executeUpdate();
-            if(count==1)
-                return true;
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }finally {
-            JdbcUtils.close(pstmt,conn);
-        }
+        JdbcTemplate template=new JdbcTemplate(JdbcUtils.getDataSource());
+        String sql="update reader set STATE=? where READER_ID=?";
+        int count=template.update(sql,flag,reader_id);
+        if(count==1)
+            return true;
         return false;
+    }
+    /**
+     * 登出测试
+     * */
+    @Test
+    public void test2(){
+        System.out.println(new Reader().ReaderLogout("13512345678"));//True
     }
     /**
      * 读者登出
@@ -94,27 +73,24 @@ public class Reader {
         return ChangeState(reader_id,false);
     }
     /**
+     * 读者个人信息修改测试
+     * */
+    @Test
+    public void test3(){
+        System.out.println(new Reader().NameModify("13512345678","Amy"));//true
+        System.out.println(new Reader().E_mailModify("13512345678","1234567777@463.com"));//true
+        System.out.println(new Reader().PasswordModify("13512345678","123252"));//true
+    }
+    /**
      * 读者个人信息修改
      * 修改姓名
     * */
     public boolean NameModify(String Reader_ID,String N_name)  {
-        Connection con=null;
-        PreparedStatement stmt=null;
-        ResultSet rs =null;
-        try {
-            con=JdbcUtils.getConnection();
-            String sql="update reader set READER_NAME=? where READER_ID=?";
-            stmt=con.prepareStatement(sql);
-            stmt.setString(1, N_name);
-            stmt.setString(2, Reader_ID);
-            stmt.executeUpdate();
+        JdbcTemplate template=new JdbcTemplate(JdbcUtils.getDataSource());
+        String sql="update reader set READER_NAME=? where READER_ID=?";
+        int count=template.update(sql,N_name,Reader_ID);
+        if(count==1)
             return true;
-        }
-        catch(Exception e) {
-            e.printStackTrace();
-        }finally {
-            JdbcUtils.close(rs,stmt,con);
-        }
         return false;
     }
     /**
@@ -122,23 +98,11 @@ public class Reader {
      * 修改邮箱
      * */
     public boolean E_mailModify(String Reader_ID,String N_Email)  {
-        Connection con=null;
-        PreparedStatement stmt=null;
-        ResultSet rs =null;
-        try {
-            con=JdbcUtils.getConnection();
-            String sql="update reader set E_MAIL=? where READER_ID=?";
-            stmt=con.prepareStatement(sql);
-            stmt.setString(1, N_Email);
-            stmt.setString(2, Reader_ID);
-            stmt.executeUpdate();
+        JdbcTemplate template=new JdbcTemplate(JdbcUtils.getDataSource());
+        String sql="update reader set E_MAIL=? where READER_ID=?";
+        int count=template.update(sql,N_Email,Reader_ID);
+        if(count==1)
             return true;
-        }
-        catch(Exception e) {
-            e.printStackTrace();
-        }finally {
-            JdbcUtils.close(rs,stmt,con);
-        }
         return false;
     }
     /**
@@ -146,26 +110,12 @@ public class Reader {
      * 修改密码
      * */
      boolean PasswordModify(String Reader_ID,String N_Password)  {
-        Connection con=null;
-        PreparedStatement stmt=null;
-        ResultSet rs =null;
-        try {
-            con=JdbcUtils.getConnection();
-            String sql="update reader set PASSWORD=? where READER_ID=?";
-            stmt=con.prepareStatement(sql);
-            stmt.setString(1, N_Password);
-            stmt.setString(2, Reader_ID);
-            stmt.executeUpdate();
-            return true;
-        }
-        catch(Exception e) {
-            e.printStackTrace();
-        }finally {
-            JdbcUtils.close(rs,stmt,con);
-        }
-        return false;
+         JdbcTemplate template=new JdbcTemplate(JdbcUtils.getDataSource());
+         String sql="update reader set PASSWORD=? where READER_ID=?";
+         int count=template.update(sql,N_Password,Reader_ID);
+         if(count==1)
+             return true;
+         return false;
     }
 
 }
-
-

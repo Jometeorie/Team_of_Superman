@@ -1,6 +1,8 @@
 package com.example.library.database.src.team.library.demo;
 
 import sun.security.util.Password;
+import org.junit.Test;
+import org.springframework.jdbc.core.JdbcTemplate;
 import com.example.library.database.src.team.library.util.JdbcUtils;
 
 import java.math.BigDecimal;
@@ -11,49 +13,14 @@ import java.sql.SQLException;
 import java.util.Scanner;
 
 public class Librarian {
-    /*
-     * 用于测试，可能有重复定义的变量
+    /**
+     * 登录测试
      * */
-   /* public static void main(String[] args)
-    {
-        Scanner in=new Scanner(System.in);
-        System.out.println("请输入账名！");
-        String id=in.nextLine();
-        System.out.println("请输入密码！");
-        String password=in.nextLine();
-        boolean flag =new Librarian().LibrLogin(id,password);
-        System.out.println("登录验证"+flag);
-        System.out.println("请输入修改后的名字！");
-        String name=in.nextLine();
-        Boolean flag2=new Librarian().LNameModify(id,name);
-        System.out.println("姓名修改验证"+flag2);
-        System.out.println("请输入修改后的密码！");
-        password=in.nextLine();
-        Boolean flag3=new Librarian().LPasswordModify(id,password);
-        System.out.println("密码修改验证"+flag3);
-        System.out.println("请输入读者账名！");
-        String user_id=in.nextLine();
-        System.out.println("请输入读者名字！");
-        String user_name=in.nextLine();
-        System.out.println("请输入读者邮箱！");
-        String e_mail=in.nextLine();
-        Boolean flag4=new Librarian().ReaderRegister(user_id,user_name,e_mail);
-        System.out.println("用户注册验证"+flag4);
-        System.out.println("请输入要删除的读者账名！");
-        String userd_id=in.nextLine();
-        Boolean flag5=new Librarian().DeleteReader("18391669235");
-        System.out.println("删除读者用户"+flag5);
-        System.out.println("请输入登出用户账名！");
-        id=in.nextLine();
-        boolean flag6=new Librarian().LibrLogout(id);
-        System.out.println("登出验证"+flag6);
-        System.out.println("请输入读者账名！");
-        String user_id2=in.nextLine();
-        System.out.println("请输入读者邮箱！");
-        String e_mail2=in.nextLine();
-        String rs=new Librarian().FindPassword(user_id2,e_mail2);
-        System.out.println(rs);
-    }*/
+    @Test
+    public void test1(){
+        System.out.println(new Librarian().LibrLogin("17130177001","123456789"));//True
+        System.out.println(new Librarian().LibrLogin("1351234567","12345678"));//False
+    }
     /**
      * 管理员登录验证
      * @return 返回boolean值，false为登录失败，true为成功
@@ -92,22 +59,20 @@ public class Librarian {
      * 修改状态
      **/
     private  boolean ChangeState(String libr_id,Boolean flag){
-        Connection conn=null;
-        PreparedStatement pstmt =null;
-        try {
-            conn= JdbcUtils.getConnection();
-            String sql="update librarian set STATE=? where LIBR_ID=?";
-            pstmt=conn.prepareStatement(sql);
-            pstmt.setBoolean(1,flag);
-            pstmt.setString(2,libr_id);
-            pstmt.executeUpdate();
+        JdbcTemplate template=new JdbcTemplate(JdbcUtils.getDataSource());
+        String sql="update librarian set STATE=? where LIBR_ID=?";
+        int count=template.update(sql,flag,libr_id);
+        if(count==1)
             return true;
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }finally {
-            JdbcUtils.close(pstmt,conn);
-        }
         return false;
+    }
+
+    /**
+     * 登出测试
+     * */
+    @Test
+    public void test2(){
+        System.out.println(new Librarian().LibrLogout("17130177001"));//True
     }
     /**
      * 读者登出
@@ -116,30 +81,26 @@ public class Librarian {
         return ChangeState(libr_id,false);
     }
 
+
+    /**
+     * 管理员个人信息修改测试
+     * */
+    @Test
+    public void test3() {
+        System.out.println(new Librarian().LPasswordModify("17130177001", "1234555"));//true
+        System.out.println(new Librarian().LNameModify("17130177001", "Tracy"));//true
+    }
+
     /**
      * 管理员个人信息修改
      * 修改姓名
      * */
     public boolean LNameModify(String Libr_ID,String N_Name)  {
-        Connection con=null;
-        PreparedStatement stmt=null;
-        ResultSet rs =null;
-        try {
-            con=JdbcUtils.getConnection();
-            String sql="update librarian set LIBR_NAME=? where LIBR_ID=?";
-            stmt=con.prepareStatement(sql);
-            stmt.setString(1,N_Name );
-            stmt.setString(2, Libr_ID);
-            int count=stmt.executeUpdate();
-            if(count==1){
-                return true;
-            }
-        }
-        catch(Exception e) {
-            e.printStackTrace();
-        }finally {
-            JdbcUtils.close(rs,stmt,con);
-        }
+        JdbcTemplate template=new JdbcTemplate(JdbcUtils.getDataSource());
+        String sql="update librarian set LIBR_NAME=? where LIBR_ID=?";
+        int count=template.update(sql,N_Name,Libr_ID);
+        if(count==1)
+            return true;
         return false;
     }
     /**
@@ -147,28 +108,18 @@ public class Librarian {
      * 修改密码
      * */
     public boolean LPasswordModify(String Libr_ID,String N_Password)  {
-        Connection con=null;
-        PreparedStatement stmt=null;
-        ResultSet rs =null;
-        try {
-            con=JdbcUtils.getConnection();
-            String sql="update librarian set PASSWORD=? where LIBR_ID=?";
-            stmt=con.prepareStatement(sql);
-            stmt.setString(1, N_Password);
-            stmt.setString(2, Libr_ID);
-            int count=stmt.executeUpdate();
-            if(count==1){
-                return true;
-            }
-        }
-        catch(Exception e) {
-            e.printStackTrace();
-        }finally {
-            JdbcUtils.close(rs,stmt,con);
-        }
+        JdbcTemplate template=new JdbcTemplate(JdbcUtils.getDataSource());
+        String sql="update librarian set PASSWORD=? where LIBR_ID=?";
+        int count=template.update(sql,N_Password,Libr_ID);
+        if(count==1)
+            return true;
         return false;
     }
 
+    @Test
+    public void test4(){
+        System.out.println(new Librarian().FindPassword("13412345679","12345678@qq.com"));
+    }
     /**
      * 找回密码
      * */
@@ -198,29 +149,24 @@ public class Librarian {
         return null;
     }
 
+    @Test
+    public  void test5(){
+        System.out.println(new Librarian().ReaderRegister("13412345655","Momo","1234678@qq.com"));
+        System.out.println(new Librarian().DeleteReader("13412345655"));
+
+    }
+
+
     /**
      * 通过管理员注册
      * 注册读者账号
      * */
     public boolean ReaderRegister(String READER_ID,String name,String E_mail) {
-        Connection con=null;
-        PreparedStatement stmt=null;
-        ResultSet rs =null;
-        try {
-            con=JdbcUtils.getConnection();
-            String sql="insert into reader(READER_ID,READER_NAME,E_MAIL)values(?,?,?)";
-            stmt=con.prepareStatement(sql);
-            stmt.setString(1, READER_ID);
-            stmt.setString(2, name);
-            stmt.setString(3, E_mail);
-            stmt.executeUpdate();
+        JdbcTemplate template=new JdbcTemplate(JdbcUtils.getDataSource());
+        String sql="insert into reader(READER_ID,READER_NAME,E_MAIL)values(?,?,?)";
+        int count=template.update(sql,READER_ID,name,E_mail);
+        if(count==1)
             return true;
-        }
-        catch(Exception e) {
-            e.printStackTrace();
-        }finally {
-            JdbcUtils.close(rs,stmt,con);
-        }
         return false;
     }
     /**
@@ -249,6 +195,7 @@ public class Librarian {
         }
         return false;
     }
+
     /**管理员修改读者信息
     * */
     public boolean NameModify(String Reader_ID,String N_name)  {
