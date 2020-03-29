@@ -1,52 +1,23 @@
 package com.example.library.database.src.team.library.demo;
 
+import org.junit.Test;
+import org.springframework.jdbc.core.JdbcTemplate;
 import com.example.library.database.src.team.library.util.JdbcUtils;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Scanner;
 
 public class Admin {
-    /*
-    * 用于测试，可能有重复定义的变量
-    * */
-   /* public static void main(String[] args)
-    {
-        Scanner in=new Scanner(System.in);
-        System.out.println("请输入账名！");
-        String id=in.nextLine();
-        System.out.println("请输入密码！");
-        String password=in.nextLine();
-        boolean flag =new Admin().AdminLogin(id,password);
-        System.out.println("登录验证"+flag);
-        System.out.println("请输入账名！");
-        String id=in.nextLine();
-        System.out.println("请输入修改后的名字！");
-        String name=in.nextLine();
-        Boolean flag2=new Admin().LNameModify(id,name);
-        System.out.println("姓名修改验证"+flag2);
-        System.out.println("请输入修改后的密码！");
-        String password=in.nextLine();
-        Boolean flag3=new Admin().LPasswordModify(id,password);
-        System.out.println("密码修改验证"+flag3);
-        System.out.println("请输入管理员账名！");
-        String libr_id=in.nextLine();
-        System.out.println("请输入管理员名字！");
-        String libr_name=in.nextLine();
-        Boolean flag4=new Admin().LibrRegister(libr_id,libr_name);
-        System.out.println("管理员注册验证"+flag4);
-        System.out.println("请输入要删除的管理员账名！");
-        String libr1_id=in.nextLine();
-        Boolean flag5=new Admin().DeleteLibr(libr1_id);
-        System.out.println("删除管理员用户"+flag5);
-        System.out.println("请输入登出用户账名！");
-        String id1=in.nextLine();
-        boolean flag6=new Librarian().LibrLogout(id1);
-        System.out.println("登出验证"+flag6);
-
-    }*/
+    /**
+     * 登录测试
+     * */
+    @Test
+    public void test1(){
+        System.out.println(new Admin().AdminLogin("17130166001","152152"));//True
+        System.out.println(new Admin().AdminLogin("1351234567","12345678"));//False
+    }
     /**
      * 超级管理员登录验证
      * @return 返回boolean值，false为登录失败，true为成功
@@ -86,121 +57,158 @@ public class Admin {
      **/
 
     public  boolean ChangeState(String admin_id,Boolean flag){
-        Connection conn=null;
-        PreparedStatement pstmt =null;
-        try {
-            conn= JdbcUtils.getConnection();
-            String sql="update Admin set STATE=? where ADMIN_ID=?";
-            pstmt=conn.prepareStatement(sql);
-            pstmt.setBoolean(1,flag);
-            pstmt.setString(2,admin_id);
-            int count=pstmt.executeUpdate();
-            if(count==1){
-                return true;
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }finally {
-            JdbcUtils.close(pstmt,conn);
-        }
+        JdbcTemplate template=new JdbcTemplate(JdbcUtils.getDataSource());
+        String sql="update admin set STATE=? where ADMIN_ID=?";
+        int count=template.update(sql,flag,admin_id);
+        if(count==1)
+            return true;
         return false;
     }
     /**
-     * 读者登出
+     * 登出测试
+     * */
+    @Test
+    public void test2(){
+        System.out.println(new Admin().AdminLogout("17130166001"));//True
+    }
+    /**
+     * 超级管理员登出
      * */
     public  boolean AdminLogout(String admin_id){
         return ChangeState(admin_id,false);
     }
     /**
+     * 注册管理员账号测试
+     * */
+    @Test
+    public void test3(){
+        System.out.println(new Admin().LibrRegister("17130177005","Lora"));//报错可能是数据库中已经有了改用户
+    }
+    /**
      * 注册管理员账号
      * */
     public static boolean LibrRegister(String Libr_ID,String name) {
-        Connection con=null;
-        PreparedStatement stmt=null;
-        ResultSet rs =null;
-        try {
-            con=JdbcUtils.getConnection();
-            String sql="insert into librarian(LIBR_ID,LIBR_NAME)values(?,?)";
-            stmt=con.prepareStatement(sql);
-            stmt.setString(1, Libr_ID);
-            stmt.setString(2, name);
-            int count=stmt.executeUpdate();
-            if(count==1){
-                return true;
-            }
-
-        }
-        catch(Exception e) {
-            e.printStackTrace();
-        }finally {
-            JdbcUtils.close(rs,stmt,con);
-        }
+        JdbcTemplate template=new JdbcTemplate(JdbcUtils.getDataSource());
+        String sql="insert into librarian(LIBR_ID,LIBR_NAME)values(?,?)";
+        int count=template.update(sql,Libr_ID,name);
+        if(count==1)
+            return true;
         return false;
     }
+
     /**
-     * 注册超级管理员账号
+     * 删除管理员账号测试
      * */
-    public static boolean AdminRegister(String Admin_ID,String name,String password) {
-        Connection con=null;
-        PreparedStatement stmt=null;
-        ResultSet rs =null;
-        try {
-            con=JdbcUtils.getConnection();
-            String sql="insert into admin(ADMIN_ID,ADMIN_NAME,PASSWORD)values(?,?,?)";
-            stmt=con.prepareStatement(sql);
-            stmt.setString(1, Admin_ID);
-            stmt.setString(2, name);
-            stmt.setString(3, password);
-            int count=stmt.executeUpdate();
-            if(count==1){
-                return true;
-            }
-
-        }
-        catch(Exception e) {
-            e.printStackTrace();
-        }finally {
-            JdbcUtils.close(rs,stmt,con);
-        }
-        return false;
+    @Test
+    public void test4(){
+        System.out.println(new Admin().DeleteLibr("17130177005"));
     }
+
     /**
      * 删除图书管理员账号
      * */
     private static boolean DeleteLibr(String Libr_ID) {
-        Connection con=null;
-        PreparedStatement stmt=null;
-        ResultSet rs =null;
-        try {
-            con=JdbcUtils.getConnection();
-            String sql="delete from librarian where LIBR_ID=?";
-            stmt=con.prepareStatement(sql);
-            stmt.setString(1, Libr_ID);
-            int count=stmt.executeUpdate();
-            if(count==1){
-                return true;
-            }
-        }
-        catch(Exception e) {
-            e.printStackTrace();
-        }finally {
-            JdbcUtils.close(rs,stmt,con);
-        }
+        JdbcTemplate template=new JdbcTemplate(JdbcUtils.getDataSource());
+        String sql="delete from librarian where LIBR_ID=?";
+        int count=template.update(sql,Libr_ID);
+        if(count==1)
+            return true;
         return false;
+    }
+
+    /**
+     * 超级管理员修改管理员个人信息测试
+     * */
+    @Test
+    public void test5(){
+        System.out.println(new Admin().LPasswordModify("17130177002","111111"));//true
+        System.out.println(new Admin().LNameModify("17130177002","Brandt"));//true
+
     }
     /**
      * 超级管理员修改管理员个人信息
      * 修改密码
      * */
     public boolean LPasswordModify(String Libr_ID,String N_Password)  {
-       return new Librarian().LPasswordModify(Libr_ID,N_Password);
+        return new Librarian().LPasswordModify(Libr_ID,N_Password);
     }
     /**
      * 超级管理员修改管理员个人信息
      * 修改姓名
      * */
     public boolean LNameModify(String Libr_ID,String N_Name)  {
-       return new Librarian().LNameModify(Libr_ID,N_Name);
+        return new Librarian().LNameModify(Libr_ID,N_Name);
     }
 
+    /**
+     * 超级管理员找回管理员密码测试
+     * */
+    @Test
+    public void test6(){
+        System.out.println(new Admin().FindLPassword("17130177001"));//true
+    }
+    /**
+     * 超级管理员找回管理员密码
+     * */
+    public String FindLPassword(String Libr_ID){
+        Connection conn=null;
+        ResultSet rs=null;
+        PreparedStatement pstmt =null;
+        try {
+            conn= JdbcUtils.getConnection();
+            String sql="select * from librarian where LIBR_ID=? ";
+            pstmt=conn.prepareStatement(sql);
+            pstmt.setString(1,Libr_ID);
+            rs= pstmt.executeQuery();
+            while(rs.next()){
+                String res=rs.getString("PASSWORD");
+                return res;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }finally {
+            JdbcUtils.close(rs,pstmt,conn);
+        }
+        return null;
+
+    }
+
+
+    /**
+     * 注册管理员账号测试
+     * */
+    @Test
+    public void test7(){
+        System.out.println(new Admin().AdminRegister("17130166004","Nacy","123456"));//下次测试要更改id!!
+    }
+    /**
+     * 注册超级管理员账号
+     * */
+    public static boolean AdminRegister(String Admin_ID,String name,String password) {
+        JdbcTemplate template=new JdbcTemplate(JdbcUtils.getDataSource());
+        String sql="insert into admin(ADMIN_ID,ADMIN_NAME,PASSWORD)values(?,?,?)";
+        int count=template.update(sql,Admin_ID,name,password);
+        if(count==1)
+            return true;
+        return false;
+    }
+
+    /**
+     * 超级管理员修改其密码测试
+     * */
+    @Test
+    public void test8(){
+        System.out.println(new Admin().APasswordModify("17130166003","1255"));
+    }
+    /**
+     * 超级管理员修改其密码
+     * */
+    public boolean APasswordModify(String admin_id,String password)  {
+        JdbcTemplate template=new JdbcTemplate(JdbcUtils.getDataSource());
+        String sql="UPDATE admin set PASSWORD=? where ADMIN_ID=?";
+        int count=template.update(sql,password,admin_id);
+        if(count==1)
+            return true;
+        return false;
+    }
 }
