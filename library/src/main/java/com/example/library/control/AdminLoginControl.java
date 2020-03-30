@@ -9,6 +9,8 @@ import javax.servlet.http.HttpSession;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import java.io.IOException;
+
 @RestController
 public class AdminLoginControl
 {
@@ -19,7 +21,7 @@ public class AdminLoginControl
     }
 
     @RequestMapping(value = "/AdminLogin", method = RequestMethod.POST)
-    public ModelAndView postLogin(ModelAndView mv, HttpServletRequest request, HttpServletResponse response) {
+    public void postLogin(ModelAndView mv, HttpServletRequest request, HttpServletResponse response)  throws IOException{
         String username = request.getParameter("username");
         String password = request.getParameter("password");
 
@@ -28,14 +30,11 @@ public class AdminLoginControl
             System.out.println("Successed login librarian!");
             HttpSession session = request.getSession();
             session.setAttribute("username", username);
+            response.sendRedirect("ADPage");
         }
         else {
             System.out.println("Failed login librarian!");
         }
         mv.addObject("isLogin", isLogin);
-        
-
-
-        return mv;
     }
 }

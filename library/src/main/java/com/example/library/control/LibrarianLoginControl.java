@@ -10,6 +10,8 @@ import javax.servlet.http.HttpSession;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import java.io.IOException;
+
 @RestController
 public class LibrarianLoginControl
 {
@@ -20,7 +22,7 @@ public class LibrarianLoginControl
     }
 
     @RequestMapping(value = "/LibrarianLogin", method = RequestMethod.POST)
-    public ModelAndView postLogin(ModelAndView mv, HttpServletRequest request, HttpServletResponse response) {
+    public  void postLogin(ModelAndView mv, HttpServletRequest request, HttpServletResponse response)  throws IOException{
         String username = request.getParameter("username");
         String password = request.getParameter("password");
 
@@ -29,12 +31,11 @@ public class LibrarianLoginControl
             System.out.println("Successed login librarian!");
             HttpSession session = request.getSession();
             session.setAttribute("username", username);
+            response.sendRedirect("LibrarianPage");
         }
         else {
             System.out.println("Failed login librarian!");
         }
         mv.addObject("isLogin", isLogin);
-
-        return mv;
     }
 }
