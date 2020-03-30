@@ -24,7 +24,7 @@ public class RegisterControl
         String username = request.getParameter("username");
         String password = request.getParameter("password");
         String email = request.getParameter("email");
-        String name = request.getParameter("name")
+        String name = request.getParameter("name");
         String tel = request.getParameter("tel");
         String gender = request.getParameter("gender");
         String bond = request.getParameter("bond");
