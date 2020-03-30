@@ -50,15 +50,6 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
-	
-
-		<!--WEB支持-->
-		<dependency>
-    		<groupId>org.springframework.boot</groupId>
-    		<artifactId>spring-boot-starter-web</artifactId>
-		</dependency>
-
-
 		<dependency>
     		<groupId>com.alibaba</groupId>
     		<artifactId>druid</artifactId>
