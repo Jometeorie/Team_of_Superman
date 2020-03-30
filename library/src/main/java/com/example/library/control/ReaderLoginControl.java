@@ -21,35 +21,19 @@ public class ReaderLoginControl
 
     @RequestMapping(value = "/ReaderLogin", method = RequestMethod.POST)
     public ModelAndView postLogin(ModelAndView mv, HttpServletRequest request, HttpServletResponse response) {
-        String identify = request.getParameter("identify");
         String username = request.getParameter("username");
         String password = request.getParameter("password");
 
-        if (identify.equals("librarian")) {
-            boolean isLogin =new Librarian().LibrLogin(username,password);
-            if (isLogin) {
-                System.out.println("Successed login librarian!");
-                HttpSession session = request.getSession();
-                session.setAttribute("username", username);
-            }
-            else {
-                System.out.println("Failed login librarian!");
-            }
-            mv.addObject("isLogin", isLogin);
+        boolean isLogin =new Reader().ReaderLogin(username,password);
+        if (isLogin) {
+            System.out.println("Successed login librarian!");
+            HttpSession session = request.getSession();
+            session.setAttribute("username", username);
         }
-
-        if (identify.equals("reader")) {
-            boolean isLogin =new Reader().ReaderLogin(username,password);
-            if (isLogin) {
-                System.out.println("Successed login librarian!");
-                HttpSession session = request.getSession();
-                session.setAttribute("username", username);
-            }
-            else {
-                System.out.println("Failed login librarian!");
-            }
-            mv.addObject("isLogin", isLogin);
+        else {
+            System.out.println("Failed login librarian!");
         }
+        mv.addObject("isLogin", isLogin);
 
         return mv;
     }
