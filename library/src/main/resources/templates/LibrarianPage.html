@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+      *{
+        margin:0px;
+        margin:0px;
+        box-sizing:border-box ;
+      }
+      body{
+        background: url("img/timg.jfif");
+        background-size: cover;
+        background-repeat: no-repeat;
+      }
+
+      .mp_head{
+        background-color: white;
+        width:100%;
+        height: 113px;
+      }
+
+      .mp_logo{
+        float:left;
+      }
+
+      .mp_title{
+        height: 113px;
+        margin-left: 380px;
+        padding-top: 30px;
+        float:left;
+        font-size: 60px;
+      }
+
+      .mp_search{
+        width:1000px;
+        height: 200px;
+        margin-left: 300px;
+        padding-left: 120px;
+        padding-top: 100px;
+      }
+
+
+      #search{
+        width:500px;
+        height:42px;
+        border: 1px solid grey;
+        border-radius: 5px;
+      }
+
+      #img_search{
+        height:42px;
+        vertical-align: middle;
+      }
+
+      .bt_rr{
+        float: left;
+        background-color: lavenderblush;
+        margin-left: 380px;
+        height: 250px;
+        width: 180px;
+      }
+
+      .bt_ab{
+        float: left;
+        background-color: lightyellow;
+        margin-left: 140px;
+        height: 250px;
+        width: 180px;
+      }
+
+      .bt_db{
+        float:right;
+        background-color:#b3d4fc ;
+        margin-right: 350px;
+        height: 250px;
+        width: 180px;
+      }
+
+    </style>
+</head>
+<body>
+    <div class="mp_head">
+      <div class="mp_logo">
+         <button><a href="MainPage.html"><img src="img/logo.png"></a></button>
+      </div>
+      <div class="mp_title">
+        <p>LibrarianPage</p>
+      </div>
+
+    </div>
+    <hr size="20px" color="black">
+
+    <div class="mp_search">
+      <td><label for="search">Search:</label></td>
+      <td><input type="search" name="search" id="search" placeholder="Search Book"><button type="submit"><img src="img/search.jfif" id="img_search"></button></td>
+    </div>
+
+    <div>
+      <div>
+        <a href="register.html"><button class="bt_rr" type="button" autofocus>读者注册(ReaderRegister)</button></a>
+      </div>
+      <div>
+        <button class="bt_ab" type="button" autofocus>增加书籍(AddBooks)</button>
+      </div>
+      <div>
+        <button class="bt_db" type="button" autofocus>删除书籍(DeleteBooks)</button>
+      </div>
+    </div>
+
+</body>
+</html>
