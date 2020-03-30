@@ -7,14 +7,14 @@ import org.springframework.web.servlet.ModelAndView;
 import com.example.library.database.src.team.library.demo.*;
 
 @RestController
-public class MainPageControl
+public class ADPageControl
 {
-    @RequestMapping(value = "/MainPage", method = RequestMethod.GET)
+    @RequestMapping(value = "/ADPage", method = RequestMethod.GET)
     public ModelAndView test(ModelAndView mv) {
-        mv.setViewName("/MainPage");
+        mv.setViewName("/ADPage");
         return mv;
     }
 
-    // @RequestMapping(value = "/Mainpage", method = RequestMethod.POST HttpServletRequest request, HttpServletResponse response)
+    // @RequestMapping(value = "/ADPage", method = RequestMethod.POST HttpServletRequest request, HttpServletResponse response)
 
 }

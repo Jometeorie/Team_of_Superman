@@ -10,15 +10,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 @RestController
-public class AdminLoginPageControl
+public class AdminLoginControl
 {
-    @RequestMapping(value = "/AdminLoginPage", method = RequestMethod.GET)
+    @RequestMapping(value = "/AdminLogin", method = RequestMethod.GET)
     public ModelAndView getView(ModelAndView mv) {
-        mv.setViewName("/AdminLoginPage");
+        mv.setViewName("/AdminLogin");
         return mv;
     }
 
-    @RequestMapping(value = "/AdminLoginPage", method = RequestMethod.POST)
+    @RequestMapping(value = "/AdminLogin", method = RequestMethod.POST)
     public ModelAndView postLogin(ModelAndView mv, HttpServletRequest request, HttpServletResponse response) {
         String username = request.getParameter("username");
         String password = request.getParameter("password");

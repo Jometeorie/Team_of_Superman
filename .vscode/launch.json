@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "CodeLens (Launch) - Book",
+            "request": "launch",
+            "mainClass": "com.example.library.database.src.team.library.demo.Book",
+            "projectName": "library"
+        },
+        {
+            "type": "java",
             "name": "Debug (Launch) - Current File",
             "request": "launch",
             "mainClass": "${file}"

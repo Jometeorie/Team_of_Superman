@@ -165,6 +165,11 @@ public class Book{
         return false;
     }
 
-
-
+    public static void main(String[] args)  {
+        List<Map<String, Object>> list=new Book().SearchBook("The");
+        for (Map<String, Object> stringObjectMap : list) {
+            System.out.println(stringObjectMap.get("PRICE"));
+            Object ooo = stringObjectMap.get("PRICE");
+        }
+    }
 }
