@@ -11,15 +11,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 @RestController
-public class LoginPageControl
+public class ReaderLoginControl
 {
-    @RequestMapping(value = "/LoginPage", method = RequestMethod.GET)
+    @RequestMapping(value = "/ReaderLogin", method = RequestMethod.GET)
     public ModelAndView getView(ModelAndView mv) {
-        mv.setViewName("/LoginPage");
+        mv.setViewName("/ReaderLogin");
         return mv;
     }
 
-    @RequestMapping(value = "/LoginPage", method = RequestMethod.POST)
+    @RequestMapping(value = "/ReaderLogin", method = RequestMethod.POST)
     public ModelAndView postLogin(ModelAndView mv, HttpServletRequest request, HttpServletResponse response) {
         String identify = request.getParameter("identify");
         String username = request.getParameter("username");
