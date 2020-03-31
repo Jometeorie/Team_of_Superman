@@ -3,6 +3,7 @@ package com.example.library.database.src.team.library.demo;
 import org.junit.Test;
 import org.springframework.jdbc.core.JdbcTemplate;
 import com.example.library.database.src.team.library.util.JdbcUtils;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 
 import java.math.BigDecimal;
 import java.sql.Connection;
@@ -37,8 +38,8 @@ public class Book{
      * 返回信息：BOOK_NAME,AUTHOR,LOCATION,PRICE,CATEGORY,STATE
      * 返回List集合
      * */
-    }
-    public List SearchBook(String str){
+
+    public List<BookInfo> SearchBook(String str){
         JdbcTemplate template = new JdbcTemplate(JdbcUtils.getDataSource());
         String sql = "select BOOK_NAME,AUTHOR,LOCATION,PRICE,CATEGORY,STATE from book where BOOK_NAME like ?";
         List<BookInfo> list=template.query(sql,new BeanPropertyRowMapper<BookInfo>(BookInfo.class),"%" + str + "%");
@@ -175,10 +176,6 @@ public class Book{
     }
 
     public static void main(String[] args)  {
-        List<Map<String, Object>> list=new Book().SearchBook("The");
-        for (Map<String, Object> stringObjectMap : list) {
-            System.out.println(stringObjectMap.get("PRICE"));
-            Object ooo = stringObjectMap.get("PRICE");
-        }
+            new Book().test1();
     }
 }

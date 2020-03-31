@@ -1,4 +1,4 @@
-package team.library.demo;
+package com.example.library.database.src.team.library.demo;
 
 import java.math.BigDecimal;
 
