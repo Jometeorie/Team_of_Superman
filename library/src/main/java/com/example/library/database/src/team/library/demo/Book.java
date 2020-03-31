@@ -19,9 +19,18 @@ public class Book{
      * */
     @Test
     public void test1(){
-        List<Map<String, Object>> list=new Book().SearchBook("The");
-        for (Map<String, Object> stringObjectMap : list) {
-            System.out.println(stringObjectMap);
+        List<BookInfo> list = SearchBook("h");
+        String name;
+        String location;
+       /* for (BookInfo bookinfo : list) {
+            System.out.println(bookinfo);
+        }*/
+        for (BookInfo bookinfo : list) {
+            name=bookinfo.getBook_name();
+            System.out.println(name);
+            location=bookinfo.getLocation();
+            System.out.println(location);
+        }
     }
     /**
      * 书籍模糊查询
@@ -30,9 +39,9 @@ public class Book{
      * */
     }
     public List SearchBook(String str){
-        JdbcTemplate template=new JdbcTemplate(JdbcUtils.getDataSource());
+        JdbcTemplate template = new JdbcTemplate(JdbcUtils.getDataSource());
         String sql = "select BOOK_NAME,AUTHOR,LOCATION,PRICE,CATEGORY,STATE from book where BOOK_NAME like ?";
-        List<Map<String, Object>> list = template.queryForList(sql,"%" + str + "%");
+        List<BookInfo> list=template.query(sql,new BeanPropertyRowMapper<BookInfo>(BookInfo.class),"%" + str + "%");
         return list;
     }
     /**
