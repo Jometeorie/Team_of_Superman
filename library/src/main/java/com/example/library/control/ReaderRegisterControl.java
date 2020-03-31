@@ -11,15 +11,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 @RestController
-public class RegisterControl
+public class ReaderRegisterControl
 {
-    @RequestMapping(value = "/Register", method = RequestMethod.GET)
+    @RequestMapping(value = "/ReaderRegister", method = RequestMethod.GET)
     public ModelAndView getView(ModelAndView mv) {
-        mv.setViewName("/Register");
+        mv.setViewName("/ReaderRegister");
         return mv;
     }
 
-    @RequestMapping(value = "/Regiseter ", method = RequestMethod.POST)
+    @RequestMapping(value = "/ReaderRegister", method = RequestMethod.POST)
     public ModelAndView postRegister(ModelAndView mv, HttpServletRequest request, HttpServletResponse response) {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
@@ -30,7 +30,7 @@ public class RegisterControl
         String bond = request.getParameter("bond");
 
         String id = String.valueOf(new Random().nextInt(99999999));
-        boolean isRegister =new Admin().AdminRegister(id, username, password);
+        boolean isRegister =new Librarian().ReaderRegister(id, username, password);
         if (isRegister) {
             System.out.println("Successed register admin!");
         }
