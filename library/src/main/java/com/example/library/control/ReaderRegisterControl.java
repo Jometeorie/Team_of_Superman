@@ -29,8 +29,8 @@ public class ReaderRegisterControl
         String gender = request.getParameter("gender");
         String bond = request.getParameter("bond");
 
-        String id = String.valueOf(new Random().nextInt(99999999));
-        boolean isRegister =new Librarian().ReaderRegister(id, username, password);
+        // String id = String.valueOf(new Random().nextInt(99999999));
+        boolean isRegister =new Librarian().ReaderRegister(tel, username, password);
         if (isRegister) {
             System.out.println("Successed register admin!");
         }
