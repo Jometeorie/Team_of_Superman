@@ -22,7 +22,7 @@ public class LibrarianLoginControl
     }
 
     @RequestMapping(value = "/LibrarianLogin", method = RequestMethod.POST)
-    public  void postLogin(ModelAndView mv, HttpServletRequest request, HttpServletResponse response)  throws IOException{
+    public  void postLogin(ModelAndView mv, HttpServletRequest request, HttpServletResponse response)  throws IOException {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
 
