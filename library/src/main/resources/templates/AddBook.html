@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Register</title>
+  <style>
+    *{
+      margin:0px;
+      margin:0px;
+      box-sizing:border-box ;
+    }
+    body{
+      background: url("img/timg.jfif");
+      background-size: cover;
+      background-repeat: no-repeat;
+    }
+    .rg_logo{
+      float:left;
+    }
+
+
+    .rg_layout{
+      width: 900px;
+      height:600px;
+      border:8px solid gray;
+      background-color: white;
+      margin-right: 300px;
+      padding:15px;
+      margin-top: 90px;
+      float:right;
+    }
+
+    .rg_left{
+      float: left;
+      margin: 15px;
+    }
+
+    .rg_left > p:first-child{
+      color:yellow;
+      font-size:20px;
+    }
+    .rg_left > p:last-child{
+      color:gray;
+      font-size:10px;
+    }
+
+    .rg_center{
+
+      float:left;
+      margin-left: 50px;
+      padding-top: 50px;
+    }
+
+    .td_left{
+      width:200px;
+      text-align: right;
+      height:45px;
+    }
+
+    .td_right{
+      padding-left: 20px;
+    }
+
+    #ISBN,#name,#author ,#place,#price{
+      width:250px;
+      height:32px;
+      border: 1px solid grey;
+      border-radius: 5px;
+      padding-left: 10px;
+    }
+
+    #intro{
+      width:250px;
+      height:100px;
+      border: 1px solid grey;
+      border-radius: 5px;
+      padding-left: 10px;
+    }
+
+  </style>
+</head>
+<body>
+<div class="rg_logo">
+  <button><a href="MainPage.html"><img src="img/logo.png"></a></button>
+</div>
+<div class="rg_layout">
+  <div class="rg_left">
+    <p>添加书籍</p>
+    <p>Add Book</p>
+  </div>
+  <div class="rg_center">
+
+
+
+    <div class="rg_form">
+      <form action="#" method="post">
+        <table>
+          <tr>
+            <td class="td_left"><label for="Cover">cover</label></td>
+            <td class="td_right"><input type="file" name="Cover" id="Cover"></td>
+          </tr>
+
+
+          <tr>
+            <td class="td_left"><label for="name">name</label></td>
+            <td class="td_right"><input type="text" name="name" id="name" placeholder="No More Than 30 Characters" ></td>
+          </tr>
+
+          <tr>
+            <td class="td_left"><label for="ISBN">ibsn</label></td>
+            <td class="td_right"><input type="number" name="ISBN" id="ISBN" placeholder="Place Enter A Stand ISBN"></td>
+          </tr>
+
+          <tr>
+            <td class="td_left"><label for="author">author</label></td>
+            <td class="td_right"><input type="text" name="author" id="author" placeholder="No More Than 20 Characters"></td>
+          </tr>
+
+
+          <tr>
+            <td class="td_left"><label for="place">place</label></td>
+            <td class="td_right"><input type="text" name="place" id="place" placeholder="No More Than 30 Characters"></td>
+          </tr>
+
+          <tr>
+            <td class="td_left"><label for="price">price</label></td>
+            <td class="td_right"><input type="number" name="price" id="price" placeholder="Place Enter A Stand ISBN"></td>
+          </tr>
+
+          <tr>
+            <td class="td_left"><label for="intro">introduction</label></td>
+            <td class="td_right"><input type="text" name="introduction" id="intro" placeholder="Place Enter A Introduction"></td>
+          </tr>
+
+          <tr>
+            <td class="td_left"><label for="QRcode">QR code</label></td>
+            <td class="td_right"><input type="file" name="QRcode" id="QRcode"></td>
+          </tr>
+
+          <tr><td colspan="2" align="center"><button type="submit">confirm</button></td></tr>
+
+
+        </table>
+      </form>
+
+    </div>
+  </div>
+</div>
+
+
+</body>
+</html>
