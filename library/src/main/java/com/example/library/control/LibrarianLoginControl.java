@@ -22,7 +22,8 @@ public class LibrarianLoginControl
     }
 
     @RequestMapping(value = "/LibrarianLogin", method = RequestMethod.POST)
-    public  void postLogin(ModelAndView mv, HttpServletRequest request, HttpServletResponse response)  throws IOException {
+    public  ModelAndView postLogin(ModelAndView mv, HttpServletRequest request, HttpServletResponse response)  throws IOException {
+        mv.setViewName("/LibrarianLogin");
         String username = request.getParameter("username");
         String password = request.getParameter("password");
 
@@ -32,10 +33,13 @@ public class LibrarianLoginControl
             HttpSession session = request.getSession();
             session.setAttribute("username", username);
             response.sendRedirect("LibrarianPage");
+            mv.addObject("value_judg", 0);
         }
         else {
             System.out.println("Failed login librarian!");
+            mv.addObject("value_judg", 1);
         }
         mv.addObject("isLogin", isLogin);
+        return mv;
     }
 }
