@@ -2,26 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>LibrarianRegister</title>
-    <script language="JavaScript">
-        function checkForm() {
-            var username = document.getElementById("username").value;
-            var password = document.getElementById("password").value;
-            var email = document.getElementById("email").value;
-            var name = document.getElementById("name").value;
-            var tel = document.getElementById("tel").value;
-            var birthday = document.getElementById("birthday").value;
-            if((username==null || username=='') || (password==null || password=='') || 
-               (email==null || email=='') || (name==null || name=='') || (tel==null || tel=='') ||
-               (!document.getElementById("gender_m").checked&&!document.getElementById("gender_m").checked) || (birthday==null)){
-                alert("Information cannot be empty");
-                return false;
-            }else {
-                return true;
-            }
-        }
-    </script>
-
+    <title>ReaderRegister</title>
     <style>
       *{
         margin:0px;
@@ -106,7 +87,7 @@
   </div>
   <div class="rg_layout">
     <div class="rg_left">
-        <p>Librarian Register</p>
+        <p>Reader Register</p>
     </div>
     <div class="rg_center">
         <div class="rg_form">
@@ -140,8 +121,16 @@
               <tr>
                 <td class="td_left"><label>gender</label></td>
                 <td class="td_right">
-                    <input type="radio" name="gender" id="gender_m" value="male">male
-                    <input type="radio" name="gender" id="gender_f" value="female">female
+                    <input type="radio" name="gender" value="male">male
+                    <input type="radio" name="gender" value="female">female
+                </td>
+              </tr>
+
+              <tr>
+                <td class="td_left"><label>security deposit</label></td>
+                <td class="td_right">
+                  <input type="radio" name="bond" value="yes">yes
+                  <input type="radio" name="bond" value="no">no
                 </td>
               </tr>
 
@@ -150,16 +139,13 @@
                 <td class="td_right"><input type="date" name="birthday" id="birthday"></td>
               </tr>
 
-              <tr><td colspan="2" align="center"><button type="submit" onclick="return checkForm()">register</button></td></tr>
+              <tr><td colspan="2" align="center"><button type="submit">register</button></td></tr>
 
 
             </table>
           </form>
 
         </div>
-    </div>
-    <div class="rg_right">
-        <p><a href="ReaderLoginPage.html">skip to Login</a></p>
     </div>
 
   </div>

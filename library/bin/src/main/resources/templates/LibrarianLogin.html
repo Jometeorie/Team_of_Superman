@@ -2,20 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>ReaderLogin</title>
-  <script language="JavaScript">
-        function checkForm() {
-            var username = document.getElementById("username").value;
-            var password = document.getElementById("password").value;
-            if((username==null || username=='') || (password==null || password=='')){
-                alert("Username or password cannot be empty");
-                return false;
-            }else {
-                return true;
-            }
-        }
-   </script>
-
+  <title>LibrarianLogin</title>
   <style>
     *{
       margin:0px;
@@ -115,12 +102,12 @@
     <button><a href="MainPage.html"><img src="img/logo.png"></a></button>
   </div>
   <div class="al_title">
-    <p>Welcome Login,Reader!</p>
+    <p>Welcome Login,Librarian!</p>
   </div>
 </div>
 <div class="al_layout">
   <div class="al_left">
-    <p>ReaderLogin</p>
+    <p>LibrarianLogin</p>
   </div>
   <div class="al_center">
     <div>
@@ -136,20 +123,14 @@
             <td class="td_right"><input type="password" name="password" id="password" placeholder="enter password"></td>
           </tr>
 
-          <tr><td colspan="2" align="center"><button type="submit" onclick = "return checkForm()">login</button></td></tr>
+          <tr><td colspan="2" align="center"><button type="submit">login</button></td></tr>
         </table>
-        <!-- 后端int value_judg 非0 alert -->
-        <span th:if = " ${value_judg} ">
-            <script type = "text/javascript">
-              alert("wrong password!!!");
-            </script>
-        </span>
       </form>
 
     </div>
   </div>
   <div class="al_right">
-    <p>Librarian<a href="LibrarianLogin.html">Login</a></p>
+    <p>Reader<a href="ReaderLoginPage.html">Login</a></p>
   </div>
 
 </div>
