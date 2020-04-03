@@ -26,7 +26,12 @@ public class LibrarianPageControl
         if (request.getParameter("ReaderRegister") != null) {
             response.sendRedirect("ReaderRegister");
         }
-        // else if 
+        else if (request.getParameter("AddBooks") != null) {
+            response.sendRedirect("AddBook");
+        }
+        else if (request.getParameter("DeleteBooks") != null) {
+            response.sendRedirect("DeleteBook");
+        }
     }
         
     
