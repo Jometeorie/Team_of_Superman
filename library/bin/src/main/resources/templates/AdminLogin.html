@@ -7,7 +7,7 @@
         function checkForm() {
             var username = document.getElementById("username").value;
             var password = document.getElementById("password").value;
-            if((username==null || username=='') || (password==null || password=='')){
+            if((username=null || username=='') &&(password=null || password=='')){
                 alert("Username or password cannot be empty");
                 return false;
             }else {
@@ -133,7 +133,7 @@
             <!-- 后端int value_judg 非0 alert -->
             <span th:if = " ${value_judg} ">
             <script type = "text/javascript">
-              alert("wrong password!!!");
+              alert("密码错误");
             </script>
             </span>
 
