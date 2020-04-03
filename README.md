@@ -15,11 +15,11 @@
 
 ### 项目主体情况
 * 项目没有采用前后端分离的架构方式，而是使用较为传统的后端渲染前段的手法
-* 前段代码放在library/src/main/resources/templates中（css/js/image文件放在同级static文件夹下）
-* 后端路由代码在libary/src/main/java/com/example/library/control中（尽量一个路由一个文件）
-* JDBC接口代码放在library/src/main/java/com/example/library/database/src/team/library中
-* 数据库脚本文件在library同级的sql文件夹中
-* 全局变量在library/src/main/resources下的application.properties和druid.properties中
+* 前段代码放在[library/src/main/resources/templates](https://github.com/frozenlalala/Team_of_Superman/blob/master/library/src/main/resources/templates)中（css/js/image文件放在同级static文件夹下）
+* 后端路由代码在[libary/src/main/java/com/example/library/control](https://github.com/frozenlalala/Team_of_Superman/blob/master/libary/src/main/java/com/example/library/control)中（尽量一个路由一个文件）
+* JDBC接口代码放在[library/src/main/java/com/example/library/database/src/team/library](https://github.com/frozenlalala/Team_of_Superman/blob/master/library/src/main/java/com/example/library/database/src/team/library)中
+* 数据库脚本文件在library同级的[sql文件夹](https://github.com/frozenlalala/Team_of_Superman/blob/master/sql)中
+* 全局变量在[library/src/main/resources](https://github.com/frozenlalala/Team_of_Superman/blob/master/library/src/main/resources)下的application.properties和druid.properties中
 
 ### 其他事项
 尽量保持格式统一整齐，例如路由为/login，就将文件写在control/LoginControl.java中，前段代码也应对应为login.html放在对应templates文件夹中
