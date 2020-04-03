@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ReaderPage</title>
+
+  <style>
+    *{
+      margin:0px;
+      margin:0px;
+      box-sizing:border-box ;
+    }
+    body{
+      background: url("img/timg.jfif");
+      background-size: cover;
+      background-repeat: no-repeat;
+    }
+
+    .mp_head{
+      background-color: white;
+      width:100%;
+      height: 115px;
+    }
+
+    .mp_logo{
+      float:left;
+    }
+
+    .mp_title{
+      height: 113px;
+      margin-left: 20px;
+      padding-top: 30px;
+      float:left;
+      font-size: 60px;
+    }
+
+
+    .mp_login{
+      height: 113px;
+      padding-top:85px;
+      float:right;
+    }
+
+    .mp_search{
+      width:1000px;
+      height: 200px;
+      margin-left: 300px;
+      padding-left: 120px;
+      padding-top: 100px;
+    }
+
+
+    #search{
+      width:500px;
+      height:42px;
+      border: 1px solid grey;
+      border-radius: 5px;
+    }
+
+    #img_search{
+      height:42px;
+      vertical-align: middle;
+    }
+
+    </style>
+</head>
+<body>
+    <div class="mp_head">
+      <div class="mp_logo">
+          <button><a href="MainPage.html"><img src="img/logo.png"></a></button>
+      </div>
+      <div class="mp_title">
+        <p>Welcome To Mandarin Library,Reader!</p>
+      </div>
+    </div>
+
+    <hr size="20px" color="black">
+
+    <div class="mp_search">
+      <td><label for="search">Search:</label></td>
+      <td><input type="search" name="search" id="search" placeholder="Search you're interested"><button type="submit"><img src="img/search.jfif" id="img_search"></button></td>
+    </div>
+
+</body>
+</html>

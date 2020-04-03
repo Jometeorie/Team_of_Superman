@@ -3,23 +3,6 @@
 <head>
   <meta charset="UTF-8">
   <title>AddBook</title>
-  <script language="JavaScript">
-        function checkForm() {
-            var name = document.getElementById("name").value;
-            var ISBN = document.getElementById("ISBN").value;
-            var author = document.getElementById("author").value;
-            var place = document.getElementById("place").value;
-            var price = document.getElementById("price").value;
-            var intro = document.getElementById("intro").value;
-            if((name==null || name=='') || (ISBN==null || ISBN=='') || (author==null || author=='') || 
-               (place==null || place=='') || (price==null || price=='') || (intro==null || intro=='')){
-                alert("Information cannot be empty");
-                return false;
-            }else {
-                return true;
-            }
-        }
-  </script>  
   <style>
     *{
       margin:0px;
@@ -153,7 +136,7 @@
             <td class="td_right"><input type="file" name="QRcode" id="QRcode"></td>
           </tr>
 
-          <tr><td colspan="2" align="center"><button type="submit" onclick="return checkForm()">confirm</button></td></tr>
+          <tr><td colspan="2" align="center"><button type="submit">confirm</button></td></tr>
 
 
         </table>
