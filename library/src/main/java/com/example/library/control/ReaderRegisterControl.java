@@ -11,33 +11,33 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 @RestController
-public class RegisterPageControl
+public class ReaderRegisterControl
 {
-    @RequestMapping(value = "/RegisterPage", method = RequestMethod.GET)
+    @RequestMapping(value = "/ReaderRegister", method = RequestMethod.GET)
     public ModelAndView getView(ModelAndView mv) {
-        mv.setViewName("/RegisterPage");
+        mv.setViewName("/ReaderRegister");
         return mv;
     }
 
-    @RequestMapping(value = "/RegisterPage", method = RequestMethod.POST)
+    @RequestMapping(value = "/ReaderRegister", method = RequestMethod.POST)
     public ModelAndView postRegister(ModelAndView mv, HttpServletRequest request, HttpServletResponse response) {
-        String identify = request.getParameter("identify");
         String username = request.getParameter("username");
         String password = request.getParameter("password");
-        String money = request.getParameter("money");
+        String email = request.getParameter("email");
+        String name = request.getParameter("name");
+        String tel = request.getParameter("tel");
         String gender = request.getParameter("gender");
+        String bond = request.getParameter("bond");
 
-        if (identify.equals("supermanager")) {
-            String id = String.valueOf(new Random().nextInt(99999999));
-            boolean isRegister =new Admin().AdminRegister(id, username, password);
-            if (isRegister) {
-                System.out.println("Successed register admin!");
-            }
-            else {
-                System.out.println("Failed register admin!");
-            }
-            mv.addObject("isRegister", isRegister);
+        // String id = String.valueOf(new Random().nextInt(99999999));
+        boolean isRegister =new Librarian().ReaderRegister(tel, username, password);
+        if (isRegister) {
+            System.out.println("Successed register admin!");
         }
+        else {
+            System.out.println("Failed register admin!");
+        }
+        mv.addObject("isRegister", isRegister);
 
         return mv;
     }

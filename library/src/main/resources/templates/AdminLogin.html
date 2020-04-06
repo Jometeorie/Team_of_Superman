@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>AdminLogin</title>
+    <script language="JavaScript">
+        function checkForm() {
+            var username = document.getElementById("username").value;
+            var password = document.getElementById("password").value;
+            if((username==null || username=='') || (password==null || password=='')){
+                alert("Username or password cannot be empty");
+                return false;
+            }else {
+                return true;
+            }
+        }
+    </script>
+
+    <style>
+      *{
+        margin:0px;
+        margin:0px;
+        box-sizing:border-box ;
+      }
+      body{
+        background: url("img/timg.jfif");
+        background-size: cover;
+        background-repeat: no-repeat;
+      }
+
+      .al_logo{
+        float:left;
+      }
+
+      .al_title{
+        height: 113px;
+        margin-left: 20px;
+        padding-top: 28px;
+        float:left;
+        font-size: 70px;
+      }
+
+      .al_head{
+        width: 100%;
+        height: 114px;
+        background: gainsboro;
+      }
+
+
+      .al_layout{
+        width: 900px;
+        height:300px;
+        border:8px solid gray;
+        background-color: white;
+        margin-right: 300px;
+        padding:15px;
+        margin-top: 90px;
+        float:right;
+      }
+
+      .al_left{
+        float: left;
+        margin: 15px;
+      }
+
+      .al_left > p:first-child{
+        color:yellow;
+        font-size:20px;
+      }
+      .al_left > p:last-child{
+        color:gray;
+        font-size:10px;
+      }
+
+      .al_center{
+
+        float:left;
+        margin-left: 50px;
+        padding-top: 50px;
+      }
+
+      #username,#password{
+        width:250px;
+        height:32px;
+        border: 1px solid grey;
+        border-radius: 5px;
+        padding-left: 10px;
+      }
+
+
+      .td_left{
+        width:200px;
+        text-align: right;
+        height:45px;
+      }
+
+      .td_right{
+        padding-left: 20px;
+      }
+
+
+    </style>
+</head>
+<body>
+    <div class="al_head">
+    <div class="al_logo">
+      <button><a href="MainPage.html"><img src="img/logo.png"></a></button>
+    </div>
+    <div class="al_title">
+      <p>Welcome Login</p>
+    </div>
+    </div>
+    <div class="al_layout">
+      <div class="al_left">
+        <p>Login</p>
+      </div>
+      <div class="al_center">
+        <div>
+          <form action="#" method="post">
+            <table>
+              <tr>
+                <td class="td_left"><label for="username">username</label></td>
+                <td class="td_right"><input type="text" name="username" id="username" placeholder="enter username" ></td>
+              </tr>
+
+              <tr>
+                <td class="td_left"><label for="password">password</label></td>
+                <td class="td_right"><input type="password" name="password" id="password" placeholder="enter password"></td>
+              </tr>
+
+              <tr><td colspan="2" align="center"><button type="submit" name="login" onclick = "return checkForm()">login</button></td></tr>
+            </table>
+            <!-- 后端int value_judg 非0 alert -->
+            <span th:if = " ${value_judg} ">
+            <script type = "text/javascript">
+              alert("wrong password!!!");
+            </script>
+            </span>
+
+          </form>
+
+        </div>
+      </div>
+
+    </div>
+</body>
+</html>

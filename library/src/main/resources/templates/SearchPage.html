@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>搜索结果页</title>
+  <style>
+    *{
+      margin:0px;
+      margin:0px;
+      box-sizing:border-box ;
+    }
+    body{
+      background: url("img/timg.jfif");
+      background-size: cover;
+      background-repeat: no-repeat;
+    }
+
+    .mp_head{
+      background-color: white;
+      width:100%;
+      height: 115px;
+    }
+
+    .mp_logo{
+      float:left;
+    }
+
+    .mp_title{
+      height: 113px;
+      margin-left: 20px;
+      padding-top: 30px;
+      float:left;
+      font-size: 60px;
+    }
+
+
+
+    .sp_search{
+      width:1000px;
+      height: 100px;
+      margin-left: 300px;
+      padding-left: 120px;
+      padding-top: 10px;
+    }
+
+
+    #search{
+      width:500px;
+      height:42px;
+      border: 1px solid grey;
+      border-radius: 5px;
+    }
+
+    #img_search{
+      height:42px;
+      vertical-align: middle;
+    }
+
+
+
+    table tr:first-child{
+      border-right: 3px rgb(71, 51, 87) solid;
+      background-color: lightgoldenrodyellow;
+    }
+
+    table tr:not(:first-child) td{
+      width: 180px;
+      height: 110px;
+      line-height: 40px;
+      border-bottom: 3px rgb(48, 33, 87) solid;
+      background-color:lightpink;
+      vertical-align: middle;
+    }
+    table{
+      font-size: 20px;
+      color: rgb(63, 48, 87);
+      text-align: center;
+      border: 3px rgb(87, 87, 87) solid;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .BC{
+      width:70px;
+      height: 100px;
+
+    }
+
+  </style>
+<body>
+<div class="mp_head">
+  <div class="mp_logo">
+    <button><a href="MainPage.html"><img src="img/logo.png"></a></button>
+  </div>
+  <div class="mp_title">
+    <p>Welcome To Mandarin Library</p>
+  </div>
+</div>
+<hr size="20px" color="black">
+
+<div class="sp_search">
+  <td><input type="search" name="search" id="search" placeholder="Search you're interested"><button type="submit"><img src="img/search.jfif" id="img_search"></button></td>
+</div>
+
+<div>
+  <table class="sp_booktable">
+    <tr>
+      <td>no</td>
+      <td>id</td>
+      <td>name</td>
+      <td>author</td>
+      <td>cover</td>
+      <td>location</td>
+      <td>state</td>
+      <td>price</td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>11111</td>
+      <td>The Catcher in the Rye</td>
+      <td>Jerome David Salinger</td>
+      <td><img src="img/TCITR.jfif" class="BC"></td>
+      <td>floor4-434-C</td>
+      <td>Good</td>
+      <td>$20</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>id</td>
+      <td>The Kite Runner</td>
+      <td>Khaled Hosseini</td>
+      <td><img src="img/TKR.jfif" class="BC"></td>
+      <td>floor2-202-A</td>
+      <td>Good</td>
+      <td>$30</td>
+    </tr>
+    <!-- <tr>
+      <td>3</td>
+      <td>id</td>
+      <td>To Kill a Mocking Bird</td>
+      <td>Nelle Harper Lee</td>
+      <td><img src="img/TKAMB.jfif" class="BC"></td>
+      <td>location</td>
+      <td>state</td>
+      <td>price</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td>id</td>
+      <td>Vater und Sohn</td>
+      <td>E.O.Plauen</td>
+      <td><img src="img/FYZ.jfif" class="BC"></td>
+      <td>location</td>
+      <td>state</td>
+      <td>price</td>
+    </tr> -->
+  </table>
+</div>
+
+
+</body>
+</html>

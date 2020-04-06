@@ -5,14 +5,14 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 @RestController
-public class MainPageControl
+public class ReaderPageControl
 {
-    @RequestMapping(value = "/MainPage", method = RequestMethod.GET)
+    @RequestMapping(value = "/ReaderPage", method = RequestMethod.GET)
     public ModelAndView test(ModelAndView mv) {
-        mv.setViewName("/MainPage");
+        mv.setViewName("/ReaderPage");
         return mv;
     }
 
-    // @RequestMapping(value = "/Mainpage", method = RequestMethod.POST HttpServletRequest request, HttpServletResponse response)
+    // @RequestMapping(value = "/ReaderPage", method = RequestMethod.POST HttpServletRequest request, HttpServletResponse response)
 
 }
