@@ -16,30 +16,39 @@ import java.io.IOException;
 public class LibrarianLoginControl
 {
     @RequestMapping(value = "/LibrarianLogin", method = RequestMethod.GET)
-    public ModelAndView getView(ModelAndView mv) {
+    public ModelAndView getLibrarianLogin(ModelAndView mv) {
         mv.setViewName("/LibrarianLogin");
         return mv;
     }
 
     @RequestMapping(value = "/LibrarianLogin", method = RequestMethod.POST)
-    public  ModelAndView postLogin(ModelAndView mv, HttpServletRequest request, HttpServletResponse response)  throws IOException {
-        mv.setViewName("/LibrarianLogin");
-        String username = request.getParameter("username");
-        String password = request.getParameter("password");
+    public  ModelAndView postLibrarianLogin(ModelAndView mv, HttpServletRequest request, HttpServletResponse response)  throws IOException {
+        if (request.getParameter("LibrarianLogin") != null)  {
+            mv.setViewName("/LibrarianLogin");
+            String username = request.getParameter("username");
+            String password = request.getParameter("password");
+    
+            boolean isLogin =new Librarian().LibrLogin(username,password);
+            if (isLogin) {
+                System.out.println("Successed login librarian!");
+                HttpSession session = request.getSession();
+                session.setAttribute("username", username);
+                response.sendRedirect("LibrarianPage");
+                mv.addObject("value_judg", 0);
+            }
+            else {
+                System.out.println("Failed login librarian!");
+                mv.addObject("value_judg", 1);
+            }
+            mv.addObject("isLogin", isLogin);
+            return mv;
+        }
 
-        boolean isLogin =new Librarian().LibrLogin(username,password);
-        if (isLogin) {
-            System.out.println("Successed login librarian!");
-            HttpSession session = request.getSession();
-            session.setAttribute("username", username);
-            response.sendRedirect("LibrarianPage");
-            mv.addObject("value_judg", 0);
+        else if (request.getParameter("mainpage") != null) {
+            response.sendRedirect("MainPage");
+            return mv;
         }
-        else {
-            System.out.println("Failed login librarian!");
-            mv.addObject("value_judg", 1);
-        }
-        mv.addObject("isLogin", isLogin);
+
         return mv;
     }
 }

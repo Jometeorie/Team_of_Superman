@@ -116,7 +116,7 @@
       </div>
       <div class="al_center">
         <div>
-          <form action="#" method="post">
+          <form action='' method="post">
             <table>
               <tr>
                 <td class="td_left"><label for="username">username</label></td>
@@ -128,7 +128,7 @@
                 <td class="td_right"><input type="password" name="password" id="password" placeholder="enter password"></td>
               </tr>
 
-              <tr><td colspan="2" align="center"><button type="submit" name="login" onclick = "return checkForm()">login</button></td></tr>
+              <tr><td colspan="2" align="center"><button type="submit" name="AdminLogin" onclick = "return checkForm()">login</button></td></tr>
             </table>
             <!-- 后端int value_judg 非0 alert -->
             <span th:if = " ${value_judg} ">
@@ -136,7 +136,6 @@
               alert("wrong password!!!");
             </script>
             </span>
-
           </form>
 
         </div>
