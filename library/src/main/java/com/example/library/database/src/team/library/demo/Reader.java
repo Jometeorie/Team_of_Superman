@@ -4,7 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Scanner;
+// import java.util.Scanner;
 import org.junit.Test;
 import org.springframework.jdbc.core.JdbcTemplate;
 

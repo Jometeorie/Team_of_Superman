@@ -82,7 +82,7 @@ public class Admin {
      * */
     @Test
     public void test3(){
-        System.out.println(new Admin().LibrRegister("17130177005","Lora"));//报错可能是数据库中已经有了改用户
+        System.out.println(Admin.LibrRegister("17130177005","Lora"));//报错可能是数据库中已经有了改用户
     }
     /**
      * 注册管理员账号
@@ -101,7 +101,7 @@ public class Admin {
      * */
     @Test
     public void test4(){
-        System.out.println(new Admin().DeleteLibr("17130177005"));
+        System.out.println(Admin.DeleteLibr("17130177005"));
     }
 
     /**
@@ -179,7 +179,7 @@ public class Admin {
      * */
     @Test
     public void test7(){
-        System.out.println(new Admin().AdminRegister("17130166004","Nacy","123456"));//下次测试要更改id!!
+        System.out.println(Admin.AdminRegister("17130166004","Nacy","123456"));//下次测试要更改id!!
     }
     /**
      * 注册超级管理员账号
