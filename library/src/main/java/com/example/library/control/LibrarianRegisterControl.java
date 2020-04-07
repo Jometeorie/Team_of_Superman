@@ -1,3 +1,7 @@
+/*
+图书管理员注册界面
+127.0.0.1:8888/LibrarianRegister
+*/
 package com.example.library.control;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -29,8 +33,9 @@ public class LibrarianRegisterControl
             String tel = request.getParameter("tel");
             // String gender = request.getParameter("gender");
             // String bond = request.getParameter("bond");
-    
-            boolean isRegister =new Admin().AdminRegister(tel, username, password);
+
+            // 判断是否注册成功
+            boolean isRegister =Admin.AdminRegister(tel, username, password);
             if (isRegister) {
                 System.out.println("Successed register admin!");
             }
@@ -39,6 +44,7 @@ public class LibrarianRegisterControl
             }
             mv.addObject("isRegister", isRegister);
         }
+        // 页眉Logo按钮
         else if (request.getParameter("mainpage") != null) {
             response.sendRedirect("MainPage");
             return mv;

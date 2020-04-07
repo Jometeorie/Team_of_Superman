@@ -1,3 +1,7 @@
+/*
+书籍搜索界面
+127.0.0.1:8888/SearchPage
+*/
 package com.example.library.control;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -31,10 +35,13 @@ public class SearchPageControl
 
     @RequestMapping(value = "/SearchPage", method = RequestMethod.POST) 
     public ModelAndView postSearch(ModelAndView mv, HttpServletRequest request, HttpServletResponse response)  throws IOException {
+        // 书籍搜索按钮
         if (request.getParameter("search_button") != null) {
             String search_name = request.getParameter("search");
             return getSearch(mv, search_name);
         }
+
+        // 页眉Logo按钮
         else if (request.getParameter("mainpage") != null) {
             response.sendRedirect("MainPage");
         }

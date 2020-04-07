@@ -1,3 +1,7 @@
+/*
+图书管理员登录界面
+127.0.0.1:8888/LibrarianLogin
+*/
 package com.example.library.control;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -27,13 +31,15 @@ public class LibrarianLoginControl
             mv.setViewName("/LibrarianLogin");
             String username = request.getParameter("username");
             String password = request.getParameter("password");
-    
+
+            // 判断是否登录成功
             boolean isLogin =new Librarian().LibrLogin(username,password);
             if (isLogin) {
                 System.out.println("Successed login librarian!");
                 HttpSession session = request.getSession();
                 session.setAttribute("username", username);
                 response.sendRedirect("LibrarianPage");
+                // 前端判断登录是否成功的依据，0为成功，非0为失败
                 mv.addObject("value_judg", 0);
             }
             else {
@@ -44,6 +50,7 @@ public class LibrarianLoginControl
             return mv;
         }
 
+        // 页眉Logo按钮
         else if (request.getParameter("mainpage") != null) {
             response.sendRedirect("MainPage");
             return mv;
