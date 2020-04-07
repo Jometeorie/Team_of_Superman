@@ -13,27 +13,16 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 @RestController
-public class LibrarianPageControl
+public class AddBookControl
 {
-    @RequestMapping(value = "/LibrarianPage", method = RequestMethod.GET)
+    @RequestMapping(value = "/AddBook", method = RequestMethod.GET)
     public ModelAndView test(ModelAndView mv) {
-        mv.setViewName("/LibrarianPage");
+        mv.setViewName("/AddBook");
         return mv;
     }
-    
-    @RequestMapping(value = "/LibrarianPage", method = RequestMethod.POST) 
-    public void postRegister(ModelAndView mv, HttpServletRequest request, HttpServletResponse response)  throws IOException {
-        if (request.getParameter("ReaderRegister") != null) {
-            response.sendRedirect("ReaderRegister");
-        }
-        else if (request.getParameter("AddBooks") != null) {
-            response.sendRedirect("AddBook");
-        }
-        else if (request.getParameter("DeleteBooks") != null) {
-            response.sendRedirect("DeleteBook");
-        }
-    }
-        
-    
 
+    @RequestMapping(value = "/AddBook", method = RequestMethod.POST) 
+    public void postRegister(ModelAndView mv, HttpServletRequest request, HttpServletResponse response)  throws IOException {
+        System.out.println(request.getParameter("QRcode"));
+    }
 }

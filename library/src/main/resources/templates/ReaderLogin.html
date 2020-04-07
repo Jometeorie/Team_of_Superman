@@ -1,156 +1,171 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>ReaderLogin</title>
-  <script language="JavaScript">
-        function checkForm() {
-            var username = document.getElementById("username").value;
-            var password = document.getElementById("password").value;
-            if((username==null || username=='') || (password==null || password=='')){
-                alert("Username or password cannot be empty");
-                return false;
-            }else {
-                return true;
-            }
-        }
-   </script>
+    <meta charset="UTF-8">
+    <title>ReaderLogin</title>
+    <script language="JavaScript">
+        function checkForm() {
+            var username = document.getElementById("username").value;
+            var password = document.getElementById("password").value;
+            if ((username == null || username == '') || (password == null || password == '')) {
+                alert("Username or password cannot be empty");
+                return false;
+            } else {
+                return true;
+            }
+        }
+    </script>
 
-  <style>
-    *{
-      margin:0px;
-      margin:0px;
-      box-sizing:border-box ;
-    }
-    body{
-      background: url("img/timg.jfif");
-      background-size: cover;
-      background-repeat: no-repeat;
-    }
+    <style>
+        * {
+            margin: 0px;
+            margin: 0px;
+            box-sizing: border-box;
+        }
 
-    .al_logo{
-      float:left;
-    }
+        a {
+            text-decoration: none;
+            color: #355bb7
+        }
 
-    .al_title{
-      height: 113px;
-      margin-left: 20px;
-      padding-top: 28px;
-      float:left;
-      font-size: 70px;
-    }
+        body {
+            background: url("img/timg.jfif");
+            background-size: cover;
+            background-repeat: no-repeat;
+        }
 
-    .al_head{
-      width: 100%;
-      height: 114px;
-      background: gainsboro;
-    }
+        .al_logo {
+            float: left;
+        }
 
+        .al_title {
+            height: 113px;
+            margin-left: 20px;
+            padding-top: 28px;
+            float: left;
+            font-size: 70px;
+        }
 
-    .al_layout{
-      width: 900px;
-      height:300px;
-      border:8px solid gray;
-      background-color: white;
-      margin-right: 300px;
-      padding:15px;
-      margin-top: 90px;
-      float:right;
-    }
-
-    .al_left{
-      float: left;
-      margin: 15px;
-    }
-
-    .al_left > p:first-child{
-      color:yellow;
-      font-size:20px;
-    }
-    .al_left > p:last-child{
-      color:gray;
-      font-size:10px;
-    }
-
-    .al_center{
-
-      float:left;
-      margin-left: 50px;
-      padding-top: 50px;
-    }
-
-    #username,#password{
-      width:250px;
-      height:32px;
-      border: 1px solid grey;
-      border-radius: 5px;
-      padding-left: 10px;
-    }
+        .al_head {
+            width: 100%;
+            height: 114px;
+            background: gainsboro;
+        }
 
 
-    .td_left{
-      width:200px;
-      text-align: right;
-      height:45px;
-    }
+        .al_layout {
+            width: 900px;
+            height: 300px;
+            border: 8px solid gray;
+            background-color: white;
+            margin-right: 300px;
+            padding: 15px;
+            margin-top: 90px;
+            float: right;
+        }
 
-    .td_right{
-      padding-left: 20px;
-    }
+        .al_left {
+            float: left;
+            margin: 15px;
+        }
 
-    .al_right{
-      float:right;
-      margin: 5px;
-    }
+        .al_left > p:first-child {
+            color: yellow;
+            font-size: 20px;
+        }
 
-    .al_right p{
-      font-size:10px;
-    }
+        .al_left > p:last-child {
+            color: gray;
+            font-size: 10px;
+        }
 
-  </style>
+        .al_center {
+
+            float: left;
+            margin-left: 50px;
+            padding-top: 50px;
+        }
+
+        #username, #password {
+            width: 250px;
+            height: 32px;
+            border: 1px solid grey;
+            border-radius: 5px;
+            padding-left: 10px;
+        }
+
+
+        .td_left {
+            width: 200px;
+            text-align: right;
+            height: 45px;
+        }
+
+        .td_right {
+            padding-left: 20px;
+        }
+
+        .al_right {
+            float: right;
+            margin: 5px;
+        }
+
+        .al_right p {
+            font-size: 10px;
+        }
+
+    </style>
 </head>
 <body>
 <div class="al_head">
-  <div class="al_logo">
-    <button><a href="MainPage.html"><img src="img/logo.png"></a></button>
-  </div>
-  <div class="al_title">
-    <p>Welcome Login,Reader!</p>
-  </div>
+    <div class="al_logo">
+        <button><a href="MainPage.html"><img src="img/logo.png"></a></button>
+    </div>
+    <div class="al_title">
+        <p>Welcome Login, Reader! </p>
+    </div>
 </div>
 <div class="al_layout">
-  <div class="al_left">
-    <p>ReaderLogin</p>
-  </div>
-  <div class="al_center">
-    <div>
-      <form action="#" method="post">
-        <table>
-          <tr>
-            <td class="td_left"><label for="username">username</label></td>
-            <td class="td_right"><input type="text" name="username" id="username" placeholder="enter username" ></td>
-          </tr>
+    <div class="al_left">
+        <p>ReaderLogin</p>
+    </div>
+    <div class="al_center">
+        <div>
+            <form action="#" method="post">
+                <table>
+                    <tr>
+                        <td class="td_left"><label for="username">username</label></td>
+                        <td class="td_right"><input type="text" name="username" id="username"
+                                                    placeholder="enter username"></td>
+                    </tr>
 
-          <tr>
-            <td class="td_left"><label for="password">password</label></td>
-            <td class="td_right"><input type="password" name="password" id="password" placeholder="enter password"></td>
-          </tr>
+                    <tr>
+                        <td class="td_left"><label for="password">password</label></td>
+                        <td class="td_right"><input type="password" name="password" id="password"
+                                                    placeholder="enter password"></td>
+                    </tr>
 
-          <tr><td colspan="2" align="center"><button type="submit" onclick = "return checkForm()">login</button></td></tr>
-        </table>
-        <!-- 后端int value_judg 非0 alert -->
-        <span th:if = " ${value_judg} ">
-            <script type = "text/javascript">
+                    <tr>
+                        <td colspan="2" align="center">
+                            <button type="submit" onclick="return checkForm()">login</button>
+                        </td>
+                        <td><a href="ForgotReaderPassword.html">Forgot Password? </a></td>
+                    </tr>
+
+                </table>
+                <!-- 后端int value_judg 非0 alert -->
+                <span th:if=" ${value_judg} ">
+            <script type="text/javascript">
               alert("wrong password!!!");
             </script>
         </span>
-      </form>
+            </form>
 
+        </div>
     </div>
-  </div>
-  <div class="al_right">
-    <p>Librarian<a href="LibrarianLogin.html">Login</a></p>
-  </div>
+    <div class="al_right">
+        <p>Librarian<a href="LibrarianLogin.html">Login</a></p>
+    </div>
 
 </div>
 </body>
