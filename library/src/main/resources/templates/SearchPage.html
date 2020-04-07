@@ -89,7 +89,9 @@
 <body>
 <div class="mp_head">
   <div class="mp_logo">
-    <button><a href="MainPage.html"><img src="img/logo.png"></a></button>
+    <form  action='' method="post">
+      <button type="submit" name="mainpage"><img src="img/logo.png" id="mainpage"></button>
+    </form>
   </div>
   <div class="mp_title">
     <p>Welcome To Mandarin Library</p>
@@ -98,17 +100,16 @@
 <hr size="20px" color="black">
 
 <div class="sp_search">
-  <form action="#" method="post">
-  <td><input type="search" name="search" id="search" placeholder="Search you're interested"><button type="submit"><img src="img/search.jfif" id="img_search"></button></td>
+  <form action="" method="post">
+  <td><input type="text" name="search" id="search" placeholder="Search you're interested"><button type="submit" name="search_button"><img src="img/search.jfif" id="img_search" name="search"></button></td>
   </form>
 </div>
 
 <div>
   <table class="sp_booktable">
-<<<<<<< HEAD
     <thead>
       <tr>
-        <th>ID</th>
+        <!-- <th>ID</th> -->
         <th>Name</th>
         <th>Author</th>
         <th>Location</th>
@@ -119,9 +120,9 @@
     </thead>
  <!--    后端list成员变量名对应小写 -->
     <tbody>
-      <tr th:each = "book : ${list}">
-        <td th:text = ${book.id}></td>
-        <td th:text = ${book.name}></td>
+      <tr th:each = "book : ${book}">
+        <!-- <td th:text = ${book.id}></td> -->
+        <td th:text = ${book.book_name}></td>
         <td th:text = ${book.author}></td>
         <td th:text = ${book.location}></td>
         <td th:text = ${book.price}></td>
@@ -129,58 +130,6 @@
         <td th:text = ${book.state}></td>
       </tr>
     </tbody> 
-=======
-    <tr>
-      <td>no</td>
-      <td>id</td>
-      <td>name</td>
-      <td>author</td>
-      <td>cover</td>
-      <td>location</td>
-      <td>state</td>
-      <td>price</td>
-    </tr>
-    <tr>
-      <td>1</td>
-      <td>11111</td>
-      <td>The Catcher in the Rye</td>
-      <td>Jerome David Salinger</td>
-      <td><img src="img/TCITR.jfif" class="BC"></td>
-      <td>floor4-434-C</td>
-      <td>Good</td>
-      <td>$20</td>
-    </tr>
-    <tr>
-      <td>2</td>
-      <td>id</td>
-      <td>The Kite Runner</td>
-      <td>Khaled Hosseini</td>
-      <td><img src="img/TKR.jfif" class="BC"></td>
-      <td>floor2-202-A</td>
-      <td>Good</td>
-      <td>$30</td>
-    </tr>
-    <!-- <tr>
-      <td>3</td>
-      <td>id</td>
-      <td>To Kill a Mocking Bird</td>
-      <td>Nelle Harper Lee</td>
-      <td><img src="img/TKAMB.jfif" class="BC"></td>
-      <td>location</td>
-      <td>state</td>
-      <td>price</td>
-    </tr>
-    <tr>
-      <td>4</td>
-      <td>id</td>
-      <td>Vater und Sohn</td>
-      <td>E.O.Plauen</td>
-      <td><img src="img/FYZ.jfif" class="BC"></td>
-      <td>location</td>
-      <td>state</td>
-      <td>price</td>
-    </tr> -->
->>>>>>> 1b60c273bd763734d76c11980d6a5fd5a88f9acf
   </table>
 </div>
 
