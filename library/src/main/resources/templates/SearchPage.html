@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en"  xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
   <title>搜索结果页</title>
@@ -98,11 +98,38 @@
 <hr size="20px" color="black">
 
 <div class="sp_search">
+  <form action="#" method="post">
   <td><input type="search" name="search" id="search" placeholder="Search you're interested"><button type="submit"><img src="img/search.jfif" id="img_search"></button></td>
+  </form>
 </div>
 
 <div>
   <table class="sp_booktable">
+<<<<<<< HEAD
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Author</th>
+        <th>Location</th>
+        <th>Price</th>
+        <th>Category</th>
+        <th>State</th>
+      </tr>
+    </thead>
+ <!--    后端list成员变量名对应小写 -->
+    <tbody>
+      <tr th:each = "book : ${list}">
+        <td th:text = ${book.id}></td>
+        <td th:text = ${book.name}></td>
+        <td th:text = ${book.author}></td>
+        <td th:text = ${book.location}></td>
+        <td th:text = ${book.price}></td>
+        <td th:text = ${book.category}></td>
+        <td th:text = ${book.state}></td>
+      </tr>
+    </tbody> 
+=======
     <tr>
       <td>no</td>
       <td>id</td>
@@ -153,6 +180,7 @@
       <td>state</td>
       <td>price</td>
     </tr> -->
+>>>>>>> 1b60c273bd763734d76c11980d6a5fd5a88f9acf
   </table>
 </div>
 

@@ -3,6 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <title>LibrarianRegister</title>
+    <script language="JavaScript">
+        function checkForm() {
+            var username = document.getElementById("username").value;
+            var password = document.getElementById("password").value;
+            var email = document.getElementById("email").value;
+            var name = document.getElementById("name").value;
+            var tel = document.getElementById("tel").value;
+            var birthday = document.getElementById("birthday").value;
+            if((username==null || username=='') || (password==null || password=='') || 
+               (email==null || email=='') || (name==null || name=='') || (tel==null || tel=='') ||
+               (!document.getElementById("gender_m").checked&&!document.getElementById("gender_m").checked) || (birthday==null)){
+                alert("Information cannot be empty");
+                return false;
+            }else {
+                return true;
+            }
+        }
+    </script>
+
     <style>
       *{
         margin:0px;
@@ -121,8 +140,8 @@
               <tr>
                 <td class="td_left"><label>gender</label></td>
                 <td class="td_right">
-                    <input type="radio" name="gender" value="male">male
-                    <input type="radio" name="gender" value="female">female
+                    <input type="radio" name="gender" id="gender_m" value="male">male
+                    <input type="radio" name="gender" id="gender_f" value="female">female
                 </td>
               </tr>
 
@@ -131,7 +150,7 @@
                 <td class="td_right"><input type="date" name="birthday" id="birthday"></td>
               </tr>
 
-              <tr><td colspan="2" align="center"><button type="submit">register</button></td></tr>
+              <tr><td colspan="2" align="center"><button type="submit" onclick="return checkForm()">register</button></td></tr>
 
 
             </table>
