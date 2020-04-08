@@ -48,6 +48,36 @@ public class Reader {
     }
 
     /**
+     * 读者邮箱验证
+     * @return 返回boolean值，false为失败，true为成功
+     * */
+    public boolean ReaderEmail(String reader_id,String e_mail){
+        if(reader_id==null||e_mail==null){
+            return false;
+        }
+        Boolean flag=false;
+        Connection conn=null;
+        ResultSet rs=null;
+        PreparedStatement pstmt =null;
+        try {
+            conn= JdbcUtils.getConnection();
+            String sql="select * from reader where READER_ID=? and E_MAIL=? ";
+            pstmt=conn.prepareStatement(sql);
+            pstmt.setString(1,reader_id);
+            pstmt.setString(2,e_mail);
+            rs=pstmt.executeQuery();
+            flag= rs.next();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }finally {
+            JdbcUtils.close(rs,pstmt,conn);
+        }
+        if(flag)
+            ChangeState(reader_id,true);
+        return flag;
+    }
+
+    /**
      * 修改状态
     **/
 
