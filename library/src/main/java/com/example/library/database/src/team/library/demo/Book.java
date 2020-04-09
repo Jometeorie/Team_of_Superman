@@ -5,6 +5,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import com.example.library.database.src.team.library.util.JdbcUtils;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 
+import java.io.File;
 import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -42,8 +43,17 @@ public class Book{
 
     public List<BookInfo> SearchBook(String str){
         JdbcTemplate template = new JdbcTemplate(JdbcUtils.getDataSource());
-        String sql = "select BOOK_NAME,AUTHOR,LOCATION,PRICE,CATEGORY,STATE from book where BOOK_NAME like ?";
+        String sql = "select BOOK_NAME,AUTHOR,LOCATION,PRICE,CATEGORY,STATE,BOOK_ID from book where BOOK_NAME like ?";
         List<BookInfo> list=template.query(sql,new BeanPropertyRowMapper<BookInfo>(BookInfo.class),"%" + str + "%");
+        File[] covers=new File("library/src/main/resources/cover").listFiles();
+        for (BookInfo book:list)
+        {
+            for (File f:covers)
+            {
+                if(!f.isDirectory()&&f.getName().contains(book.getBook_id()))
+                    book.setBook_id(f.getName());
+            }
+        }
         return list;
     }
     /**
