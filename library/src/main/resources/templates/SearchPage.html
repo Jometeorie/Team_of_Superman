@@ -113,6 +113,7 @@
         <th>Name</th>
         <th>Author</th>
         <th>Location</th>
+        <th>Cover</th>
         <th>Price</th>
         <th>Category</th>
         <th>State</th>
@@ -125,6 +126,7 @@
         <td th:text = ${book.book_name}></td>
         <td th:text = ${book.author}></td>
         <td th:text = ${book.location}></td>
+        <td><img th:src = "@{${filepath}+${filename}}"></td>
         <td th:text = ${book.price}></td>
         <td th:text = ${book.category}></td>
         <td th:text = ${book.state}></td>
