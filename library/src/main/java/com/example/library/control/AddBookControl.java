@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 import com.example.library.database.src.team.library.demo.*;
+import com.example.library.utils.*;
 
 // import javax.servlet.http.HttpSession;
 
@@ -59,7 +60,8 @@ public class AddBookControl
             // 判断是否添加书籍成功
             boolean isInsert = Book.InsertBook(bookID, bookName, author, place, price);
             if (isInsert) {
-                
+                // 添加条形码
+                BarCode.generateFile(bookID, "library/src/main/resources/static/BarCode/" + bookID + ".png");
             }
 
             return mv;

@@ -72,6 +72,11 @@ public class BookInfo {
         }
     }
 
+    public String barCodePath() {
+        // 获取条形码路径
+        return this.book_id.split("\\.")[0] + ".png";
+    }
+
     @Override
     public String toString() {
         return "BookInfo{" +
