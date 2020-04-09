@@ -44,7 +44,7 @@ insert  into `admin`(`ADMIN_ID`,`ADMIN_NAME`,`PASSWORD`,`STATE`) values ('171301
 DROP TABLE IF EXISTS `book`;
 
 CREATE TABLE `book` (
-  `BOOK_ID` int(11) NOT NULL AUTO_INCREMENT,
+  `BOOK_ID` varchar(50) NOT NULL,
   `BOOK_NAME` varchar(32) NOT NULL,
   `AUTHOR` varchar(32) NOT NULL,
   `LOCATION` varchar(45) NOT NULL,
@@ -57,14 +57,14 @@ CREATE TABLE `book` (
 
 /*Data for the table `book` */
 
-insert  into `book`(`BOOK_ID`,`BOOK_NAME`,`AUTHOR`,`LOCATION`,`PRICE`,`CATEGORY`,`STATE`,`INFO`) values (1,'The Beauties of Math','lin','floor2-202-A','20.00','Geography',0,'NULL'),(2,'I want ','lam','floor4-434-C','26.00','math',0,'NULL'),(3,'The dds','Leo','floor3-343-B','24.00','Music',0,'NULL');
+insert  into `book`(`BOOK_ID`,`BOOK_NAME`,`AUTHOR`,`LOCATION`,`PRICE`,`CATEGORY`,`STATE`,`INFO`) values (1,'The Beauties of Math','lin','floor2-202-A','20.00','Geography',0,'NULL'),('00000000','I want ','lam','floor4-434-C','26.00','math',0,'NULL'),(3,'The dds','Leo','floor3-343-B','24.00','Music',0,'NULL');
 
 /*Table structure for table `book_deleted` */
 
 DROP TABLE IF EXISTS `book_deleted`;
 
 CREATE TABLE `book_deleted` (
-  `BOOK_ID` int(11) NOT NULL,
+  `BOOK_ID` varchar(50) NOT NULL,
   `BOOK_NAME` varchar(32) NOT NULL,
   `LIBR_ID` varchar(11) NOT NULL,
   PRIMARY KEY (`BOOK_ID`),
@@ -74,7 +74,7 @@ CREATE TABLE `book_deleted` (
 
 /*Data for the table `book_deleted` */
 
-insert  into `book_deleted`(`BOOK_ID`,`BOOK_NAME`,`LIBR_ID`) values (4,'hhhhh','17130177001');
+insert  into `book_deleted`(`BOOK_ID`,`BOOK_NAME`,`LIBR_ID`) values ('20000000','hhhhh','17130177001');
 
 /*Table structure for table `librarian` */
 

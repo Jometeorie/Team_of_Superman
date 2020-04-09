@@ -1,20 +1,20 @@
 /*
 图书管理员忘记密码界面
-127.0.0.1:8888/AdminLogin
+127.0.0.1:8888/ForgotLibrarianPassword
 */
 package com.example.library.control;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
-import com.example.library.database.src.team.library.demo.*;
+// import com.example.library.database.src.team.library.demo.*;
 
-import javax.servlet.http.HttpSession;
+// import javax.servlet.http.HttpSession;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+// import javax.servlet.http.HttpServletRequest;
+// import javax.servlet.http.HttpServletResponse;
 
-import java.io.IOException;
+// import java.io.IOException;
 
 @RestController
 public class ForgotLibrarianPasswordControl {
