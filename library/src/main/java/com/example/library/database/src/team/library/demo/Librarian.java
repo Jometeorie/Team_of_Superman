@@ -1,6 +1,6 @@
 package com.example.library.database.src.team.library.demo;
 
-import sun.security.util.Password;
+// import sun.security.util.Password;
 import org.junit.Test;
 import org.springframework.jdbc.core.JdbcTemplate;
 import com.example.library.database.src.team.library.util.JdbcUtils;
@@ -10,7 +10,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Scanner;
+// import java.util.Scanner;
 
 public class Librarian {
     /**
