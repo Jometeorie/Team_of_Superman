@@ -38,14 +38,17 @@ public class AddBookControl
     public ModelAndView postAddBook(ModelAndView mv, HttpServletRequest request, HttpServletResponse response)  throws IOException {
         // 添加书籍按钮
         if (request.getParameter("AddBook") != null) {
+            String resourcePath = "library/src/main/resources/";
+            File coverPath = new File(resourcePath + "cover");
+            if ( !coverPath.exists()) {
+                coverPath.mkdir();
+            }
+
             String bookID = Book.getUUID();
-            boolean isUploadFile = AddBookControl.upLoadFile(request, bookID);
+            boolean isUploadFile = AddBookControl.upLoadFile(request, bookID, resourcePath);
             if (isUploadFile) {
                 System.out.println("Success Upload File.");
             }
-            
-            String cover = request.getParameter("cover");
-            System.out.println(cover);
             
             String bookName = request.getParameter("name");
             // String ISBN = request.getParameter("ISBN");
@@ -58,10 +61,7 @@ public class AddBookControl
             if (isInsert) {
                 
             }
-            File coverPath = new File("cover");
-            if ( !coverPath.exists()) {
-                coverPath.mkdir();
-            }
+
             return mv;
         }
 
@@ -73,7 +73,7 @@ public class AddBookControl
         return mv;
     }
 
-    public static boolean upLoadFile(HttpServletRequest request, String bookID) {
+    public static boolean upLoadFile(HttpServletRequest request, String bookID, String resourcePath) {
         // 上传文件
         List<MultipartFile> files = ((MultipartHttpServletRequest) request)    
                 .getFiles("cover");  
@@ -83,10 +83,10 @@ public class AddBookControl
             file = files.get(i); 
             
             if (!file.isEmpty()) {    
-                try {    
+                try {
                     byte[] bytes = file.getBytes();    
                     stream = new BufferedOutputStream(new FileOutputStream(    
-                            new File("cover/" + bookID + '.' + file.getOriginalFilename().split("\\.")[1])));
+                            new File(resourcePath + "cover/" + bookID + '.' + file.getOriginalFilename().split("\\.")[1])));
                     stream.write(bytes); 
                     stream.close(); 
                 } catch (Exception e) {    
