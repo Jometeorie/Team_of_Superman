@@ -18,7 +18,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import java.io.IOException;
 import java.math.BigDecimal;
-import java.nio.Buffer;
+// import java.nio.Buffer;
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -38,7 +38,7 @@ public class AddBookControl
     public ModelAndView postAddBook(ModelAndView mv, HttpServletRequest request, HttpServletResponse response)  throws IOException {
         // 添加书籍按钮
         if (request.getParameter("AddBook") != null) {
-            String resourcePath = "library/src/main/resources/";
+            String resourcePath = "library/src/main/resources/static/";
             File coverPath = new File(resourcePath + "cover");
             if ( !coverPath.exists()) {
                 coverPath.mkdir();
