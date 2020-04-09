@@ -57,7 +57,7 @@ CREATE TABLE `book` (
 
 /*Data for the table `book` */
 
-insert  into `book`(`BOOK_ID`,`BOOK_NAME`,`AUTHOR`,`LOCATION`,`PRICE`,`CATEGORY`,`STATE`,`INFO`) values (1,'The Beauties of Math','lin','floor2-202-A','20.00','Geography',0,'NULL'),('00000000','I want ','lam','floor4-434-C','26.00','math',0,'NULL'),(3,'The dds','Leo','floor3-343-B','24.00','Music',0,'NULL');
+insert  into `book`(`BOOK_ID`,`BOOK_NAME`,`AUTHOR`,`LOCATION`,`PRICE`,`CATEGORY`,`STATE`,`INFO`) values ('00e8682064fa4d1f92f622fc9c5de278','The Catcher in the Rye','J.D.SALINGER','floor2-202-A','20.00','Literature',0,'NULL'),('06a139dc758c42e98de260fa5ed0916f','TO KILL A MOCKINGBIRD','Nelle Harper Lee','floor4-434-C','26.00','Literature',0,'NULL');
 
 /*Table structure for table `book_deleted` */
 
@@ -74,7 +74,7 @@ CREATE TABLE `book_deleted` (
 
 /*Data for the table `book_deleted` */
 
-insert  into `book_deleted`(`BOOK_ID`,`BOOK_NAME`,`LIBR_ID`) values ('20000000','hhhhh','17130177001');
+insert  into `book_deleted`(`BOOK_ID`,`BOOK_NAME`,`LIBR_ID`) values ('422e4f0f6a1f4e36bbcf75c3ea045e14','hhhhh','17130177001');
 
 /*Table structure for table `librarian` */
 

@@ -63,6 +63,15 @@ public class BookInfo {
         this.state = state;
     }
 
+    public String getState() {
+        if (state) {
+            return "Borrered";
+        }
+        else {
+            return "Not Borrered";
+        }
+    }
+
     @Override
     public String toString() {
         return "BookInfo{" +

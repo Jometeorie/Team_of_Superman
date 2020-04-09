@@ -24,6 +24,7 @@ public class SearchPageControl
     public ModelAndView getSearch(ModelAndView mv, String search_name) {
         List<BookInfo> book = new Book().SearchBook(search_name);
         mv.addObject("book", book);
+        mv.addObject("coverPath", "cover/");
         mv.setViewName("/SearchPage");
         return mv;
     }
