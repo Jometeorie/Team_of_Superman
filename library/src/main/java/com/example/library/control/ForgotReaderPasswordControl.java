@@ -1,6 +1,6 @@
 /*
 图书管理员忘记密码界面
-127.0.0.1:8888/AdminLogin
+127.0.0.1:8888/ForgotReaderPassword
 */
 package com.example.library.control;
 import org.springframework.web.bind.annotation.RequestMapping;

@@ -9,10 +9,15 @@ public class BookInfo {
     private BigDecimal price;       //书籍价格
     private String category;        //书籍类别
     private boolean state;          //书籍是否被借阅
+    private String book_id;     //封面路径
 
     public String getBook_name() {
         return book_name;
     }
+
+    public  String getBook_id(){return book_id;}
+
+    public void setBook_id(String book_id){this.book_id=book_id;}
 
     public void setBook_name(String book_name) {
         this.book_name = book_name;
@@ -56,6 +61,15 @@ public class BookInfo {
 
     public void setState(boolean state) {
         this.state = state;
+    }
+
+    public String getState() {
+        if (state) {
+            return "Borrered";
+        }
+        else {
+            return "Not Borrered";
+        }
     }
 
     @Override

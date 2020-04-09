@@ -111,11 +111,11 @@
 
 
         <div class="rg_form">
-            <form action="#" method="post">
+            <form action="" method="post" enctype="multipart/form-data" >
                 <table>
                     <tr>
-                        <td class="td_left"><label for="Cover">cover</label></td>
-                        <td class="td_right"><input type="file" name="Cover" id="Cover"></td>
+                        <td class="td_left"><label for="cover">cover</label></td>
+                        <td class="td_right"><input type="file" name="cover" id="cover"></td>
                     </tr>
 
 
@@ -137,7 +137,7 @@
                                                     placeholder="No More Than 20 Characters"></td>
                     </tr>
 
-
+                    
                     <tr>
                         <td class="td_left"><label for="place">place</label></td>
                         <td class="td_right"><input type="text" name="place" id="place"
@@ -163,7 +163,7 @@
 
                     <tr>
                         <td colspan="2" align="center">
-                            <button type="submit" onclick="return checkForm()">confirm</button>
+                            <button type="submit" onclick="return checkForm()" name="AddBook">confirm</button>
                         </td>
                     </tr>
 
