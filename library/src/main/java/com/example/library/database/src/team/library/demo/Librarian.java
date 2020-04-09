@@ -1,6 +1,7 @@
 package com.example.library.database.src.team.library.demo;
 
 // import sun.security.util.Password;
+
 import org.junit.Test;
 import org.springframework.jdbc.core.JdbcTemplate;
 import com.example.library.database.src.team.library.util.JdbcUtils;
@@ -18,14 +19,14 @@ public class Librarian {
      * */
     @Test
     public void test1(){
-        System.out.println(new Librarian().LibrLogin("17130177001","123456789"));//True
+        System.out.println(new Librarian().LibrLogin("17130177001","1234555"));//True
         System.out.println(new Librarian().LibrLogin("1351234567","12345678"));//False
     }
     /**
      * 管理员登录验证
      * @return 返回boolean值，false为登录失败，true为成功
      * */
-    public  boolean LibrLogin(String libr_id,String passoword){
+    public boolean LibrLogin(String libr_id,String passoword){
         if(libr_id==null||passoword==null){
             return false;
         }
@@ -75,7 +76,7 @@ public class Librarian {
         System.out.println(new Librarian().LibrLogout("17130177001"));//True
     }
     /**
-     * 读者登出
+     * 管理员登出
      * */
     public  boolean LibrLogout(String libr_id){
         return ChangeState(libr_id,false);
@@ -124,7 +125,7 @@ public class Librarian {
     /**
      * 找回密码
      * */
-    public  String  FindPassword(String reader_id,String e_mail){
+    public String  FindPassword(String reader_id,String e_mail){
        if(reader_id==null||e_mail==null)
             return null;
         Connection conn=null;
@@ -151,7 +152,7 @@ public class Librarian {
     }
 
     @Test
-    public  void test5(){
+    public void test5(){
         System.out.println(new Librarian().ReaderRegister("13412345655","Momo","1234678@qq.com"));
         System.out.println(new Librarian().DeleteReader("13412345655"));
 

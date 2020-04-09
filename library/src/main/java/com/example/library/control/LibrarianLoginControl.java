@@ -17,8 +17,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 @RestController
-public class LibrarianLoginControl
-{
+public class LibrarianLoginControl {
     @RequestMapping(value = "/LibrarianLogin", method = RequestMethod.GET)
     public ModelAndView getLibrarianLogin(ModelAndView mv) {
         mv.setViewName("/LibrarianLogin");
@@ -33,7 +32,7 @@ public class LibrarianLoginControl
             String password = request.getParameter("password");
 
             // 判断是否登录成功
-            boolean isLogin =new Librarian().LibrLogin(username,password);
+            boolean isLogin =new Librarian().LibrLogin(username, password);
             if (isLogin) {
                 System.out.println("Successed login librarian!");
                 HttpSession session = request.getSession();
