@@ -109,7 +109,7 @@
   <table class="sp_booktable">
     <thead>
       <tr>
-        <!-- <th>ID</th> -->
+        <th>BarCode</th>
         <th>Name</th>
         <th>Author</th>
         <th>Location</th>
@@ -122,11 +122,11 @@
  <!--    后端list成员变量名对应小写 -->
     <tbody>
       <tr th:each = "book : ${book}">
-        <!-- <td th:text = ${book.book_id}></td> -->
+        <td><img th:src = "@{${barCodePath}+${book.barCodePath()}}"></td>
         <td th:text = ${book.book_name}></td>
         <td th:text = ${book.author}></td>
         <td th:text = ${book.location}></td>
-        <td><img th:src = "@{${coverPath}+${book.book_id}}"></td>
+        <td><img th:src = "@{${coverPath}+${book.book_id}}" height="200px" width="250px"></td>
         <td th:text = ${book.price}></td>
         <td th:text = ${book.category}></td>
         <td th:text = ${book.getState()} ></td>

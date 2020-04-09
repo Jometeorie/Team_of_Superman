@@ -25,6 +25,7 @@ public class SearchPageControl
         List<BookInfo> book = new Book().SearchBook(search_name);
         mv.addObject("book", book);
         mv.addObject("coverPath", "cover/");
+        mv.addObject("barCodePath", "BarCode/");
         mv.setViewName("/SearchPage");
         return mv;
     }
