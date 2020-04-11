@@ -284,7 +284,7 @@ public class Book{
     public static void BackBook(String Book_ID,String Backtime)
     {
         EditBookState(Book_ID,0);
-        //todo
+        changeResvState(SearchReserveID(Book_ID), "Back");
     }
 
     //给管理员展示借书请求
@@ -294,6 +294,14 @@ public class Book{
         String sql = "select * from reserve ";
         List<ResvInfo> list=template.query(sql,new BeanPropertyRowMapper<ResvInfo>(ResvInfo.class));
         return list;
+    }
+
+    // 根据Book_ID 查找Reserve_ID
+    public static String SearchReserveID(String Book_id){
+        JdbcTemplate template = new JdbcTemplate(JdbcUtils.getDataSource());
+        String sql = "select RESV_ID from reserve where BOOK_ID = ?";
+        String RESV_ID=template.queryForObject(sql,String.class,Book_id);
+        return RESV_ID;
     }
 
     public static void main(String[] args)  {
