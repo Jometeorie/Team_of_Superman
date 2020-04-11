@@ -2,6 +2,8 @@ package com.example.library.database.src.team.library.demo;
 
 import org.junit.Test;
 import org.springframework.jdbc.core.JdbcTemplate;
+
+import com.alibaba.druid.sql.visitor.functions.Now;
 import com.example.library.database.src.team.library.util.JdbcUtils;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 
@@ -285,6 +287,8 @@ public class Book{
     }
 
     public static void main(String[] args)  {
-            new Book().test1();
+            // Book.reservebook("123", "00e8682064fa4d1f92f622fc9c5de278", "2020-04-12 10:35:5", "2020-04-15 10:35:5", "13412345679");
+            // Book.EditResv("123", "00e8682064fa4d1f92f622fc9c5de278", false);
+            // Book.BackBook("00e8682064fa4d1f92f622fc9c5de278", "2020-04-14 10:35:5");
     }
 }
