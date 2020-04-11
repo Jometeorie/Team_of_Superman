@@ -221,6 +221,16 @@ public class Book{
         return false;
     }
 
+    public static boolean changeResvState(String RESV_ID,String Status)
+    {
+        JdbcTemplate template=new JdbcTemplate(JdbcUtils.getDataSource());
+        String sql="update reserve set STATUS=? where RESV_ID=?";
+        int count=template.update(sql,Status,RESV_ID);
+        if(count==1)
+            return true;
+        return false;
+    }
+
     //读者预约书，time格式为"2021-12-12 23:59:59"
     public static boolean reservebook(String RESV_ID,String Book_ID,String Starttime,String Endtime,String Reader_ID)
     {
@@ -257,7 +267,7 @@ public class Book{
             if(SearchBookState(Book_ID)==0)
             {
                 EditBookState(Book_ID,1);
-                deleteResv(RESV_ID);
+                changeResvState(RESV_ID,"Agree");
                 return true;
             }
             else
@@ -265,7 +275,7 @@ public class Book{
         }
         else
         {
-            deleteResv(RESV_ID);
+            changeResvState(RESV_ID,"Disagree");
             return true;
         }
     }
