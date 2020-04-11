@@ -3,6 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <title>搜索结果页</title>
+
+<!--   <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">  
+  <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+  <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+   -->
   <style>
     *{
       margin:0px;
@@ -109,7 +114,6 @@
   <table class="sp_booktable">
     <thead>
       <tr>
-        <th>BarCode</th>
         <th>Name</th>
         <th>Author</th>
         <th>Location</th>
@@ -117,12 +121,13 @@
         <th>Price</th>
         <th>Category</th>
         <th>State</th>
+        <th>BarCode</th>
+        <th>Reservation</th>
       </tr>
     </thead>
  <!--    后端list成员变量名对应小写 -->
     <tbody>
       <tr th:each = "book : ${book}">
-        <td><img th:src = "@{${barCodePath}+${book.barCodePath()}}"></td>
         <td th:text = ${book.book_name}></td>
         <td th:text = ${book.author}></td>
         <td th:text = ${book.location}></td>
@@ -130,6 +135,9 @@
         <td th:text = ${book.price}></td>
         <td th:text = ${book.category}></td>
         <td th:text = ${book.getState()} ></td>
+        <td><img th:src = "@{${barCodePath}+${book.barCodePath()}}"></td>
+        <td><a th:href="'/managebooks/'+${book.book_id}+'/book'">
+            <button type="button" class="btn btn-info">reservation</button></a></td>
       </tr>
     </tbody> 
   </table>
