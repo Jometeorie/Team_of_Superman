@@ -1,181 +1,370 @@
 <!DOCTYPE html>
+<!--Coded by YXQ-->
 <html lang="en">
+
 <head>
+
     <meta charset="UTF-8">
-    <title>ForgotReaderPassword</title>
+
+    <title>ChangePassword</title>
+
     <script language="JavaScript">
+
         function checkForm() {
-            var username = document.getElementById("username").value;
-            var email = document.getElementById("email").value;
-            if ((username == null || username == '') || (email == null || email == '')) {
-                alert("Username or email cannot be empty");
+
+            var old_password = document.getElementById("old_password").value;
+
+            var new_password = document.getElementById("new_password").value;
+
+            var confirm_new_password = document.getElementById("confirm_new_password").value;
+
+            if (old_password == null || old_password == '') {
+
+                alert("Please input the old password!");
+
                 return false;
-            } else {
-                return true;
+
             }
+            /* else if(密码不符){
+
+                alert("Password is wrong!");
+
+                return false;
+
+            }*/
+            else if (new_password == null || new_password == '') {
+
+                alert("Password cannot be empty!");
+
+                return false;
+
+            } else if (confirm_new_password == null || confirm_new_password == '') {
+
+                alert("Please confirm the new password!");
+
+                return false;
+
+            } else if (new_password != confirm_new_password) {
+
+                alert("The two inputs are inconsistent!");
+
+                return false;
+
+            } else {
+
+                /*修改密码();*/
+
+                alert("Change successfully!");
+
+                return true;
+
+            }
+
         }
+
     </script>
+
     <style>
+
         * {
+
             margin: 0px;
+
             margin: 0px;
+
             box-sizing: border-box;
+
             /*font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;*/
+
         }
+
 
         a {
+
             text-decoration: none;
+
         }
+
 
         body {
+
             background: url("img/timg.jfif");
+
             background-size: cover;
+
             background-repeat: no-repeat;
+
         }
+
 
         .al_logo {
+
             float: left;
+
         }
+
 
         .al_title {
+
             height: 113px;
+
             margin-left: 20px;
+
             padding-top: 28px;
+
             float: left;
+
             font-size: 70px;
+
         }
 
+
         .al_head {
+
             width: 100%;
+
             height: 114px;
+
             background: gainsboro;
+
         }
 
 
         .al_layout {
+
             width: 900px;
+
             height: 300px;
+
             border: 8px solid gray;
+
             background-color: white;
+
             margin-right: 300px;
+
             padding: 15px;
+
             margin-top: 90px;
+
             float: right;
+
         }
+
 
         .al_left {
+
             float: left;
+
             margin: 15px;
 
+
         }
+
 
         .al_left > p:first-child {
+
             color: yellow;
+
             font-size: 20px;
+
         }
 
+
         .al_left > p:last-child {
+
             color: gray;
+
             font-size: 10px;
+
         }
+
 
         .al_center {
 
+
             float: left;
+
             margin-left: 50px;
+
             padding-top: 50px;
+
         }
+
 
         .login {
+
             font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+
             font-size: 16px;
+
         }
 
-        #username, #email {
+
+        #old_password, #new_password, #confirm_new_password {
+
             font-size: 17px;
+
             width: 250px;
+
             height: 32px;
+
             border: 1px solid grey;
+
             border-radius: 5px;
+
             padding-left: 10px;
+
         }
 
 
         .td_left {
+
             font-size: 20px;
+
             width: 200px;
+
             text-align: right;
+
             height: 45px;
+
         }
+
 
         .td_right {
+
             padding-left: 20px;
+
         }
+
 
         .al_right {
+
             float: right;
+
             margin: 5px;
+
         }
+
 
         .al_right p {
+
             font-size: 10px;
+
         }
 
+
     </style>
+
 </head>
 
-
 <body>
+
 <div class="al_head">
+
     <div class="al_logo">
+
         <button><a href="MainPage"><img src="img/logo.png"></a></button>
+
     </div>
+
     <div class="al_title">
-        <p>Forgot the Reader's Password</p>
+
+        <p>Change the Reader's Password</p>
+
     </div>
+
 </div>
+
 <div class="al_layout">
+
     <div class="al_left">
-        <p>Recovery the Reader's password</p>
+
+        <p>Change Reader's Password</p>
+
     </div>
+
     <div class="al_center">
+
         <div>
+
             <form action="#" method="post">
+
                 <table>
+
                     <tr>
-                        <td class="td_left"><label for="username">username</label></td>
-                        <td class="td_right"><input type="text" name="username" id="username"
-                                                    placeholder="enter username"></td>
+
+                        <td class="td_left"><label for="old_password">Old password</label></td>
+
+                        <td class="td_right"><input type="text" name="old_password" id="old_password"
+
+                                                    placeholder="enter the old password"></td>
+
+                    </tr>
+
+
+                    <tr>
+
+                        <td class="td_left"><label for="new_password">New password</label></td>
+
+                        <td class="td_right"><input type="text" name="new_password" id="new_password"
+
+                                                    placeholder="enter the new password"></td>
+
                     </tr>
 
                     <tr>
-                        <td class="td_left"><label for="email">email</label></td>
-                        <td class="td_right"><input type="email" name="email" id="email"
-                                                    placeholder="enter email"></td>
+
+                        <td class="td_left"><label for="confirm_new_password">Confirm New password</label></td>
+
+                        <td class="td_right"><input type="text" name="confirm_new_password" id="confirm_new_password"
+
+                                                    placeholder="confirm the new password"></td>
+
                     </tr>
 
+
                     <tr>
+
                         <td colspan="2" align="center">
-                            <button type="submit" name="ForgotReaderPassword" onclick="return checkForm()">submit
+
+                            <button type="submit" name="ForgotLibrarianPassword" onclick="return checkForm()">submit
                             </button>
+
                         </td>
+
                     </tr>
+
                 </table>
+
                 <!-- 后端int value_judg 非0 alert -->
+
                 <span th:if=" ${value_judg} ">
+
             <script type="text/javascript">
+
               alert("Account not exists!");
+
             </script>
+
         </span>
+
             </form>
 
+
         </div>
+
     </div>
+
     <div class="al_right">
-        <p><a class="login" href="ReaderLogin">Login</a></p>
+
+        <p><a class="login" href="ReaderPage.html">Cancel</a></p>
+
     </div>
+
 
 </div>
 
+
 </body>
+
 </html>
