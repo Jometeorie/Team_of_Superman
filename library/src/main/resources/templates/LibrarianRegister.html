@@ -4,157 +4,167 @@
     <meta charset="UTF-8">
     <title>LibrarianRegister</title>
     <script language="JavaScript">
-        function checkForm() {
-            var username = document.getElementById("username").value;
-            var password = document.getElementById("password").value;
+        function checkForm() {
+            var username = document.getElementById("username").value;
+            var password = document.getElementById("password").value;
             var email = document.getElementById("email").value;
             var name = document.getElementById("name").value;
             var tel = document.getElementById("tel").value;
             var birthday = document.getElementById("birthday").value;
-            if((username==null || username=='') || (password==null || password=='') || 
-               (email==null || email=='') || (name==null || name=='') || (tel==null || tel=='') ||
-               (!document.getElementById("gender_m").checked&&!document.getElementById("gender_m").checked) || (birthday==null)){
-                alert("Information cannot be empty");
-                return false;
-            }else {
-                return true;
-            }
-        }
-    </script>
+            if ((username == null || username == '') || (password == null || password == '') ||
+                (email == null || email == '') || (name == null || name == '') || (tel == null || tel == '') ||
+                (!document.getElementById("gender_m").checked && !document.getElementById("gender_m").checked) || (birthday == null)) {
+                alert("Information cannot be empty");
+                return false;
+            } else {
+                return true;
+            }
+        }
+    </script>
 
     <style>
-      *{
-        margin:0px;
-        margin:0px;
-        box-sizing:border-box ;
-      }
-      body{
-        background: url("img/timg.jfif");
-        background-size: cover;
-        background-repeat: no-repeat;
-      }
-      .rg_logo{
-        float:left;
-      }
+        * {
+            margin: 0px;
+            margin: 0px;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: url("img/timg.jfif");
+            background-size: cover;
+            background-repeat: no-repeat;
+        }
+
+        .rg_logo {
+            float: left;
+        }
 
 
-      .rg_layout{
-        width: 900px;
-        height:500px;
-        border:8px solid gray;
-        background-color: white;
-        margin-right: 300px;
-        padding:15px;
-        margin-top: 90px;
-        float:right;
-      }
+        .rg_layout {
+            width: 900px;
+            height: 500px;
+            border: 8px solid gray;
+            background-color: white;
+            margin-right: 300px;
+            padding: 15px;
+            margin-top: 90px;
+            float: right;
+        }
 
-      .rg_left{
-        float: left;
-        margin: 15px;
-      }
+        .rg_left {
+            float: left;
+            margin: 15px;
+        }
 
-      .rg_left > p:first-child{
-        color:yellow;
-        font-size:20px;
-      }
-      .rg_left > p:last-child{
-        color:gray;
-        font-size:10px;
-      }
+        .rg_left > p:first-child {
+            color: yellow;
+            font-size: 20px;
+        }
 
-      .rg_center{
+        .rg_left > p:last-child {
+            color: gray;
+            font-size: 10px;
+        }
 
-        float:left;
-        margin-left: 50px;
-        padding-top: 50px;
-      }
+        .rg_center {
 
-      .td_left{
-        width:200px;
-        text-align: right;
-        height:45px;
-      }
+            float: left;
+            margin-left: 50px;
+            padding-top: 50px;
+        }
 
-      .td_right{
-        padding-left: 20px;
-      }
+        .td_left {
+            width: 200px;
+            text-align: right;
+            height: 45px;
+        }
 
-      #username,#password,#name,#email ,#tel,#birthday{
-        width:250px;
-        height:32px;
-        border: 1px solid grey;
-        border-radius: 5px;
-        padding-left: 10px;
-      }
+        .td_right {
+            padding-left: 20px;
+        }
+
+        #username, #password, #name, #email, #tel, #birthday {
+            width: 250px;
+            height: 32px;
+            border: 1px solid grey;
+            border-radius: 5px;
+            padding-left: 10px;
+        }
 
 
-      .rg_right{
-        float:right;
-        margin: 5px;
-      }
+        .rg_right {
+            float: right;
+            margin: 5px;
+        }
 
-      .rg_right p{
-        font-size:10px;
-      }
+        .rg_right p {
+            font-size: 10px;
+        }
 
     </style>
 </head>
 <body>
-  <div class="rg_logo">
+<div class="rg_logo">
     <button><a href="MainPage"><img src="img/logo.png"></a></button>
-  </div>
-  <div class="rg_layout">
+</div>
+<div class="rg_layout">
     <div class="rg_left">
         <p>Librarian Register</p>
     </div>
     <div class="rg_center">
         <div class="rg_form">
-          <form action="#" method="post">
-            <table>
-              <tr>
-                <td class="td_left"><label for="username">username</label></td>
-                <td class="td_right"><input type="text" name="username" id="username" placeholder="enter username" ></td>
-              </tr>
+            <form action="#" method="post">
+                <table>
+                    <tr>
+                        <td class="td_left"><label for="username">username</label></td>
+                        <td class="td_right"><input type="text" name="username" id="username"
+                                                    placeholder="enter username"></td>
+                    </tr>
 
-              <tr>
-                <td class="td_left"><label for="password">password</label></td>
-                <td class="td_right"><input type="password" name="password" id="password" placeholder="enter password"></td>
-              </tr>
+                    <tr>
+                        <td class="td_left"><label for="password">password</label></td>
+                        <td class="td_right"><input type="password" name="password" id="password"
+                                                    placeholder="enter password"></td>
+                    </tr>
 
-              <tr>
-                <td class="td_left"><label for="email">Email</label></td>
-                <td class="td_right"><input type="email" name="email" id="email" placeholder="enter email"></td>
-              </tr>
+                    <tr>
+                        <td class="td_left"><label for="email">Email</label></td>
+                        <td class="td_right"><input type="email" name="email" id="email" placeholder="enter email"></td>
+                    </tr>
 
-              <tr>
-                <td class="td_left"><label for="name">name</label></td>
-                <td class="td_right"><input type="text" name="name" id="name" placeholder="enter name"></td>
-              </tr>
+                    <tr>
+                        <td class="td_left"><label for="name">name</label></td>
+                        <td class="td_right"><input type="text" name="name" id="name" placeholder="enter name"></td>
+                    </tr>
 
-              <tr>
-                <td class="td_left"><label for="tel">telephone</label></td>
-                <td class="td_right"><input type="text" name="tel" id="tel" placeholder="enter telephone"></td>
-              </tr>
+                    <tr>
+                        <td class="td_left"><label for="tel">telephone</label></td>
+                        <td class="td_right"><input type="text" name="tel" id="tel" placeholder="enter telephone"></td>
+                    </tr>
 
-              <tr>
-                <td class="td_left"><label>gender</label></td>
-                <td class="td_right">
-                    <input type="radio" name="gender" id="gender_m" value="male">male
-                    <input type="radio" name="gender" id="gender_f" value="female">female
-                </td>
-              </tr>
+                    <tr>
+                        <td class="td_left"><label>gender</label></td>
+                        <td class="td_right">
+                            <input type="radio" name="gender" id="gender_m" value="male">male
+                            <input type="radio" name="gender" id="gender_f" value="female">female
+                        </td>
+                    </tr>
 
-              <tr>
-                <td class="td_left"><label for="birthday">birthday</label></td>
-                <td class="td_right"><input type="date" name="birthday" id="birthday"></td>
-              </tr>
+                    <tr>
+                        <td class="td_left"><label for="birthday">birthday</label></td>
+                        <td class="td_right"><input type="date" name="birthday" id="birthday"></td>
+                    </tr>
 
-              <tr><td colspan="2" align="center"><button type="submit" name="LibrarianRegister" onclick="return checkForm()">register</button></td></tr>
+                    <tr>
+                        <td colspan="2" align="center">
+                            <button type="submit" name="LibrarianRegister" onclick="return checkForm()">register
+                            </button>
+                        </td>
+                    </tr>
 
 
-            </table>
-          </form>
+                </table>
+            </form>
 
         </div>
     </div>
@@ -162,12 +172,7 @@
         <p><a href="ReaderLogin">skip to Login</a></p>
     </div>
 
-  </div>
-
-
-
-
-
+</div>
 
 
 </body>

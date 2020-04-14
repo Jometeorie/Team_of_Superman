@@ -1,138 +1,151 @@
 <!DOCTYPE html>
-<html lang="en"  xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-  <meta charset="UTF-8">
-  <title>搜索结果页</title>
-  <style>
-    *{
-      margin:0px;
-      margin:0px;
-      box-sizing:border-box ;
-    }
-    body{
-      background: url("img/timg.jfif");
-      background-size: cover;
-      background-repeat: no-repeat;
-    }
+    <meta charset="UTF-8">
+    <title>搜索结果页</title>
 
-    .mp_head{
-      background-color: white;
-      width:100%;
-      height: 115px;
-    }
+    <!--   <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+      <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+      <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+       -->
+    <style>
+        * {
+            margin: 0px;
+            margin: 0px;
+            box-sizing: border-box;
+        }
 
-    .mp_logo{
-      float:left;
-    }
+        body {
+            background: url("img/timg.jfif");
+            background-size: cover;
+            background-repeat: no-repeat;
+        }
 
-    .mp_title{
-      height: 113px;
-      margin-left: 20px;
-      padding-top: 30px;
-      float:left;
-      font-size: 60px;
-    }
+        .mp_head {
+            background-color: white;
+            width: 100%;
+            height: 115px;
+        }
 
+        .mp_logo {
+            float: left;
+        }
 
-
-    .sp_search{
-      width:1000px;
-      height: 100px;
-      margin-left: 300px;
-      padding-left: 120px;
-      padding-top: 10px;
-    }
+        .mp_title {
+            height: 113px;
+            margin-left: 20px;
+            padding-top: 30px;
+            float: left;
+            font-size: 60px;
+        }
 
 
-    #search{
-      width:500px;
-      height:42px;
-      border: 1px solid grey;
-      border-radius: 5px;
-    }
-
-    #img_search{
-      height:42px;
-      vertical-align: middle;
-    }
+        .sp_search {
+            width: 1000px;
+            height: 100px;
+            margin-left: 300px;
+            padding-left: 120px;
+            padding-top: 10px;
+        }
 
 
+        #search {
+            width: 500px;
+            height: 42px;
+            border: 1px solid grey;
+            border-radius: 5px;
+        }
 
-    table tr:first-child{
-      border-right: 3px rgb(71, 51, 87) solid;
-      background-color: lightgoldenrodyellow;
-    }
+        #img_search {
+            height: 42px;
+            vertical-align: middle;
+        }
 
-    table tr:not(:first-child) td{
-      width: 180px;
-      height: 110px;
-      line-height: 40px;
-      border-bottom: 3px rgb(48, 33, 87) solid;
-      background-color:lightpink;
-      vertical-align: middle;
-    }
-    table{
-      font-size: 20px;
-      color: rgb(63, 48, 87);
-      text-align: center;
-      border: 3px rgb(87, 87, 87) solid;
-      margin-left: auto;
-      margin-right: auto;
-    }
-    .BC{
-      width:70px;
-      height: 100px;
 
-    }
+        table tr:first-child {
+            border-right: 3px rgb(71, 51, 87) solid;
+            background-color: lightgoldenrodyellow;
+        }
 
-  </style>
+        table tr:not(:first-child) td {
+            width: 180px;
+            height: 110px;
+            line-height: 40px;
+            border-bottom: 3px rgb(48, 33, 87) solid;
+            background-color: lightpink;
+            vertical-align: middle;
+        }
+
+        table {
+            font-size: 20px;
+            color: rgb(63, 48, 87);
+            text-align: center;
+            border: 3px rgb(87, 87, 87) solid;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .BC {
+            width: 70px;
+            height: 100px;
+
+        }
+
+    </style>
 <body>
 <div class="mp_head">
-  <div class="mp_logo">
-    <form  action='' method="post">
-      <button type="submit" name="mainpage"><img src="img/logo.png" id="mainpage"></button>
-    </form>
-  </div>
-  <div class="mp_title">
-    <p>Welcome To Mandarin Library</p>
-  </div>
+    <div class="mp_logo">
+        <form action='' method="post">
+            <button type="submit" name="mainpage"><img src="img/logo.png" id="mainpage"></button>
+        </form>
+    </div>
+    <div class="mp_title">
+        <p>Welcome To Mandarin Library</p>
+    </div>
 </div>
 <hr size="20px" color="black">
 
 <div class="sp_search">
-  <form action="" method="post">
-  <td><input type="text" name="search" id="search" placeholder="Search you're interested"><button type="submit" name="search_button"><img src="img/search.jfif" id="img_search" name="search"></button></td>
-  </form>
+    <form action="" method="post">
+        <td><input type="text" name="search" id="search" placeholder="Search you're interested">
+            <button type="submit" name="search_button"><img src="img/search.jfif" id="img_search" name="search">
+            </button>
+        </td>
+    </form>
 </div>
 
 <div>
-  <table class="sp_booktable">
-    <thead>
-      <tr>
-        <!-- <th>ID</th> -->
-        <th>Name</th>
-        <th>Author</th>
-        <th>Location</th>
-        <th>Cover</th>
-        <th>Price</th>
-        <th>Category</th>
-        <th>State</th>
-      </tr>
-    </thead>
- <!--    后端list成员变量名对应小写 -->
-    <tbody>
-      <tr th:each = "book : ${book}">
-        <!-- <td th:text = ${book.book_id}></td> -->
-        <td th:text = ${book.book_name}></td>
-        <td th:text = ${book.author}></td>
-        <td th:text = ${book.location}></td>
-        <td><img th:src = "@{${coverPath}+${book.book_id}}"></td>
-        <td th:text = ${book.price}></td>
-        <td th:text = ${book.category}></td>
-        <td th:text = ${book.getState()} ></td>
-      </tr>
-    </tbody> 
-  </table>
+    <table class="sp_booktable">
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Author</th>
+            <th>Location</th>
+            <th>Cover</th>
+            <th>Price</th>
+            <th>Category</th>
+            <th>State</th>
+            <th>BarCode</th>
+            <th>Reservation</th>
+        </tr>
+        </thead>
+        <!--    后端list成员变量名对应小写 -->
+        <tbody>
+        <tr th:each="book : ${book}">
+            <td th:text=${book.book_name}></td>
+            <td th:text=${book.author}></td>
+            <td th:text=${book.location}></td>
+            <td><img th:src="@{${coverPath}+${book.book_id}}" height="200px" width="250px"></td>
+            <td th:text=${book.price}></td>
+            <td th:text=${book.category}></td>
+            <td th:text=${book.getState()}></td>
+            <td><img th:src="@{${barCodePath}+${book.barCodePath()}}"></td>
+            <td><a th:href="'/managebooks/'+${book.book_id}+'/book'">
+                <button type="button" class="btn btn-info">reservation</button>
+            </a></td>
+        </tr>
+        </tbody>
+    </table>
 </div>
 
 

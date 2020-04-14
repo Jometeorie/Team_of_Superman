@@ -2,6 +2,8 @@ package com.example.library.database.src.team.library.demo;
 
 import org.junit.Test;
 import org.springframework.jdbc.core.JdbcTemplate;
+
+import com.alibaba.druid.sql.visitor.functions.Now;
 import com.example.library.database.src.team.library.util.JdbcUtils;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 
@@ -55,6 +57,13 @@ public class Book{
             }
         }
         return list;
+    }
+
+    public static int SearchBookState(String Book_id){
+        JdbcTemplate template = new JdbcTemplate(JdbcUtils.getDataSource());
+        String sql = "select STATE from book where BOOK_ID = ?";
+        int State=template.queryForObject(sql,Integer.class,Book_id);
+        return State;
     }
     /**
      * 书籍编辑功能测试
@@ -112,6 +121,16 @@ public class Book{
         JdbcTemplate template=new JdbcTemplate(JdbcUtils.getDataSource());
         String sql="update book set CATEGORY=? where BOOK_ID=?";
         int count=template.update(sql,category,book_id);
+        if(count==1)
+            return true;
+        return false;
+    }
+
+    public static Boolean EditBookState(String Book_id,int state)
+    {
+        JdbcTemplate template=new JdbcTemplate(JdbcUtils.getDataSource());
+        String sql="update book set STATE=? where BOOK_ID=?";
+        int count=template.update(sql,state,Book_id);
         if(count==1)
             return true;
         return false;
@@ -192,7 +211,102 @@ public class Book{
         return false;
     }
 
+    public static boolean deleteResv(String RESV_ID)
+    {
+        JdbcTemplate template=new JdbcTemplate(JdbcUtils.getDataSource());
+        String sql="delete from reserve where RESV_ID=?";
+        int count=template.update(sql,RESV_ID);
+        if(count==1)
+            return true;
+        return false;
+    }
+
+    public static boolean changeResvState(String RESV_ID,String Status)
+    {
+        JdbcTemplate template=new JdbcTemplate(JdbcUtils.getDataSource());
+        String sql="update reserve set STATUS=? where RESV_ID=?";
+        int count=template.update(sql,Status,RESV_ID);
+        if(count==1)
+            return true;
+        return false;
+    }
+
+    //读者预约书，time格式为"2021-12-12 23:59:59"
+    public static boolean reservebook(String RESV_ID,String Book_ID,String Starttime,String Endtime,String Reader_ID)
+    {
+        if(SearchBookState(Book_ID)==0) {
+            Connection con = null;
+            PreparedStatement stmt = null;
+            ResultSet rs = null;
+            try {
+                con = JdbcUtils.getConnection();
+                String sql = "insert into reserve values (?,?,?,?,?,?)";
+                stmt = con.prepareStatement(sql);
+                stmt.setString(1, RESV_ID);
+                stmt.setString(2, Book_ID);
+                stmt.setString(3, Reader_ID);
+                stmt.setString(4, Starttime);
+                stmt.setString(5, Endtime);
+                stmt.setString(6, "Waiting");
+                stmt.executeUpdate();
+            } catch (Exception e) {
+                e.printStackTrace();
+            } finally {
+                JdbcUtils.close(rs, stmt, con);
+            }
+            return true;
+        }
+        return  false;
+    }
+
+    //管理员受理借阅
+    public static boolean EditResv(String RESV_ID,String Book_ID,boolean IfAgree)
+    {
+        if(IfAgree)
+        {
+            if(SearchBookState(Book_ID)==0)
+            {
+                EditBookState(Book_ID,1);
+                changeResvState(RESV_ID,"Agree");
+                return true;
+            }
+            else
+            {System.out.println("the book has been reserved");return false;}
+        }
+        else
+        {
+            changeResvState(RESV_ID,"Disagree");
+            return true;
+        }
+    }
+
+    //还书
+    public static void BackBook(String Book_ID,String Backtime)
+    {
+        EditBookState(Book_ID,0);
+        changeResvState(SearchReserveID(Book_ID), "Back");
+    }
+
+    //给管理员展示借书请求
+    public static List<ResvInfo> showResvList()
+    {
+        JdbcTemplate template = new JdbcTemplate(JdbcUtils.getDataSource());
+        String sql = "select * from reserve ";
+        List<ResvInfo> list=template.query(sql,new BeanPropertyRowMapper<ResvInfo>(ResvInfo.class));
+        return list;
+    }
+
+    // 根据Book_ID 查找Reserve_ID
+    public static String SearchReserveID(String Book_id){
+        JdbcTemplate template = new JdbcTemplate(JdbcUtils.getDataSource());
+        String sql = "select RESV_ID from reserve where BOOK_ID = ?";
+        String RESV_ID=template.queryForObject(sql,String.class,Book_id);
+        return RESV_ID;
+    }
+
     public static void main(String[] args)  {
-            new Book().test1();
+            // Book.reservebook("123", "00e8682064fa4d1f92f622fc9c5de278", "2020-04-12 10:35:5", "2020-04-15 10:35:5", "13412345679");
+            // Book.EditResv("123", "00e8682064fa4d1f92f622fc9c5de278", false);
+            // Book.BackBook("00e8682064fa4d1f92f622fc9c5de278", "2020-04-14 10:35:5");
     }
 }
