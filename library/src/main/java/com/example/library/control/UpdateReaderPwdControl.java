@@ -18,13 +18,13 @@ import java.io.IOException;
 
 @RestController
 public class UpdateReaderPwdControl {
-    @RequestMapping(value = "/UpdateReaderPsw", method = RequestMethod.GET)
+    @RequestMapping(value = "/UpdateReaderPwd", method = RequestMethod.GET)
     public ModelAndView getUpdateReaderPsw(ModelAndView mv) {
         mv.setViewName("UpdateReaderPwd");
         return mv;
     }
 
-    @RequestMapping(value = "/UpdateReaderPsw", method = RequestMethod.POST)
+    @RequestMapping(value = "/UpdateReaderPwd", method = RequestMethod.POST)
     public ModelAndView postUpdateReaderPsw(ModelAndView mv, HttpServletRequest request, HttpServletResponse response)  throws IOException{
         mv.setViewName("UpdateReaderPwd");
         if (request.getParameter("UpdatePsw") != null) {
