@@ -26,7 +26,7 @@
 
 端口暂时用的是8888，如果显示端口占用了可以先把8888端口的进程kill掉，本地运行时需要安装MySQL8，Java环境以及SpringBoot框架，需要的依赖都写在pom.xml中，如果你需要添加新的依赖，也请将内容写在里面。运行前需要修改一些全局变量，例如数据库的密码等。
 
-第一次运行时，你的IDE会自动帮你安装pom.xml里的一些必要依赖，因此可能会等较长一段时间，与此同时，你也需要在MySQL中执行create_database.sql脚本，执行命令为source ./create_database.sql，或者也可以复制粘贴进去。之后便可以运行DemoApplication.java，**报错的话可以先检查下全局变量里的数据库密码有没有改成自己的。**如果运行仍有什么问题可以私聊我。
+第一次运行时，你的IDE会自动帮你安装pom.xml里的一些必要依赖，因此可能会等较长一段时间，与此同时，你也需要在MySQL中执行create_database.sql脚本，执行命令为source ./create_database.sql，或者也可以复制粘贴进去。之后便可以运行DemoApplication.java，**报错的话可以先检查下全局变量里的数据库密码有没有改成自己的。** 如果运行仍有什么问题可以私聊我。
 
 另外，对github不太熟悉的话可以在test文件夹中进行尝试
 
