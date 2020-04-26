@@ -2,8 +2,8 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>搜索结果页</title>
-    
+    <title>AllowLending</title>
+
     <!--   <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
       <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
       <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -19,11 +19,6 @@
             background: url("img/timg.jfif");
             background-size: cover;
             background-repeat: no-repeat;
-        }
-
-        a {
-            text-decoration: none;
-            color: #355bb7;
         }
 
         .mp_head {
@@ -110,43 +105,34 @@
 </div>
 <hr size="20px" color="black">
 
-<div class="sp_search">
+<!-- <div class="sp_search">
     <form action="" method="post">
         <td><input type="text" name="search" id="search" placeholder="Search you're interested">
             <button type="submit" name="search_button"><img src="img/search.jfif" id="img_search" name="search">
             </button>
         </td>
     </form>
-</div>
+</div> -->
 
 <div>
-    <table class="sp_booktable">
+    <table class="Allow">
         <thead>
         <tr>
-            <th>Name</th>
-            <th>Author</th>
-            <th>Location</th>
-            <th>Cover</th>
-            <th>Price</th>
-            <th>Category</th>
+            <th>Username</th><!--多加了个读者Username-->
+            <th>BookID</th>
             <th>State</th>
-            <th>BarCode</th>
-            <th>Reservation</th>
+            <th>ReserveTime</th>
+            <th>AllowLending</th><!--批准按钮对应的一栏-->
         </tr>
         </thead>
         <!--    后端list成员变量名对应小写 -->
         <tbody>
-        <tr th:each="book : ${book}">
-            <td th:text=${book.book_name}></td>
-            <td th:text=${book.author}></td>
-            <td th:text=${book.location}></td>
-            <td><img th:src="@{${coverPath}+${book.book_id}}" height="200px" width="250px"></td>
-            <td th:text=${book.price}></td>
-            <td th:text=${book.category}></td>
-            <td th:text=${book.getState()}></td>
-            <td><img th:src="@{${barCodePath}+${book.barCodePath()}}"></td>
-            <td><a th:href="'/managebooks/'+${book.book_id}+'/book'">
-                <button type="button" class="btn btn-info">reservation</button>
+        <tr th:each="bookreq : ${bookreq}"><!--    需要数据库再建一张表，把已预约但未借出的书存起来(2小时预约就过期失效，删掉记录)，批准页面需要对这个表进行查找，并且从中获取用户名/书id/可预约状态/预约时间 -->
+            <td th.text=${bookreq.username}></td>>
+            <td th:text=${bookreq.book_id}></td>
+            <td th:text=${bookreq.getState()}></td>
+            <td th:text=${bookreq.reserveTime()}></td>
+            <td><button type="submit"  name="Allow">Allow</button><!--需要返回借出时间，以计算时限和罚金,并且把之前提到的预约未借出的记录删掉，这个操作同样要给读者的持有书籍（需求文档第三页的view相关）带来信息-->
             </a></td>
         </tr>
         </tbody>
