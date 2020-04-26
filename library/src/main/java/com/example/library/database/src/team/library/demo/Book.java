@@ -3,7 +3,7 @@ package com.example.library.database.src.team.library.demo;
 import org.junit.Test;
 import org.springframework.jdbc.core.JdbcTemplate;
 
-import com.alibaba.druid.sql.visitor.functions.Now;
+// import com.alibaba.druid.sql.visitor.functions.Now;
 import com.example.library.database.src.team.library.util.JdbcUtils;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 
