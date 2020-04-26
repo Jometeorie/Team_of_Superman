@@ -9,21 +9,13 @@
     <title>ChangePassword</title>
 
     <script language="JavaScript">
-
         function checkForm() {
-
             var old_password = document.getElementById("old_password").value;
-
             var new_password = document.getElementById("new_password").value;
-
             var confirm_new_password = document.getElementById("confirm_new_password").value;
-
             if (old_password == null || old_password == '') {
-
                 alert("Please input the old password!");
-
                 return false;
-
             }
             /* else if(密码不符){
 
@@ -33,37 +25,21 @@
 
             }*/
             else if (new_password == null || new_password == '') {
-
                 alert("Password cannot be empty!");
-
                 return false;
-
             } else if (confirm_new_password == null || confirm_new_password == '') {
-
                 alert("Please confirm the new password!");
-
                 return false;
-
             } else if (new_password != confirm_new_password) {
-
                 alert("The two inputs are inconsistent!");
-
                 return false;
-
             } else {
-
                 /*修改密码();*/
-
                 alert("Change successfully!");
-
                 return true;
-
             }
-
         }
-
     </script>
-
     <style>
 
         * {
@@ -269,7 +245,7 @@
 
     <div class="al_title">
 
-        <p>Change the Librarian's Password</p>
+        <p>Change the Admin's Password</p>
 
     </div>
 
@@ -279,92 +255,48 @@
 
     <div class="al_left">
 
-        <p>Change Librarian's Password</p>
+        <p>Change Admin's Password</p>
 
     </div>
 
     <div class="al_center">
-
         <div>
-
             <form action="#" method="post">
-
                 <table>
-
                     <tr>
-
                         <td class="td_left"><label for="old_password">Old password</label></td>
-
-                        <td class="td_right"><input type="text" name="old_password" id="old_password"
-
+                        <td class="td_right"><input type="password" name="old_password" id="old_password"
                                                     placeholder="enter the old password"></td>
-
                     </tr>
-
-
                     <tr>
-
                         <td class="td_left"><label for="new_password">New password</label></td>
-
-                        <td class="td_right"><input type="text" name="new_password" id="new_password"
-
+                        <td class="td_right"><input type="password" name="new_password" id="new_password"
                                                     placeholder="enter the new password"></td>
-
                     </tr>
-
                     <tr>
-
                         <td class="td_left"><label for="confirm_new_password">Confirm New password</label></td>
-
-                        <td class="td_right"><input type="text" name="confirm_new_password" id="confirm_new_password"
-
+                        <td class="td_right"><input type="password" name="confirm_new_password" id="confirm_new_password"
                                                     placeholder="confirm the new password"></td>
-
                     </tr>
-
-
                     <tr>
-
                         <td colspan="2" align="center">
-
                             <button type="submit" name="UpdatePsw" onclick="return checkForm()">submit
                             </button>
-
                         </td>
-
                     </tr>
-
                 </table>
-
                 <!-- 后端int value_judg 非0 alert -->
-
                 <span th:if=" ${value_judg} ">
-
             <script type="text/javascript">
-
               alert("Account not exists!");
-
             </script>
-
         </span>
-
             </form>
-
-
         </div>
-
     </div>
-
     <div class="al_right">
-
         <p><a class="login" href="ADPage.html">Cancel</a></p>
-
     </div>
-
-
 </div>
-
-
 </body>
-
 </html>

@@ -11,14 +11,14 @@
 
 ## 注意事项
 ### Git使用
-开发过程中，尽量不要直接在主分支上进行开发，先用'git checkout dev'切换到dev分支，再'git push origin dev'提交， **千万不要强制push到master分支上，这样很有可能会造成不必要的版本冲突。** 提交完成后上github上对比一下dev分支和master分支并合并，若合并时出现冲突需要即使选择正确的版本并解决冲突，或者也可以私聊我，反正无论如何（更新README除外）不要直接在master分支上提交qaq。
+开发过程中，尽量不要直接在主分支上进行开发，可以先用'git checkout dev'切换到dev分支，再'git push origin dev'提交， 也可以自己单独开个分支。**千万不要强制push到master分支上，这样很有可能会造成不必要的版本冲突。** 提交完成后上github上对比一下dev分支和master分支并合并，同时在git commit -m中用一句话概括下这次提交改了什么东西，尽量不要过于笼统。若合并时出现冲突需要即使选择正确的版本并解决冲突，或者也可以私聊我，反正无论如何（更新README除外）不要直接在master分支上提交qaq。
 
 ### 项目主体情况
 * 项目没有采用前后端分离的架构方式，而是使用较为传统的后端渲染前段的手法
 * 前段代码放在[library/src/main/resources/templates](https://github.com/frozenlalala/Team_of_Superman/blob/master/library/src/main/resources/templates)中（css/js/image文件放在同级static文件夹下）
 * 后端路由代码在[libary/src/main/java/com/example/library/control](https://github.com/frozenlalala/Team_of_Superman/blob/master/library/src/main/java/com/example/library/control)中（尽量一个路由一个文件）
 * JDBC接口代码放在[library/src/main/java/com/example/library/database/src/team/library](https://github.com/frozenlalala/Team_of_Superman/blob/master/library/src/main/java/com/example/library/database/src/team/library)中
-* 数据库脚本文件在library同级的[sql文件夹](https://github.com/frozenlalala/Team_of_Superman/blob/master/sql)中
+* 数据库脚本文件在library同级的[sql文件夹](https://github.com/frozenlalala/Team_of_Superman/blob/master/sql)中，release 2后请使用create_db_v2.sql脚本更新
 * 全局变量在[library/src/main/resources](https://github.com/frozenlalala/Team_of_Superman/blob/master/library/src/main/resources)下的application.properties和druid.properties中
 
 ### 其他事项
@@ -26,7 +26,7 @@
 
 端口暂时用的是8888，如果显示端口占用了可以先把8888端口的进程kill掉，本地运行时需要安装MySQL8，Java环境以及SpringBoot框架，需要的依赖都写在pom.xml中，如果你需要添加新的依赖，也请将内容写在里面。运行前需要修改一些全局变量，例如数据库的密码等。
 
-第一次运行时，你的IDE会自动帮你安装pom.xml里的一些必要依赖，因此可能会等较长一段时间，与此同时，你也需要在MySQL中执行create_database.sql脚本，执行命令为source ./create_database.sql，或者也可以复制粘贴进去。之后便可以运行DemoApplication.java，如果运行仍有什么问题可以私聊我。
+第一次运行时，你的IDE会自动帮你安装pom.xml里的一些必要依赖，因此可能会等较长一段时间，与此同时，你也需要在MySQL中执行create_database.sql脚本，执行命令为source ./create_database.sql，或者也可以复制粘贴进去。之后便可以运行DemoApplication.java，**报错的话可以先检查下全局变量里的数据库密码有没有改成自己的。** 如果运行仍有什么问题可以私聊我。
 
 另外，对github不太熟悉的话可以在test文件夹中进行尝试
 

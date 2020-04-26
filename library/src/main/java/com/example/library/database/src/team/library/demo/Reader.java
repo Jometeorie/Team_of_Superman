@@ -139,7 +139,7 @@ public class Reader {
      * 读者个人信息修改
      * 修改密码
      * */
-    public  boolean PasswordModify(String Reader_ID,String N_Password)  {
+    public boolean PasswordModify(String Reader_ID,String N_Password)  {
          JdbcTemplate template=new JdbcTemplate(JdbcUtils.getDataSource());
          String sql="update reader set PASSWORD=? where READER_ID=?";
          int count=template.update(sql,N_Password,Reader_ID);
