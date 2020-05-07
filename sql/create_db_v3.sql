@@ -173,7 +173,8 @@ CREATE TABLE `reserve` (
  `BOOK_ID` varchar(32) NOT NULL,  
  `BOOK_NAME` varchar(32) NOT NULL, 
  `READER_ID` varchar(11) NOT NULL,  
- `BEGIN_TIME` datetime NOT NULL,    
+ `BEGIN_TIME` datetime NOT NULL,   
+ `END_TIME` datetime NOT NULL,
  `STATUS` varchar(10) NOT NULL,    
  
   PRIMARY KEY (`RESV_ID`),
@@ -183,8 +184,8 @@ CREATE TABLE `reserve` (
 
 /*Data for the table `reserve` */
 
-insert into `reserve` (`RESV_ID`, `BOOK_ID`, `BOOK_NAME`, `READER_ID`, `BEGIN_TIME`, `STATUS`)
-               values ('45', '06a139dc758c42e98de260fa5ed0916f', 'TO KILL A MOCKINGBIRD', '13512345688', now(), "WAITING");
+insert into `reserve` (`RESV_ID`, `BOOK_ID`, `BOOK_NAME`, `READER_ID`, `BEGIN_TIME`, `END_TIME`, `STATUS`)
+               values ('45', '06a139dc758c42e98de260fa5ed0916f', 'TO KILL A MOCKINGBIRD', '13512345688', now(), "2021-12-12 23:59:59","WAITING");
 
 
 
@@ -200,7 +201,7 @@ CREATE TABLE `checked_out` (
  `BOOK_ID` varchar(32) NOT NULL,     
  `BOOK_NAME` varchar(32) NOT NULL, 
  `READER_ID` varchar(11) NOT NULL,
- `CHECKOUT_TIME` datetime NOT NULL,
+ `END_TIME` datetime NOT NULL,
 	
   PRIMARY KEY (`CHECKOUT_ID`),
   CONSTRAINT `reserve_fk_1` FOREIGN KEY (`LIBR_ID`) REFERENCES `librarian`(`LIBR_ID`), 
@@ -210,7 +211,7 @@ CREATE TABLE `checked_out` (
 
 /*Data for the table `checked_out` */
 
-insert into `check_out` (`CHECKOUT_ID`, `LIBR_ID`, `BOOK_ID`, `BOOK_NAME`, `READER_ID`, `CHECKOUT_TIME`)
+insert into `check_out` (`CHECKOUT_ID`, `LIBR_ID`, `BOOK_ID`, `BOOK_NAME`, `READER_ID`, `END_TIME`)
                  values ('99', '17130177001','06a139dc758c42e98de260fa5ed0916f', 'TO KILL A MOCKINGBIRD', '13512345688', "2021-12-12 23:59:59");
 
 
