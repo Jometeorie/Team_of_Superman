@@ -146,8 +146,12 @@
             <td th:text=${book.getState()}></td>
             <td><img th:src="@{${barCodePath}+${book.barCodePath()}}"></td>
             <td>
-                <button type="submit" class="btn btn-info" name="reservation" >reservation</button>
+                <a th:href="'SearchPage/' + ${book.book_id}">
+                <!-- <a th:href="ReservationBook"> -->
+                    <button type="submit" class="btn btn-info" name="reservation" value="123">reservation</button>
+                </a>
             </td>
+                <!-- <button type="submit" class="btn btn-info" name="reservation" >reservation</button> -->
         </tr>
         </tbody>
     </table>

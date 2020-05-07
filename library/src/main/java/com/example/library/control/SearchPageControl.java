@@ -3,8 +3,10 @@
 127.0.0.1:8888/SearchPage
 */
 package com.example.library.control;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 import com.example.library.database.src.team.library.demo.*;
@@ -55,4 +57,14 @@ public class SearchPageControl
 
         return mv;
     }
+
+    // 处理读者预约一本书的响应
+    @RequestMapping(value = "SearchPage/{bookID}")
+    @ResponseBody
+    public ModelAndView test1(@PathVariable ("bookID") String bookID, HttpServletRequest request, HttpServletResponse response)  throws IOException {
+        System.out.println(bookID);
+
+        return new ModelAndView("redirect:/SearchPage");
+    }
+
 }
