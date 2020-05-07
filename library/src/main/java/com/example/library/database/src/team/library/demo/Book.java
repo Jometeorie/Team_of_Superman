@@ -232,7 +232,7 @@ public class Book{
     }
 
     //读者预约书，time格式为"2021-12-12 23:59:59"
-    public static boolean reservebook(String RESV_ID,String Book_ID,String Starttime,String Endtime,String Reader_ID)
+    public static boolean reservebook(String RESV_ID,String Book_ID,String Book_name,String Starttime,String Endtime,String Reader_ID)
     {
         if(SearchBookState(Book_ID)==0) {
             Connection con = null;
@@ -240,10 +240,11 @@ public class Book{
             ResultSet rs = null;
             try {
                 con = JdbcUtils.getConnection();
-                String sql = "insert into reserve values (?,?,?,?,?,?)";
+                String sql = "insert into reserve values (?,?,?,?,?,?,?)";
                 stmt = con.prepareStatement(sql);
                 stmt.setString(1, RESV_ID);
                 stmt.setString(2, Book_ID);
+                stmt.setString(3, Book_name);
                 stmt.setString(3, Reader_ID);
                 stmt.setString(4, Starttime);
                 stmt.setString(5, Endtime);
@@ -254,20 +255,29 @@ public class Book{
             } finally {
                 JdbcUtils.close(rs, stmt, con);
             }
+            EditBookState(Book_ID,1);
             return true;
         }
         return  false;
     }
 
+    public void updatereserve()  //更新预约表，删除超出时间的记录
+    {
+        JdbcTemplate template=new JdbcTemplate(JdbcUtils.getDataSource());
+        String sql="delete from reserve where unix_timestamp(DATE_ADD(BEGIN_TIME,INTERVAL 2 HOUR))<unix_timestamp(now())";
+        int count=template.update(sql);
+    }
+
     //管理员受理借阅
-    public static boolean EditResv(String RESV_ID,String Book_ID,boolean IfAgree)
+    public static boolean EditResv(String RESV_ID,String Book_ID,boolean IfAgree,CheckoutInfo checkedinfo)
     {
         if(IfAgree)
         {
             if(SearchBookState(Book_ID)==0)
             {
-                EditBookState(Book_ID,1);
-                changeResvState(RESV_ID,"Agree");
+                EditBookState(Book_ID,2);
+                deleteResv(RESV_ID);
+                insertcheckout(checkedinfo.checkout_id,checkedinfo.libr_id,checkedinfo.book_id,checkedinfo.book_name,checkedinfo.reader_id,checkedinfo.checkout_time);
                 return true;
             }
             else
@@ -276,6 +286,7 @@ public class Book{
         else
         {
             changeResvState(RESV_ID,"Disagree");
+            EditBookState(Book_ID,0);
             return true;
         }
     }
@@ -284,7 +295,7 @@ public class Book{
     public static void BackBook(String Book_ID,String Backtime)
     {
         EditBookState(Book_ID,0);
-        changeResvState(SearchReserveID(Book_ID), "Back");
+        //changeResvState(SearchReserveID(Book_ID), "Back");
     }
 
     //给管理员展示借书请求
@@ -302,6 +313,23 @@ public class Book{
         String sql = "select RESV_ID from reserve where BOOK_ID = ?";
         String RESV_ID=template.queryForObject(sql,String.class,Book_id);
         return RESV_ID;
+    }
+
+    //插入借出记录
+    public static void insertcheckout(String checkout_id,String libr_id,String book_id,String book_name,String reader_id,String checkouttime)
+    {
+        JdbcTemplate template=new JdbcTemplate(JdbcUtils.getDataSource());
+        String sql="insert into checked_out values(?,?,?,?,?,?)";
+        int count=template.update(sql,checkout_id,libr_id,book_id,book_name,reader_id,checkouttime);
+    }
+
+    //向读者提供该读者的借阅记录
+    public static List<CheckoutInfo> showcheckouttoreader(String reader_id)
+    {
+        JdbcTemplate template = new JdbcTemplate(JdbcUtils.getDataSource());
+        String sql = "select * from checked_out where READER_ID = ? ";
+        List<CheckoutInfo> list=template.query(sql,new BeanPropertyRowMapper<CheckoutInfo>(CheckoutInfo.class));
+        return list;
     }
 
     public static void main(String[] args)  {
