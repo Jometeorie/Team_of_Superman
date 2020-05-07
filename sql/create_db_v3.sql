@@ -38,15 +38,15 @@ CREATE TABLE `admin` (
   `ADMIN_NAME` varchar(32) NOT NULL,
   `PASSWORD` varchar(32) NOT NULL,
   `STATE` tinyint(1) NOT NULL DEFAULT '0',
-  `FINE_SET` decimal(6,2) NOT NULL DEFAULT '1.00'
-  `DATE_SET` smallint NOT NULL DEFAULT '30'
+  `FINE_SET` decimal(6,2) NOT NULL DEFAULT '1.00',
+  `DATE_SET` smallint NOT NULL DEFAULT '30',
   
   PRIMARY KEY (`ADMIN_ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /*Data for the table `admin` */
 
-insert  into `admin`(`ADMIN_ID`,`ADMIN_NAME`,`PASSWORD`,`STATE`) values ('17130166001','Bob','152152',0);
+insert  into `admin`(`ADMIN_ID`,`ADMIN_NAME`,`PASSWORD`,`STATE`) values ('17130166001','Bob','152152',0),
 																		('17130166002','wayne ','123456',0),
 																		('17130166003','Lacy','1255',0),
 																		('17130166004','Nacy','123456',0);
@@ -228,7 +228,7 @@ CREATE TABLE `return` (
  `BOOK_NAME` varchar(32) NOT NULL, 
  `READER_ID` varchar(11) NOT NULL,
  `RETURN_TIME` datetime NOT NULL,
- `FINE` decimal(6,2) NOT NULL DEFAULT '0.00'
+ `FINE` decimal(6,2) NOT NULL DEFAULT '0.00',
 
   PRIMARY KEY (`RETURN_ID`),
   CONSTRAINT `return_fk_1` FOREIGN KEY (`LIBR_ID`) REFERENCES `librarian`(`LIBR_ID`), 

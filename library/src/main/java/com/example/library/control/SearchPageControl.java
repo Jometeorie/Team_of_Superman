@@ -47,6 +47,12 @@ public class SearchPageControl
         else if (request.getParameter("mainpage") != null) {
             response.sendRedirect("MainPage");
         }
+
+        // reservation按钮
+        else if (request.getParameter("reservation") != null) {
+            response.sendRedirect("MainPage");
+        }
+
         return mv;
     }
 }
