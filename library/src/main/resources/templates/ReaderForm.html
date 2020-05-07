@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ReaderForm</title>
+    <link rel="stylesheet" href="https://formden.com/static/assets/demos/bootstrap-iso/bootstrap-iso/bootstrap-iso.css"> 
+    <style>
+        @font-face {
+            font-family: 'icomoon';
+            src: url('fonts/icomoon.eot?smc6kc');
+            src: url('fonts/icomoon.eot?smc6kc#iefix') format('embedded-opentype'), url('fonts/icomoon.ttf?smc6kc') format('truetype'), url('fonts/icomoon.woff?smc6kc') format('woff'), url('fonts/icomoon.svg?smc6kc#icomoon') format('svg');
+            font-weight: normal;
+            font-style: normal;
+            font-display: block;
+        }
+        /* 初始化 */
+        
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        
+        em,
+        i {
+            font-style: normal;
+        }
+        
+        li {
+            list-style: none;
+        }
+        
+        img {
+            border: 0;
+            vertical-align: middle;
+        }
+        
+        a {
+            color: #666;
+            text-decoration: none;
+        }
+        
+        a:hover {
+            color: #000;
+        }
+        
+        button {
+            cursor: pointer;
+        }
+        /* 背景 */
+        
+        body {
+            background-image: url(img/bg1.jpg);
+            background-repeat: no-repeat;
+            background-position: center top;
+            /* 把背景图片固定住 */
+            background-attachment: fixed;
+        }
+        /* 头部 */
+        
+        .w {
+            width: 1110px;
+            margin: 0 auto;
+        }
+        
+        .header {
+            position: relative;
+            height: 120px;
+            background-color: #fff;
+        }
+        
+        .header .nav {
+            padding: 20px 0;
+        }
+        
+        .header .nav .logo {
+            float: left;
+            width: 195px;
+            height: 90px;
+            background: url(img/logo_1.png) no-repeat;
+        }
+        
+        .header .nav ul {
+            padding-top: 20px;
+        }
+        
+        .header .nav ul li {
+            float: right;
+            margin: 20px 10px;
+            height: 40px;
+            line-height: 40px;
+            font-size: 16px;
+            color: #000;
+        }
+        
+        .header .nav ul .home {
+            border-bottom: 2px solid #c81623;
+        }
+        
+        .header .nav ul .home::before {
+            font-family: 'icomoon';
+            content: '\e905';
+            color: #000;
+        }
+        
+        .header .nav ul .logout::before {
+            font-family: 'icomoon';
+            content: '\e909';
+            color: #c81623;
+        }
+        
+        .header .nav ul li:hover {
+            border-bottom: 2px solid #c81623;
+        }
+        /*         
+        .header {
+            height: 100px;
+            background-color: #fff;
+        } */
+        /* 顶部大图  */
+        
+        .top {
+            position: relative;
+            height: 500px;
+            background-image: url(" img/timg.jfif");
+            background-repeat: no-repeat;
+        }
+        
+        .zheceng {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, .4) no-repeat center;
+        }
+        
+        .top h3 {
+            position: absolute;
+            left: 50%;
+            top: 80px;
+            width: 1000px;
+            font-size: 50px;
+            color: #fff;
+            font-weight: 600;
+            letter-spacing: 2px;
+            font-family: 'Montserrat', sans-serif;
+            margin-left: -500px;
+        }
+        
+        .top .choose {
+            position: relative;
+            top: 200px;
+            width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .choose_bottom_top {
+            float: left;
+            width: 240px;
+            height: 160px;
+            background: #fff;
+            padding: 30px 30px;
+            margin: 0 50px;
+        }
+        
+        .choose_bottom_top i {
+            display: block;
+            height: 80px;
+            font-family: icomoon;
+            font-size: 50px;
+            color: #cc2105;
+        }
+        
+        .choose_bottom_top h5 {
+            font-size: 18px;
+            letter-spacing: 1px;
+            font-weight: 600;
+            color: #343a40;
+        }
+        
+        .choose_bottom_top p {
+            color: #6c757d;
+        }
+        /* 三个表格部分 */
+        
+        #appointment_form,
+        #lending_form,
+        #return_form {
+            display: block;
+            color: #fff;
+            font-size: 20px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            margin-top: 150px;
+            margin-bottom: 20px;
+        }
+        
+        .box1,
+        .box2,
+        .box3 {
+            height: 600px;
+            background-color: #fff;
+            /* margin-bottom: 150px; */
+        }
+
+        .table > thead > tr > th {
+            text-align: center;
+        }
+
+        /* 页脚 */
+        
+        .footer {
+            height: 270px;
+            padding-top: 20px;
+            padding-left: 50px;
+            background-color: rgb(39, 35, 35);
+            margin-top: 150px;
+        }
+        
+        .footer .pic {
+            float: left;
+            width: 280px;
+        }
+        
+        .footer .pic img {
+            width: 100%;
+        }
+        
+        .footer dl {
+            float: left;
+            width: 200px;
+            color: #fff;
+            margin: 10px 85px;
+        }
+        
+        .footer dl dt {
+            font-size: 16px;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+        
+        .footer .con_us::after {
+            font-family: 'icomoon';
+            content: '\e90a';
+            color: #fff;
+        }
+        /* 返回顶部按钮*/
+        
+        .move-top {
+            position: fixed;
+            bottom: 50px;
+            right: 50px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- 头部 -->
+    <section class="header" id="header">
+        <div class=" nav w">
+            <a href="Mainpage">
+                <div class="logo "></div>
+            </a>
+            <ul>
+                <li class="logout "><a href="Mainpage" style="color: #000 "> Log Out</a></li>
+                <li><a href="#contact " style="color: #000 ">Contact Us</a></li>
+                <li><a href="#about_us" style="color: #000 "> About Us</a></li>
+                <li class="home "> <a href="Mainpage " style="color: #000; ">Home</a> </li>
+            </ul>
+        </div>
+    </section>
+    <!-- <div class="header" id="header"></div> -->
+    <!-- 顶部盒子 -->
+    <div class="top">
+        <!-- 顶部蒙版 -->
+        <div class="zheceng"></div>
+        <h3>Select the form you want to view</h3>
+        <ul class="choose">
+            <li class="choose1">
+                <a href="#appointment_form">
+                    <div class="choose_bottom_top">
+                        <i class="icon1"></i>
+                        <h5 class="card-title">Appointment Form</h5>
+                        <p class="card-text">...
+                        </p>
+                    </div>
+                </a>
+
+            </li>
+            <li class="choose2">
+                <a href="#lending_form">
+                    <div class="choose_bottom_top">
+                        <i class="icon2"></i>
+                        <h5 class="card-title">Lending Form</h5>
+                        <p class="card-text">...
+                        </p>
+                    </div>
+                </a>
+
+            </li>
+            <li class="choose3">
+                <a href="#return_form">
+                    <div class="choose_bottom_top">
+                        <i class="icon3"></i>
+                        <h5 class="card-title">Return Form</h5>
+                        <p class="card-text">...
+                        </p>
+                    </div>
+                </a>
+
+            </li>
+
+        </ul>
+
+    </div>
+
+    <!-- 三个表格部分 -->
+    <section class="forms w">
+        <h3 id="appointment_form">Appointment Form</h3>
+        <div class="box1">
+            <div class="bootstrap-iso">
+                <table class="table table-hover" style="text-align:center">
+                    <thead>
+                        <tr>
+                            <th>BookName</th>
+                            <th>Author</th>
+                            <th>Price</th>
+                            <th>Reader</th>
+                            <th>Appointment Time</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="appointment : ${appointment}">
+                            <td th:text=${appointment.book_name}></td>
+                            <td th:text=${appointment.author}></td>
+                            <td th:text=${appointment.price}></td>
+                            <td th:text=${appointment.reader}></td>
+                            <td th:text=${appointment.time}></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <h3 id="lending_form">Lending Form</h3>
+        <div class="box2">
+            <div class="bootstrap-iso">
+                <table class="table table-hover" style="text-align:center">
+                    <thead>
+                        <tr>
+                            <th>BookName</th>
+                            <th>Author</th>
+                            <th>Price</th>
+                            <th>Reader</th>
+                            <th>Lend Time</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="lend : ${lend}">
+                            <td th:text=${lend.book_name}></td>
+                            <td th:text=${lend.author}></td>
+                            <td th:text=${lend.price}></td>
+                            <td th:text=${lend.reader}></td>
+                            <td th:text=${lend.time}></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+      
+        <h3 id="return_form">Return Form</h3>
+        <div class="box3">
+            <div class="bootstrap-iso">
+                <table class="table table-hover" style="text-align:center">
+                    <thead>
+                        <tr>
+                            <th>BookName</th>
+                            <th>Author</th>
+                            <th>Price</th>
+                            <th>Reader</th>
+                            <th>Return Time</th>
+                            <th>Penalty</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="return : ${return}">
+                            <td th:text=${return.book_name}></td>
+                            <td th:text=${return.author}></td>
+                            <td th:text=${return.price}></td>
+                            <td th:text=${return.reader}></td>
+                            <td th:text=${return.time}></td>
+                            <td th:text=${return.penalty}></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+      
+    </section>
+
+
+    <!-- 脚部 -->
+    <section class="footer ">
+
+        <div>
+            <dl class="pic ">
+                <dt></dt>
+                <dd>
+                    <img src=" img/g5.jpg " alt=" ">
+                </dd>
+            </dl>
+            <dl id="about_us">
+                <dt>About Us</dt>
+                <dd>
+                    We are the D5 group of software engineering class 4 from the school of computer science and technology, with 20 members.
+                </dd>
+            </dl>
+            <dl id="contact">
+                <dt class="con_us ">Contact Us </dt>
+                <dd>
+                    Address: 266 xinglong section, xifeng road, xi 'an city, shaanxi province, China
+                </dd>
+                <dd>
+                    Postcode: 710126
+                </dd>
+            </dl>
+        </div>
+
+    </section>
+
+    <!-- 返回顶部按钮 -->
+    <a href="#header " class="move-top ">
+        <div>
+            <img src=" img/move-top.png " alt=" ">
+        </div>
+    </a>
+
+</body>
+
+</html>

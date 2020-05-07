@@ -1,103 +1,198 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AdminPage</title>
+    <link rel="stylesheet" href="common.css">
     <style>
-        * {
-            margin: 0px;
-            margin: 0px;
-            box-sizing: border-box;
+        .header {
+            height: 500px;
+            background-position: top center;
         }
-
-        body {
-            background: url("img/timg.jfif");
-            background-size: cover;
-            background-repeat: no-repeat;
+        
+        em,
+        i {
+            font-style: normal;
         }
-
-        a {
-            text-decoration: none;
-            color: #355bb7;
+        
+        .header h3 {
+            top: 250px;
+            left: 80px;
+            width: 1000px;
         }
-
-        .mp_head {
-            background-color: white;
-            width: 100%;
-            height: 113px;
+        
+        .header .search {
+            top: 450px;
         }
-
-        .mp_logo {
+        
+        .Modify_choose {
+            display: none;
+        }
+        
+        .header .nav ul .logout::before {
+            font-family: 'icomoon';
+            content: '\e909';
+            color: #c81623;
+        }
+        /* 选择操作模块 */
+        
+        .Select_Action {
+            margin: 20px 0;
+            height: 400px;
+            /* background-color: skyblue; */
+        }
+        
+        .Select_Action h3 {
+            display: block;
+            font-weight: bold;
+            font-size: 35px;
+            text-align: center;
+            letter-spacing: 2px;
+        }
+        
+        .Select_Action h3 span {
+            color: #cc2105;
+        }
+        
+        .card {
             float: left;
+            margin: 30px 0;
+            margin-right: 60px;
+            padding: 30px 30px;
+            width: 330px;
+            height: 230px;
+            background: #d6d6d6;
+            text-align: center !important;
+            border-radius: 0.25rem;
+            border: 1px solid transparent;
         }
-
-        .mp_title {
-            height: 113px;
-            margin-left: 380px;
-            padding-top: 30px;
-            float: left;
-            font-size: 60px;
+        
+        .Select_Action .action3 {
+            margin-right: 0;
         }
-
-        .mp_login {
-            height: 113px;
-            padding-top: 85px;
-            padding-right: 30px;
-            float: right;
+        
+        .card:hover {
+            background: rgba(0, 0, 0, .5);
         }
-
-        .divide {
-            height: 113px;
-            padding-top: 85px;
-            padding-right: 10px;
-            padding-left: 10px;
-            float: right;
+        
+        .card i {
+            font-family: 'icomoon';
+            font-size: 50px;
+            color: #cc2105;
         }
-
-        .mp_UpdPwd {
-            height: 113px;
-            padding-top: 85px;
-            float: right;
+        
+        .card i:hover {
+            color: #0ebeff;
         }
-
-
-        .bt_rr {
-            float: left;
-            background-color: lavenderblush;
-            margin-left: 700px;
-            height: 250px;
-            width: 180px;
+        
+        .card-title {
+            margin-top: 10px;
+            font-size: 20px;
+            color: #fff;
         }
-
-
+        
+        .card-text {
+            margin-top: 3px;
+            margin-left: 10px;
+            font-size: 14px;
+            line-height: 2em;
+            text-align: left;
+            color: #000;
+        }
     </style>
 </head>
-<body>
-<div class="mp_head">
-    <div class="mp_logo">
-        <button><a href="MainPage"><img src="img/logo.png"></a></button>
-    </div>
-    <div class="mp_title">
-        <p>AdminPage</p>
-    </div>
-    <div class="mp_login">
-        <a href="MainPage.html">Logout</a>
-    </div>
-    <div class="divide">|</div>
-    <div class="mp_UpdPwd"><a href="UpdateAdminPwd.html">Update Password</a></div>
 
-</div>
-<hr size="20px" color="black">
+<body onload="getD()">
+    <section class="header">
+        <div class="nav w">
+            <a href="MainPage">
+                <div class="logo"></div>
+            </a>
+            <ul class="key">
+                <li class="logout "><a href="MainPage" style="color: #fff"> Log Out</a></li>
+                <li><a href="UpdateAdminPwd" style="color: #fff"> Change Password</a></li>
+                <li><a href="#contact_us" style="color: #fff">Contact Us</a></li>
+                <li><a href="#about_us" style="color: #fff"> About Us</a></li>
+                <li class="home"> <a href="MainPage" style="color: #fff;">Home</a> </li>
+            </ul>
+        </div>
+        <h3>Welcome To Mandarin Library，admin!</h3>
+
+    </section>
+
+    <div class="content w">
+        <!-- 选择操作模块 -->
+        <div class="Select_Action">
+
+            <h3 class="heading-agileinfo text-center">WHAT DO YOU <span>WANT TO DO </span></h3>
+            <!-- 注册管理员 -->
+            <a href="LibrarianRegister.html">
+                <div class="action1 card">
+                    <div class="card-body">
+                        <i></i>
+                        <h5 class="card-title ">
+                            Add Librarian Account</h5>
+                        <p class="card-text">Register the account number of librarian, no limit on quantity.
+                        </p>
+                    </div>
+                </div>
+            </a>
+            <!-- 搜索并删除管理员账号 -->
+            <a href="#">
+                <div class="action2 card">
+                    <div class="card-body">
+                        <i></i>
+                        <h5 class="card-title ">
+                            Delete Librarian Account</h5>
+                        <p class="card-text">Search and delete librarian account.
+                        </p>
+                    </div>
+                </div>
+            </a>
+            <!-- 搜索并编辑管理员账号 -->
+            <a href="#">
+                <div class="action3 card">
+                    <div class="card-body">
+                        <i></i>
+                        <h5 class="card-title ">
+                            Edit Librarian Account</h5>
+                        <p class="card-text">Search and edit librarian account.
+                        </p>
+                    </div>
+                </div>
+            </a>
 
 
-<div>
-    <div>
-        <form action="#" method="post">
-            <button class="bt_rr" type="submit" name="LibrarianRegister" autofocus>LibrarianRegister</button>
-        </form>
+        </div>
+
     </div>
+    <section class="footer">
+        <dl class="pic">
+            <dt></dt>
+            <dd>
+                <img src="img/g5.jpg" alt="">
+            </dd>
+        </dl>
 
-</div>
+        <dl>
+            <dt id=about_us>About Us</dt>
+            <dd>
+                We are the D5 group of software engineering class 4 from the school of computer science and technology, with 20 members.
+            </dd>
+        </dl>
+        <dl>
+            <dt class="con_us" id=contact_us>Contact Us </dt>
+            <dd>
+                Address: 266 xinglong section, xifeng road, xi 'an city, shaanxi province, China
+            </dd>
+            <dd>
+                Postcode: 710126
+            </dd>
+        </dl>
+    </section>
 
 </body>
+
 </html>

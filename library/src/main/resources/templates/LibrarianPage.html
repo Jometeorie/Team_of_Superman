@@ -1,144 +1,423 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LibrarianPage</title>
+    <link rel="stylesheet" href="common.css">
     <style>
-        * {
-            margin: 0px;
-            margin: 0px;
-            box-sizing: border-box;
+        em,
+        i {
+            font-style: normal;
         }
-
-        body {
-            background: url("img/timg.jfif");
-            background-size: cover;
-            background-repeat: no-repeat;
-        }
-
-        a {
-            text-decoration: none;
-            color: #355bb7;
-        }
-
-        .mp_head {
-            background-color: white;
-            width: 100%;
-            height: 113px;
-        }
-
-        .mp_logo {
-            float: left;
-        }
-
-        .mp_title {
-            height: 113px;
-            margin-left: 380px;
-            padding-top: 30px;
-            float: left;
-            font-size: 60px;
-        }
-
-        .mp_search {
+        
+        .header h3 {
+            top: 250px;
+            left: 80px;
             width: 1000px;
+        }
+        
+        .header .search {
+            top: 450px;
+        }
+        
+        .Modify_choose {
+            display: none;
+        }
+        
+        .header .nav ul .logout::before {
+            font-family: 'icomoon';
+            content: '\e909';
+            color: #c81623;
+        }
+        /* 背景 */
+        
+        body {
+            background-image: url(img/bg2.jpg);
+            background-repeat: no-repeat;
+            background-position: center center;
+            /* 把背景图片固定住 */
+            background-attachment: fixed;
+        }
+        /* 选择操作模块 */
+        
+        .Select_Action {
+            height: 550px;
+            background-color: rgba(250, 250, 250, 0.6);
+        }
+        
+        .select_inner {
+            padding-top: 20px;
+        }
+        
+        .select_inner h3 {
+            /* margin-top: 20px; */
+            display: block;
+            font-weight: bold;
+            font-size: 35px;
+            text-align: center;
+            /* background-color: pink; */
+            letter-spacing: 2px;
+        }
+        
+        .select_inner h3 span {
+            color: #cc2105;
+        }
+        
+        .card {
+            float: left;
+            margin: 30px 36.6px 30px 0;
+            padding: 20px 30px;
+            width: 250px;
+            height: 370px;
+            background-color: #fff;
+            /* background: #d6d6d6; */
+            text-align: center !important;
+            border-radius: 0.25rem;
+            border: 1px solid transparent;
+        }
+        
+        .Select_Action .action4 {
+            margin-right: 0;
+        }
+        
+        .card:hover {
+            background: rgba(0, 0, 0, .5);
+        }
+        
+        .card i {
+            font-family: 'icomoon';
+            font-size: 50px;
+            color: #cc2105;
+        }
+        
+        .card i:hover {
+            color: #0ebeff;
+        }
+        
+        .card-title {
+            margin-top: 10px;
+            font-size: 18px;
+            color: #000;
+        }
+        
+        .card:hover .card-title {
+            color: #fff;
+        }
+        
+        .card-text {
+            margin-top: 3px;
+            font-size: 14px;
+            line-height: 2em;
+            text-align: left;
+            color: #000;
+        }
+        /* 操作模块 */
+        
+        .box1,
+        .box2,
+        .box3 {
+            margin-top: 150px;
+            position: relative;
+            height: 400px;
+            background-color: #fff;
+            /* margin-bottom: 150px; */
+        }
+        /* 管理读者模块 */
+        
+        .forms .card {
+            /* margin: 30px 27.5px 30px; */
+            padding: 40px 40px;
+            width: 200px;
             height: 200px;
-            margin-left: 300px;
-            padding-left: 120px;
-            padding-top: 100px;
+            /* background: #d6d6d6; */
+            background-color: rgba(0, 0, 0, 0.9);
+            text-align: center !important;
+            border: 1px solid transparent;
+            border-radius: 100px;
         }
-
-        .mp_login {
-            height: 113px;
-            padding-top: 85px;
-            padding-right: 30px;
-            float: right;
+        
+        .forms .box1 .card {
+            margin-right: 27.5px;
         }
-
-        #search {
-            width: 500px;
-            height: 42px;
-            border: 1px solid grey;
-            border-radius: 5px;
+        
+        .forms .box1 .action5 {
+            margin-right: 0;
         }
-
-        #img_search {
-            height: 42px;
-            vertical-align: middle;
+        
+        .forms .card:hover {
+            background: rgba(0, 0, 0, 0.8);
         }
-
-        .bt_rr {
-            float: left;
-            background-color: lavenderblush;
-            margin-left: 380px;
-            height: 250px;
-            width: 180px;
+        
+        .forms .card:hover i {
+            color: #0ebeff;
         }
-
-        .bt_ab {
-            float: left;
-            background-color: lightyellow;
-            margin-left: 140px;
-            height: 250px;
-            width: 180px;
+        
+        .forms .card .card-title {
+            font-size: 16px;
+            color: #fff;
         }
-
-        .bt_db {
-            float: right;
-            background-color: #b3d4fc;
-            margin-right: 350px;
-            height: 250px;
-            width: 180px;
+        
+        .forms .box1 .action5 .card-title {
+            font-size: 14px;
         }
-
-        .update {
-            display: inline-block;
-            float: right;
-            height: 113px;
-            margin-right: 20px;
-            padding-top: 56px;
+        /* 管理书籍模块 */
+        
+        .forms .box2 .card {
+            margin-left: 80px;
+            margin-right: 80px;
+        }
+        
+        .forms .box2 .action3 {
+            margin-right: 0;
+        }
+        
+        .forms .box2 .card .card-title {
+            margin-top: 20px;
+        }
+        /* 返回顶部按钮*/
+        
+        .move-top {
+            position: fixed;
+            bottom: 50px;
+            right: 50px;
         }
     </style>
 </head>
-<body>
-<div class="mp_head">
-    <div class="mp_logo">
-        <button><a href="MainPage"><img src="img/logo.png"></a></button>
-    </div>
-    <div class="mp_title">
-        <p>LibrarianPage</p>
-    </div>
-    <div class="mp_login">
-        <a href="MainPage.html">Logout</a>
-    </div>
-    <!--     <div class="update"><a href="UpdateAdminPwd.html">Update Password</a></div>
-     -->
-</div>
-<hr size="20px" color="black">
 
-<div class="mp_search">
-    <td><label for="search">Search:</label></td>
-    <td><input type="search" name="search" id="search" placeholder="Search Book">
-        <button type="submit"><img src="img/search.jfif" id="img_search"></button>
-    </td>
-</div>
+<body onload="getD()">
+    <!-- 页眉 -->
+    <section class="header" id="header">
+        <div class="nav w">
+            <a href="MainPage">
+                <div class="logo"></div>
+            </a>
+            <ul class="key">
+                <li class="logout "><a href="MainPage" style="color: #fff"> Log Out</a></li>
+                <li><a href="#contact_us" style="color: #fff">Contact Us</a></li>
+                <li><a href="#about_us" style="color: #fff"> About Us</a></li>
+                <li class="home"> <a href="MainPage" style="color: #fff;">Home</a> </li>
+            </ul>
+        </div>
+        <h3>Welcome To Mandarin Library,librarian!</h3>
+        <div class="search">
+            <img src="img/search_1.png" alt="">
+            <input type="search" name="" id="" placeholder="Search you're interested">
+            <button>search</button>
+        </div>
+    </section>
 
-<div>
-    <div>
-        <form action="" method="post">
-            <button class="bt_rr" type="submit" name="ReaderRegister" autofocus>ReaderRegister</button>
-        </form>
-    </div>
-    <div>
-        <form action="" method="post">
-            <button class="bt_ab" type="submit" name="AddBooks" autofocus>AddBooks</button>
-        </form>
-    </div>
-    <div>
-        <form action="" method="post">
-            <button class="bt_db" type="submit" name="DeleteBooks" autofocus>DeleteBooks</button>
-        </form>
-    </div>
-</div>
+    <!-- 选择操作模块 -->
+    <section class="Select_Action">
+        <div class="select_inner w">
+            <h3 class="heading-agileinfo text-center">WHAT DO YOU <span>WANT TO DO </span></h3>
+            <a href="#reader_management">
+                <div class="action1 card">
+                    <div class="card-body">
+                        <i></i>
+                        <h5 class="card-title ">
+                            About Reader</h5>
+                        <p class="card-text">Including registering a reader's account, editing or deleting the reader's account, obtaining the reader's relevant records, and accepting the business of borrowing and returning books for the reader.
+                        </p>
+                    </div>
+                </div>
+            </a>
+            <a href="#book_management">
+                <div class="action2 card">
+                    <div class="card-body">
+                        <i></i>
+                        <h5 class="card-title ">
+                            About Book</h5>
+                        <p class="card-text">Including adding books, deleting books in the library, editing book information.
+                        </p>
+                    </div>
+                </div>
+            </a>
+            <a href="#">
+                <div class="action3 card">
+                    <div class="card-body">
+                        <i></i>
+                        <h5 class="card-title ">
+                            Announcement</h5>
+                        <p class="card-text">Send announcements to the home page and manage the announcements displayed on the home page.
+                        </p>
+                    </div>
+                </div>
+            </a>
+            <a href="#">
+                <div class="action4 card">
+                    <div class="card-body">
+                        <i></i>
+                        <h5 class="card-title ">
+                            Library Revenue</h5>
+                        <p class="card-text">Obtain library revenue records , which are divided into margin revenue and penalty revenue
+                        </p>
+                    </div>
+                </div>
+            </a>
+        </div>
 
+
+    </section>
+
+
+    <!-- 操作部分 -->
+    <section class="forms">
+        <!-- 关于读者 -->
+        <div class="box1" id="reader_management">
+            <div class="select_inner w">
+                <h3 class="heading-agileinfo text-center">ABOUT <span>READER </span></h3>
+                <!-- 增加读者账号 -->
+                <a href="ReaderRegister">
+                    <div class="action1 card reader_card">
+                        <div class="card-body">
+                            <i></i>
+                            <h5 class="card-title ">
+                                Add Reader Account</h5>
+
+                        </div>
+                    </div>
+                </a>
+                <!-- 删除读者账号 -->
+                <a href="#">
+                    <div class="action2 card reader_card">
+                        <div class="card-body">
+                            <i></i>
+                            <h5 class="card-title ">
+                                Delete Reader Account</h5>
+
+                        </div>
+                    </div>
+                </a>
+                <!-- 编辑读者账号 -->
+                <a href="#">
+                    <div class="action3 card reader_card">
+                        <div class="card-body">
+                            <i></i>
+                            <h5 class="card-title ">
+                                Edit Reader Account</h5>
+
+                        </div>
+                    </div>
+                </a>
+                <!-- 查看读者相关记录表 -->
+                <a href="LibrarianForm">
+                    <div class="action4 card reader_card">
+                        <div class="card-body">
+                            <i></i>
+                            <h5 class="card-title ">
+                                View Record Form</h5>
+
+                        </div>
+                    </div>
+                </a>
+                <!-- 受理借还 -->
+                <a href="#">
+                    <div class="action5 card reader_card">
+                        <div class="card-body">
+                            <i></i>
+                            <h5 class="card-title ">
+                                Dealing With Borrowing And Returning</h5>
+
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <!-- 关于书籍 -->
+        <div class="box2" id="book_management">
+            <div class="select_inner w">
+                <h3 class="heading-agileinfo text-center">ABOUT <span>BOOK </span></h3>
+                <!-- 增加书籍 -->
+                <a href="#">
+                    <div class="action1 card book_card">
+                        <div class="card-body">
+                            <i></i>
+                            <h5 class="card-title ">
+                                Add Books</h5>
+
+                        </div>
+                    </div>
+                </a>
+                <!-- 删除书籍 -->
+                <a href="#">
+                    <div class="action2 card book_card">
+                        <div class="card-body">
+                            <i></i>
+                            <h5 class="card-title ">
+                                Delete Books</h5>
+
+                        </div>
+                    </div>
+                </a>
+                <!-- 编辑书籍 -->
+                <a href="#">
+                    <div class="action3 card book_card">
+                        <div class="card-body">
+                            <i></i>
+                            <h5 class="card-title ">
+                                Edit Books</h5>
+
+                        </div>
+                    </div>
+                </a>
+
+            </div>
+
+        </div>
+
+
+    </section>
+    <!-- 页脚 -->
+    <section class="footer">
+        <dl class="pic">
+            <dt></dt>
+            <dd>
+                <img src="img/g5.jpg" alt="">
+            </dd>
+        </dl>
+
+        <dl>
+            <dt id=about_us>About Us</dt>
+            <dd>
+                We are the D5 group of software engineering class 4 from the school of computer science and technology, with 20 members.
+            </dd>
+        </dl>
+        <dl>
+            <dt class="con_us" id=contact_us>Contact Us </dt>
+            <dd>
+                Address: 266 xinglong section, xifeng road, xi 'an city, shaanxi province, China
+            </dd>
+            <dd>
+                Postcode: 710126
+            </dd>
+        </dl>
+    </section>
+    <!-- 返回顶部按钮 -->
+    <a href="#header " class="move-top ">
+        <div>
+            <img src=" img/move-top.png " alt=" ">
+        </div>
+    </a>
+    <script>
+        function getD() {
+            var today = new Date();
+            var y = today.getFullYear();
+            var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+            var m = today.getMonth();
+            var d = today.getDate();
+            var dd = null;
+            if (today.getDay() == 0) dd = 'SUNDAY';
+            if (today.getDay() == 1) dd = 'MONDAY';
+            if (today.getDay() == 2) dd = 'TUESDAY';
+            if (today.getDay() == 3) dd = 'WEDNESDAY';
+            if (today.getDay() == 4) dd = 'THURSDAY';
+            if (today.getDay() == 5) dd = 'FRIDAY';
+            if (today.getDay() == 6) dd = 'SATYRDAY';
+            document.querySelector('.time').innerHTML = dd + ',' + months[m] + ' ' + d + '.' + y;
+        }
+    </script>
 </body>
+
 </html>
