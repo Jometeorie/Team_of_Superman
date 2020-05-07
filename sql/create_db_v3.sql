@@ -39,7 +39,7 @@ CREATE TABLE `admin` (
   `PASSWORD` varchar(32) NOT NULL,
   `STATE` tinyint(1) NOT NULL DEFAULT '0',
   `FINE_SET` decimal(6,2) NOT NULL DEFAULT '1.00'
-  `DATE_SET` int(6) NOT NULL DEFAULT '30'
+  `DATE_SET` smallint NOT NULL DEFAULT '30'
   
   PRIMARY KEY (`ADMIN_ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -204,14 +204,14 @@ CREATE TABLE `checked_out` (
  `END_TIME` datetime NOT NULL,
 	
   PRIMARY KEY (`CHECKOUT_ID`),
-  CONSTRAINT `reserve_fk_1` FOREIGN KEY (`LIBR_ID`) REFERENCES `librarian`(`LIBR_ID`), 
-  CONSTRAINT `reserve_fk_2` FOREIGN KEY (`BOOK_ID`) REFERENCES `book`(`BOOK_ID`), 
-  CONSTRAINT `reserve_fk_3` FOREIGN KEY (`READER_ID`) REFERENCES `reader`(`READER_ID`)
+  CONSTRAINT `checkout_fk_1` FOREIGN KEY (`LIBR_ID`) REFERENCES `librarian`(`LIBR_ID`), 
+  CONSTRAINT `checkout_fk_2` FOREIGN KEY (`BOOK_ID`) REFERENCES `book`(`BOOK_ID`), 
+  CONSTRAINT `checkout_fk_3` FOREIGN KEY (`READER_ID`) REFERENCES `reader`(`READER_ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /*Data for the table `checked_out` */
 
-insert into `check_out` (`CHECKOUT_ID`, `LIBR_ID`, `BOOK_ID`, `BOOK_NAME`, `READER_ID`, `END_TIME`)
+insert into `checked_out` (`CHECKOUT_ID`, `LIBR_ID`, `BOOK_ID`, `BOOK_NAME`, `READER_ID`, `END_TIME`)
                  values ('99', '17130177001','06a139dc758c42e98de260fa5ed0916f', 'TO KILL A MOCKINGBIRD', '13512345688', "2021-12-12 23:59:59");
 
 
@@ -231,9 +231,9 @@ CREATE TABLE `return` (
  `FINE` decimal(6,2) NOT NULL DEFAULT '0.00'
 
   PRIMARY KEY (`RETURN_ID`),
-  CONSTRAINT `reserve_fk_1` FOREIGN KEY (`LIBR_ID`) REFERENCES `librarian`(`LIBR_ID`), 
-  CONSTRAINT `reserve_fk_2` FOREIGN KEY (`BOOK_ID`) REFERENCES `book`(`BOOK_ID`), 
-  CONSTRAINT `reserve_fk_3` FOREIGN KEY (`READER_ID`) REFERENCES `reader`(`READER_ID`)	
+  CONSTRAINT `return_fk_1` FOREIGN KEY (`LIBR_ID`) REFERENCES `librarian`(`LIBR_ID`), 
+  CONSTRAINT `return_fk_2` FOREIGN KEY (`BOOK_ID`) REFERENCES `book`(`BOOK_ID`), 
+  CONSTRAINT `return_fk_3` FOREIGN KEY (`READER_ID`) REFERENCES `reader`(`READER_ID`)	
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /*Data for the table `return` */
