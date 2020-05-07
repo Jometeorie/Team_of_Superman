@@ -1,106 +1,141 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HomePage</title>
+    <link rel="stylesheet" href="common.css">
     <style>
-        * {
-            margin: 0px;
-            margin: 0px;
-            box-sizing: border-box;
+        .saying {
+            padding: 20px 0;
+            font-size: 14px;
+            line-height: 35px;
         }
 
-        body {
-            background: url("img/timg.jfif");
-            background-size: cover;
-            background-repeat: no-repeat;
+        .post {
+            position: absolute;
+            top: 618px;
+            right: 135px;
+            width: 300px;
+            height: 347px;
+            background: rgba(0, 0, 0, .7);
+            padding: 46px 20px;
+            color: wheat;
         }
 
-        a {
-            text-decoration: none;
-            color: #355bb7;
+        .time {
+            position: absolute;
+            top: -5px;
+            left: 35px;
+            width: 210px;
+            height: 40px;
+            line-height: 40px;
+            text-align: center;
+            background-color: rgb(245, 199, 101);
+            font-weight: 700;
+            color: #000;
         }
-
-        .mp_head {
-            background-color: white;
-            width: 100%;
-            height: 115px;
-        }
-
-        .mp_logo {
-            float: left;
-        }
-
-        .mp_title {
-            height: 113px;
-            margin-left: 20px;
-            padding-top: 30px;
-            float: left;
-            font-size: 60px;
-        }
-
-
-        .mp_login {
-            height: 113px;
-            padding-top: 85px;
-            float: right;
-        }
-
-        .mp_search {
-            width: 1000px;
-            height: 200px;
-            margin-left: 300px;
-            padding-left: 120px;
-            padding-top: 100px;
-        }
-
-
-        #search {
-            width: 500px;
-            height: 42px;
-            border: 1px solid grey;
-            border-radius: 5px;
-        }
-
-        #img_search {
-            height: 42px;
-            vertical-align: middle;
-        }
-
-        .mp_news_post {
-            background-color: #cccccc;
-        }
-
     </style>
-<body>
-<div class="mp_head">
-    <div class="mp_logo">
-        <button><a href="MainPage"><img src="img/logo.png"></a></button>
+</head>
+
+<body onload="getD()">
+    <section class="header">
+        <div class="nav w">
+            <a href="MainPage">
+                <div class="logo"></div>
+            </a>
+            <ul class="key">
+                <li style="color: #fff" class="log">Log In
+                    <ul class="log_choose">
+                        <li><a href="ReaderLogin" style="color: #fff">Reader</a> </li>
+                        <li><a href="LibrarianLogin" style="color: #fff">Librarian</a> </li>
+                        <!-- <li><a href="#" style="color: #fff">Admin</a> </li> -->
+                    </ul>
+                </li>
+                <li><a href="#contact_us" style="color: #fff">Contact Us</a></li>
+                <li><a href="#about_us" style="color: #fff"> About Us</a></li>
+                <li class="home"> <a href="MainPage" style="color: #fff;">Home</a> </li>
+            </ul>
+        </div>
+        <h3>Welcome To Mandarin Library</h3>
+        <div class="search">
+            <img src="img/search_1.png" alt="">
+            <input type="search" name="" id="" placeholder="Search you're interested">
+            <button>search</button>
+        </div>
+    </section>
+    <div class="content w">
+        <div class="saying">
+            Knowledge makes humble, ignorance makes proud. <br>
+            A good book is a good friend.<br>
+            There is no end to learning.<br>
+            Ignorance is not innocence but sin. -Robert Browning <br>
+            One is never too old to learn. <br>
+            Learning is like rowing upstream, not to advance is to drop back. -Chinese Proverb <br>
+            Learning is the eye of the mind. <br>
+            Knowledge is weightless, a treasure you can always carry easily. 
+        </div>
+        <div class="post">
+            <strong>Matters needing attention</strong>
+            <div class="time"></div>
+        </div>
     </div>
-    <div class="mp_title">
-        <p>Welcome To Mandarin Library</p>
-    </div>
-    <div class="mp_login">
-        <a href="ReaderLogin">ReaderLogin</a>/<a href="LibrarianLogin">LibrarianLogin</a>
-    </div>
-</div>
+    <section class="footer">
+        <dl class="pic">
+            <dt></dt>
+            <dd>
+                <img src="img/g5.jpg" alt="">
+            </dd>
+        </dl>
 
-<hr size="20px" color="black">
+        <dl>
+            <dt id=about_us>About Us</dt>
+            <dd>
+                We are the D5 group of software engineering class 4 from the school of computer science and technology,
+                with 20 members.
+            </dd>
+        </dl>
+        <dl>
+            <dt class="con_us" id=contact_us>Contact Us </dt>
+            <dd>
+                Address: 266 xinglong section, xifeng road, xi 'an city, shaanxi province, China
+            </dd>
+            <dd>
+                Postcode: 710126
+            </dd>
+        </dl>
+    </section>
+    <script>
+        // 1. 获取元素
+        var log = document.querySelector('.log');
+        var log_choose = document.querySelector('.log_choose');
 
-<div class="mp_news_post">
-    <marquee behavior="scroll" direction="left">
-        NOTICE:the program is under development.Some functions cannot be used normally.We are sorry for the
-        inconvenience.
-    </marquee>
-</div>
+        // 2.注册事件
 
-<div class="mp_search">
-    <td><label for="search">Search:</label></td>
-    <td><input type="search" name="search" id="search" placeholder="Search you're interested">
-        <button type="submit"><img src="img/search.jfif" id="img_search"></button>
-    </td>
-</div>
-
-
+        log.onmouseover = function () {
+            log_choose.style.display = 'block';
+        }
+        log.onmouseout = function () {
+            log_choose.style.display = 'none';
+        }
+        function getD() {
+            var today = new Date();
+            var y = today.getFullYear();
+            var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+            var m = today.getMonth();
+            var d = today.getDate();
+            var dd = null;
+            if (today.getDay() == 0) dd = 'SUNDAY';
+            if (today.getDay() == 1) dd = 'MONDAY';
+            if (today.getDay() == 2) dd = 'TUESDAY';
+            if (today.getDay() == 3) dd = 'WEDNESDAY';
+            if (today.getDay() == 4) dd = 'THURSDAY';
+            if (today.getDay() == 5) dd = 'FRIDAY';
+            if (today.getDay() == 6) dd = 'SATYRDAY';
+            document.querySelector('.time').innerHTML = dd + ',' + months[m] + ' ' + d + '.' + y;
+        }
+    </script>
 </body>
+
 </html>
