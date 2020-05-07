@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LibrarianForm</title>
+    <link rel="stylesheet" href="https://formden.com/static/assets/demos/bootstrap-iso/bootstrap-iso/bootstrap-iso.css"> 
     <style>
         @font-face {
             font-family: 'icomoon';
@@ -203,6 +204,11 @@
             background-color: #fff;
             /* margin-bottom: 150px; */
         }
+
+        .table > thead > tr > th {
+            text-align: center;
+        }
+
         /* 页脚 */
         
         .footer {
@@ -316,11 +322,79 @@
     <section class="forms w">
 
         <h3 id="lending_form">Lending Form</h3>
-        <div class="box2"></div>
+        <div class="box2">
+            <div class="bootstrap-iso">
+                <table class="table table-hover" style="text-align:center">
+                    <thead>
+                        <tr>
+                            <th>BookName</th>
+                            <th>Author</th>
+                            <th>Price</th>
+                            <th>Reader</th>
+                            <th>Lend Time</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="lend : ${lend}">
+                            <td th:text=${lend.book_name}></td>
+                            <td th:text=${lend.author}></td>
+                            <td th:text=${lend.price}></td>
+                            <td th:text=${lend.reader}></td>
+                            <td th:text=${lend.time}></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
         <h3 id="return_form">Return Form</h3>
-        <div class="box3"></div>
+        <div class="box3">
+            <div class="bootstrap-iso">
+                <table class="table table-hover" style="text-align:center">
+                    <thead>
+                        <tr>
+                            <th>BookName</th>
+                            <th>Author</th>
+                            <th>Price</th>
+                            <th>Reader</th>
+                            <th>Return Time</th>
+                            <th>Penalty</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="return : ${return}">
+                            <td th:text=${return.book_name}></td>
+                            <td th:text=${return.author}></td>
+                            <td th:text=${return.price}></td>
+                            <td th:text=${return.reader}></td>
+                            <td th:text=${return.time}></td>
+                            <td th:text=${return.penalty}></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
         <h3 id="Penalty_record">Penalty Record</h3>
-        <div class="box1"></div>
+        <div class="box1">
+            <div class="bootstrap-iso">
+                <table class="table table-hover" style="text-align:center">
+                    <thead>
+                        <tr>
+                            <th>Reader</th>
+                            <th>Penalty</th>
+                            <th>State</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="penalty : ${penalty}">
+                            <td th:text=${penalty.reader}></td>
+                            <td th:text=${penalty.amount}></td>
+                            <td th:if="${penalty.state==0}" ><button type="button" class="btn btn-success">Paid</button></td>
+                            <td th:if="${penalty.state!=0}" ><button type="button" class="btn btn-danger disabled">Unpaid</button></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </section>
 
 
