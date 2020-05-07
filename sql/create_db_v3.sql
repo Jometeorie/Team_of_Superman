@@ -46,7 +46,7 @@ CREATE TABLE `admin` (
 
 /*Data for the table `admin` */
 
-insert  into `admin`(`ADMIN_ID`,`ADMIN_NAME`,`PASSWORD`,`STATE`) values ('17130166001','Bob','152152',0),
+insert  into `admin`(`ADMIN_ID`,`ADMIN_NAME`,`PASSWORD`,`STATE`) values ('17130166001','Bob','152152',0);
 																		('17130166002','wayne ','123456',0),
 																		('17130166003','Lacy','1255',0),
 																		('17130166004','Nacy','123456',0);
