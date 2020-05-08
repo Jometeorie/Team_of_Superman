@@ -64,13 +64,20 @@ public class SearchPageControl
     @RequestMapping(value = "SearchPage/{bookID}/{bookName}")
     @ResponseBody
     public ModelAndView getReserve(@PathVariable ("bookID") String bookID, @PathVariable ("bookName") String bookName, HttpServletRequest request, HttpServletResponse response)  throws IOException {
+        long beginTime = System.currentTimeMillis();
+        // EndTime，一小时后自动删除记录
+        long endTime = beginTime + 30*60*1000;
+        Date beginDate = new Date(beginTime);
+        Date endDate = new Date(endTime);
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        String SystemTime = df.format(new Date());
+        String reserveBeginTime = df.format(beginDate);
+        String reserveEndTime = df.format(endDate);
+
         HttpSession session = request.getSession();
         String readerID = session.getAttribute("username").toString();
 
-        // 这里的EndTime还得做修改
-        Book.reservebook(Book.getUUID(), bookID.split("\\.")[0], bookName, SystemTime, SystemTime, readerID);
+        Book.reservebook(Book.getUUID(), bookID.split("\\.")[0], bookName, reserveBeginTime, 
+                                                reserveEndTime, readerID);
 
         return new ModelAndView("redirect:/SearchPage");
     }
