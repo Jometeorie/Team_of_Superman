@@ -161,6 +161,7 @@
 
         .table > thead > tr > th {
             text-align: center;
+            vertical-align: center;
         }
 
 
@@ -240,7 +241,7 @@
 
 
             <div class="bootstrap-iso">
-                <table class="table" style="text-align:center">
+                <table class="table table-hover" style="text-align:center">
                     <thead>
                     <tr>
                         <th>Name</th>
@@ -267,7 +268,7 @@
                         <td><img th:src="@{${barCodePath}+${book.barCodePath()}}"></td>
                         <td>
                             <a th:href="'SearchPage/' + ${book.book_id}">
-                            <button type="submit" class="btn btn-info" name="reservation" >reservation</button>
+                            <button type="submit" class="btn btn-info" name="reservation" >Reservation</button>
                             </a>
                         </td>
                     </tr>
