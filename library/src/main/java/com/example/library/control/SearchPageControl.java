@@ -61,7 +61,7 @@ public class SearchPageControl
     // 处理读者预约一本书的响应
     @RequestMapping(value = "SearchPage/{bookID}")
     @ResponseBody
-    public ModelAndView test1(@PathVariable ("bookID") String bookID, HttpServletRequest request, HttpServletResponse response)  throws IOException {
+    public ModelAndView getReserve(@PathVariable ("bookID") String bookID, HttpServletRequest request, HttpServletResponse response)  throws IOException {
         System.out.println(bookID);
 
         return new ModelAndView("redirect:/SearchPage");
