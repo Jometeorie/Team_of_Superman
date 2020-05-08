@@ -11,13 +11,15 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 import com.example.library.database.src.team.library.demo.*;
 
-// import javax.servlet.http.HttpSession;
+import javax.servlet.http.HttpSession;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.List;
+import java.util.Date;
 
 @RestController
 public class SearchPageControl
@@ -59,10 +61,16 @@ public class SearchPageControl
     }
 
     // 处理读者预约一本书的响应
-    @RequestMapping(value = "SearchPage/{bookID}")
+    @RequestMapping(value = "SearchPage/{bookID}/{bookName}")
     @ResponseBody
-    public ModelAndView getReserve(@PathVariable ("bookID") String bookID, HttpServletRequest request, HttpServletResponse response)  throws IOException {
-        System.out.println(bookID);
+    public ModelAndView getReserve(@PathVariable ("bookID") String bookID, @PathVariable ("bookName") String bookName, HttpServletRequest request, HttpServletResponse response)  throws IOException {
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String SystemTime = df.format(new Date());
+        HttpSession session = request.getSession();
+        String readerID = session.getAttribute("username").toString();
+
+        // 这里的EndTime还得做修改
+        Book.reservebook(Book.getUUID(), bookID.split("\\.")[0], bookName, SystemTime, SystemTime, readerID);
 
         return new ModelAndView("redirect:/SearchPage");
     }
