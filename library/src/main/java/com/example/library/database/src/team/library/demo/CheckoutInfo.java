@@ -7,4 +7,5 @@ public class CheckoutInfo {
     public String book_name;
     public String reader_id;
     public String end_time;
+    public String checkout_time;
 }

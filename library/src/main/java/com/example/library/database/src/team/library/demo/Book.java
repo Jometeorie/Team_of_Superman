@@ -245,10 +245,10 @@ public class Book{
                 stmt.setString(1, RESV_ID);
                 stmt.setString(2, Book_ID);
                 stmt.setString(3, Book_name);
-                stmt.setString(3, Reader_ID);
-                stmt.setString(4, Starttime);
-                stmt.setString(5, Endtime);
-                stmt.setString(6, "Waiting");
+                stmt.setString(4, Reader_ID);
+                stmt.setString(5, Starttime);
+                stmt.setString(6, Endtime);
+                stmt.setString(7, "Waiting");
                 stmt.executeUpdate();
             } catch (Exception e) {
                 e.printStackTrace();
