@@ -294,7 +294,7 @@ public class Book{
     }
 
     //管理员授理归还
-    public static void BackBook(String Book_ID, ReturnInfo returninfo, DatebaseCtroller controller3)
+    public static void BackBook(String Book_ID, ReturnInfo returninfo, DatebaseController controller3)
     {
         if(SearchBookState(Book_ID)==2)
         {
@@ -308,11 +308,11 @@ public class Book{
     }
 
     //插入归还记录
-    public static void insertreturn(String return_id,String libr_id,String book_id,String book_name,String reader_id,String returntime,double fine,String reader_name)
+    public static void insertreturn(String return_id,String libr_id,String book_id,String book_name,String reader_id,String returntime,String reader_name)
     {
         JdbcTemplate template=new JdbcTemplate(JdbcUtils.getDataSource());
         String sql="insert into return values(?,?,?,?,?,?,?)";
-        int count=template.update(sql,return_id,libr_id,book_id,book_name,reader_id,returntime,fine,reader_name);
+        int count=template.update(sql,return_id,libr_id,book_id,book_name,reader_id,returntime,reader_name);
     }
     
     //给管理员展示借书请求
