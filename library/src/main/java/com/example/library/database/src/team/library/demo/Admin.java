@@ -217,12 +217,14 @@ public class Admin {
     * 超级管理员设置罚金
     * */ 
     public void fineSet(double fine){
-        DatabaseController.FineSet(fine);
+        DatabaseController controller1;
+        controller1.FineSet(fine);
     }
     /**
     * 超级管理员设置还书期限天数
     * */ 
     public void dateSet(){
-        DatabaseController.DateSet(date);
+        DatabaseController controller2;
+        cotroller2.DateSet(date);
     } 
 }
