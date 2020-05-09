@@ -37,6 +37,7 @@ public class LibrarianLoginControl {
                 System.out.println("Successed login librarian!");
                 HttpSession session = request.getSession();
                 session.setAttribute("username", username);
+                session.setAttribute("identity", "librarian");
                 response.sendRedirect("LibrarianPage");
                 // 前端判断登录是否成功的依据，0为成功，非0为失败
                 mv.addObject("value_judg", 0);
