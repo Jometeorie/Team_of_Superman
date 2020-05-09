@@ -1,7 +1,7 @@
 package com.example.library.database.src.team.library.demo;
 
 // import com.example.one.mapper.LibraryMapper;
-import com.example.library.database.src.team.library.demo.LibraryMapper;
+import com.example.library.database.src.team.library.demo.LibraryMapper.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestParam;
