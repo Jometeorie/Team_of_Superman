@@ -37,6 +37,7 @@ public class ReaderLoginControl {
                 System.out.println("Successed login reader!");
                 HttpSession session = request.getSession();
                 session.setAttribute("username", username);
+                session.setAttribute("identity", "reader");
                 response.sendRedirect("ReaderPage");
                 // 前端判断登录是否成功的依据，0为成功，非0为失败
                 mv.addObject("value_judg", 0);
