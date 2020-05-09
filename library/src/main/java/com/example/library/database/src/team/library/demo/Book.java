@@ -1,5 +1,7 @@
 package com.example.library.database.src.team.library.demo;
 
+import com.example.library.database.src.team.library.demo.DatabaseController.*;
+
 import org.junit.Test;
 import org.springframework.jdbc.core.JdbcTemplate;
 
@@ -291,13 +293,28 @@ public class Book{
         }
     }
 
-    //还书,不可用
-    public static void BackBook(String Book_ID,String Backtime)
+    //管理员授理归还
+    public static void BackBook(String Book_ID, ReturnInfo returninfo, DatebaseCtroller controller3)
     {
+        if(SearchBookState(Book_ID)==2)
+        {
+        insertreturn(returninfo.return_id,returninfo.libr_id,returninfo.book_id,returninfo.book_name,returninfo.reader_id,returninfo.return_time,returninfo.reader_name);
+        controller3.CountPerBookFine(returninfo.book_id, returninfo.reader_id);   
+        controller3.SetPerBookFine(returninfo.book_id, returninfo.reader_id);
+        controller3.UpdateReaderSumFine(returninfo.reader_id);
         EditBookState(Book_ID,0);
-        //changeResvState(SearchReserveID(Book_ID), "Back");
+        }
+	    else{System.out.println("the book has not been checked out");}         
     }
 
+    //插入归还记录
+    public static void insertreturn(String return_id,String libr_id,String book_id,String book_name,String reader_id,String returntime,double fine,String reader_name)
+    {
+        JdbcTemplate template=new JdbcTemplate(JdbcUtils.getDataSource());
+        String sql="insert into return values(?,?,?,?,?,?,?)";
+        int count=template.update(sql,return_id,libr_id,book_id,book_name,reader_id,returntime,fine,reader_name);
+    }
+    
     //给管理员展示借书请求
     public static List<ResvInfo> showResvList()
     {
