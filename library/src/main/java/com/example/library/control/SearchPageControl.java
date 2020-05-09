@@ -52,11 +52,6 @@ public class SearchPageControl
             response.sendRedirect("MainPage");
         }
 
-        // reservation按钮
-        else if (request.getParameter("reservation") != null) {
-            response.sendRedirect("MainPage");
-        }
-
         return mv;
     }
 
@@ -65,8 +60,8 @@ public class SearchPageControl
     @ResponseBody
     public ModelAndView getReserve(@PathVariable ("bookID") String bookID, @PathVariable ("bookName") String bookName, HttpServletRequest request, HttpServletResponse response)  throws IOException {
         long beginTime = System.currentTimeMillis();
-        // EndTime，一小时后自动删除记录
-        long endTime = beginTime + 30*60*1000;
+        // EndTime，一小时后自动删除记录（单位毫秒）
+        long endTime = beginTime + 120*60*1000;
         Date beginDate = new Date(beginTime);
         Date endDate = new Date(endTime);
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
