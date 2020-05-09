@@ -324,7 +324,7 @@
                         <tr>
                             <th>Appointment ID</th>
                             <th>BookName</th>
-                            <th>ISBN</th>
+                            <th>BookID</th>
                             <th>Reader</th>
                             <th>Appointment Time</th>
                             <th>Operation</th>
@@ -334,7 +334,7 @@
                         <tr th:each="appointment : ${appointment}">
                             <td th:text=${appointment.appointment_id}>
                             <td th:text=${appointment.book_name}></td>
-                            <td th:text=${appointment.isbn}></td>
+                            <td th:text=${appointment.book_id}></td>
                             <td th:text=${appointment.reader}></td>
                             <td th:text=${appointment.time}></td>
                             <td><a th:href="'BorrowAndReturn/'+${appointment.appointment_id}">
@@ -353,7 +353,7 @@
                         <tr>
                             <th>Return ID</th>
                             <th>BookName</th>
-                            <th>ISBN</th>
+                            <th>BookID</th>
                             <th>Reader</th>
                             <th>Return Time</th>
                             <th>Operation</th>
@@ -363,7 +363,7 @@
                         <tr th:each="return : ${return}">
                             <td th:text=${return.return_id}></td>
                             <td th:text=${return.book_name}></td>
-                            <td th:text=${return.isbn}></td>
+                            <td th:text=${return.book_id}></td>
                             <td th:text=${return.reader}></td>
                             <td th:text=${return.time}></td>
                             <td><a th:href="'BorrowAndReturn/'+${return.return_id}">
