@@ -321,6 +321,20 @@ public class Book{
         return RESV_ID;
     }
 
+    public static List<ReturnInfo> showReturnList()
+    {
+        JdbcTemplate template = new JdbcTemplate(JdbcUtils.getDataSource());
+        String sql = "select * from `return` ";
+        List<ReturnInfo> list=template.query(sql,new BeanPropertyRowMapper<ReturnInfo>(ReturnInfo.class));
+        for (ReturnInfo info:list) {
+            JdbcTemplate temp=new JdbcTemplate(JdbcUtils.getDataSource());
+            String sql2="select READER_NAME from reader where READER_ID=?";
+            String name=temp.queryForObject(sql2,String.class,info.reader_id);
+            info.setReader_name(name);
+        }
+        return list;
+    }
+
     //插入借出记录
     public static void insertcheckout(String checkout_id,String libr_id,String book_id,String book_name,String reader_id,String checkouttime)
     {

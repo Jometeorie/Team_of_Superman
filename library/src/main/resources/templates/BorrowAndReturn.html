@@ -332,12 +332,14 @@
                     </thead>
                     <tbody>
                         <tr th:each="appointment : ${appointment}">
-                            <td th:text=${appointment.appointment_id}>
+                            <td th:text=${appointment.resv_id}>
                             <td th:text=${appointment.book_name}></td>
                             <td th:text=${appointment.book_id}></td>
-                            <td th:text=${appointment.reader}></td>
-                            <td th:text=${appointment.time}></td>
-                            <td><a th:href="'BorrowAndReturn/'+${appointment.appointment_id}">
+                            <td th:text=${appointment.reader_name}></td>
+                            <td th:text=${appointment.begin_time}></td>
+                            <td><a th:href="'BorrowRequest/'+${appointment.resv_id}+ '/' + 
+                                ${appointment.book_id} + '/' + ${appointment.book_name} + '/' + 
+                                ${appointment.reader_id} + '/' + ${appointment.reader_name}">
                                 <button type="button" class="btn btn-info">Approve</button>
                             </a></td>
                         </tr>
@@ -360,13 +362,13 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr th:each="return : ${return}">
-                            <td th:text=${return.return_id}></td>
-                            <td th:text=${return.book_name}></td>
-                            <td th:text=${return.book_id}></td>
-                            <td th:text=${return.reader}></td>
-                            <td th:text=${return.time}></td>
-                            <td><a th:href="'BorrowAndReturn/'+${return.return_id}">
+                        <tr th:each="returns : ${returns}">
+                            <td th:text=${returns.return_id}></td>
+                            <td th:text=${returns.book_name}></td>
+                            <td th:text=${returns.book_id}></td>
+                            <td th:text=${returns.reader_name}></td>
+                            <td th:text=${returns.return_time}></td>
+                            <td><a th:href="'ReturnRequest/'+${returns.return_id}">
                                 <button type="button" class="btn btn-info">Return</button>
                             </a></td>
                         </tr>
