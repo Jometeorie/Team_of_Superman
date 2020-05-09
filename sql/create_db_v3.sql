@@ -241,5 +241,16 @@ CREATE TABLE `return` (
 insert into `return` (`RETURN_ID`, `LIBR_ID`, `BOOK_ID`, `BOOK_NAME`, `READER_ID`, `RETURN_TIME`, `FINE`)
               values ('101', '17130177001','06a139dc758c42e98de260fa5ed0916f', 'TO KILL A MOCKINGBIRD', '13512345688', "2022-1-12 23:59:59", '5.00');
 
+CREATE TABLE `takemoney` (
+ `TAKE_ID` varchar(33) NOT NULL,
+ `LIBR_ID` varchar(11) NOT NULL,
+ `READER_ID` varchar(11) NOT NULL,
+ `TAKE_TIME` datetime NOT NULL,
+ `MONEY_AMOUNT` decimal(6,2) NOT NULL DEFAULT '0.00',
+ `MONEY_TYPE` tinyint(1) NOT NULL,
 
+  PRIMARY KEY (`TAKE_ID`),
+  CONSTRAINT `return_fk_1` FOREIGN KEY (`LIBR_ID`) REFERENCES `librarian`(`LIBR_ID`),
+  CONSTRAINT `return_fk_3` FOREIGN KEY (`READER_ID`) REFERENCES `reader`(`READER_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 

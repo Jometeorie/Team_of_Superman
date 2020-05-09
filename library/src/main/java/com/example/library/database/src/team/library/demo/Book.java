@@ -277,7 +277,7 @@ public class Book{
             {
                 EditBookState(Book_ID,2);
                 deleteResv(RESV_ID);
-                insertcheckout(checkedinfo.checkout_id,checkedinfo.libr_id,checkedinfo.book_id,checkedinfo.book_name,checkedinfo.reader_id,checkedinfo.checkout_time);
+                insertcheckout(checkedinfo.checkout_id,checkedinfo.libr_id,checkedinfo.book_id,checkedinfo.book_name,checkedinfo.reader_id,checkedinfo.end_time);
                 return true;
             }
             else
@@ -291,7 +291,7 @@ public class Book{
         }
     }
 
-    //还书
+    //还书,不可用
     public static void BackBook(String Book_ID,String Backtime)
     {
         EditBookState(Book_ID,0);
@@ -304,6 +304,12 @@ public class Book{
         JdbcTemplate template = new JdbcTemplate(JdbcUtils.getDataSource());
         String sql = "select * from reserve ";
         List<ResvInfo> list=template.query(sql,new BeanPropertyRowMapper<ResvInfo>(ResvInfo.class));
+        for (ResvInfo info:list) {
+            JdbcTemplate temp=new JdbcTemplate(JdbcUtils.getDataSource());
+            String sql2="select READER_NAME from reader where READER_ID=?";
+            String name=temp.queryForObject(sql2,String.class,info.reader_id);
+            info.setReader_name(name);
+        }
         return list;
     }
 
@@ -323,12 +329,63 @@ public class Book{
         int count=template.update(sql,checkout_id,libr_id,book_id,book_name,reader_id,checkouttime);
     }
 
-    //向读者提供该读者的借阅记录
+    //向管理员提供该读者的借阅记录
     public static List<CheckoutInfo> showcheckouttoreader(String reader_id)
     {
         JdbcTemplate template = new JdbcTemplate(JdbcUtils.getDataSource());
         String sql = "select * from checked_out where READER_ID = ? ";
         List<CheckoutInfo> list=template.query(sql,new BeanPropertyRowMapper<CheckoutInfo>(CheckoutInfo.class));
+        for (CheckoutInfo info:list) {
+            JdbcTemplate temp=new JdbcTemplate(JdbcUtils.getDataSource());
+            String sql2="select READER_NAME from reader where READER_ID=?";
+            String name=temp.queryForObject(sql2,String.class,info.reader_id);
+            info.setReader_name(name);
+        }
+        return list;
+    }
+
+    //交钱，type为钱的类型，0为罚金，1为保证金
+    public static void takemoney(String take_id,String libr_id,String reader_id,String take_time,BigDecimal money_Amount,int type)
+    {
+        JdbcTemplate template=new JdbcTemplate(JdbcUtils.getDataSource());
+        String sql="insert into takemoney values(?,?,?,?,?,?)";
+        int count=template.update(sql,take_id,libr_id,reader_id,take_time,money_Amount,type);
+        if(type==1)
+        {
+            JdbcTemplate temp=new JdbcTemplate(JdbcUtils.getDataSource());
+            String sql1="update reader set READER_FINE=(READER_FINE-?) where READER_ID=?";
+            temp.update(sql1,money_Amount,reader_id);
+        }
+    }
+
+    //图书馆一段时间内交易记录，0为罚金，1为保证金，2为两者都是
+    public static List<MoneyTakeInfo> showMoneyInfo(String starttime,String endtime,int type)
+    {
+        List<MoneyTakeInfo> list;
+        if(type==0)
+        {
+            JdbcTemplate template = new JdbcTemplate(JdbcUtils.getDataSource());
+            String sql = "select * from takemoney where MONEY_TYPE=0 and unix_timestamp(TAKE_TIME)>? and  unix_timestamp(TAKE_TIME)<?";
+            list=template.query(sql,new BeanPropertyRowMapper<MoneyTakeInfo>(MoneyTakeInfo.class),starttime,endtime);
+        }
+        if(type==1)
+        {
+            JdbcTemplate template = new JdbcTemplate(JdbcUtils.getDataSource());
+            String sql = "select * from takemoney where MONEY_TYPE=1 and unix_timestamp(TAKE_TIME)>? and  unix_timestamp(TAKE_TIME)<?";
+            list=template.query(sql,new BeanPropertyRowMapper<MoneyTakeInfo>(MoneyTakeInfo.class),starttime,endtime);
+        }
+        else
+        {
+            JdbcTemplate template = new JdbcTemplate(JdbcUtils.getDataSource());
+            String sql = "select * from takemoney where unix_timestamp(TAKE_TIME)>? and  unix_timestamp(TAKE_TIME)<?";
+            list=template.query(sql,new BeanPropertyRowMapper<MoneyTakeInfo>(MoneyTakeInfo.class),starttime,endtime);
+        }
+        for (MoneyTakeInfo info:list) {
+            JdbcTemplate temp=new JdbcTemplate(JdbcUtils.getDataSource());
+            String sql2="select READER_NAME from reader where READER_ID=?";
+            String name=temp.queryForObject(sql2,String.class,info.reader_id);
+            info.setReader_name(name);
+        }
         return list;
     }
 
