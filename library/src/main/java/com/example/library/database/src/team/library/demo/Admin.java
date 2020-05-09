@@ -1,5 +1,7 @@
 package com.example.library.database.src.team.library.demo;
 
+import com.example.library.database.src.team.library.demo.DatabaseController;
+
 import org.junit.Test;
 import org.springframework.jdbc.core.JdbcTemplate;
 import com.example.library.database.src.team.library.util.JdbcUtils;
@@ -211,4 +213,16 @@ public class Admin {
             return true;
         return false;
     }
+   /**
+    * 超级管理员设置罚金
+    * */ 
+    public void fineSet(double fine){
+        DatabaseController.FineSet(fine);
+    }
+    /**
+    * 超级管理员设置还书期限天数
+    * */ 
+    public void dateSet(){
+        DatabaseController.DateSet(date);
+    } 
 }
