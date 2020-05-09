@@ -9,6 +9,17 @@ public class CheckoutInfo {
     public String end_time;
     public String reader_name;
 
+    public CheckoutInfo(String checkout_id,  String libr_id, String book_id, String book_name, 
+                                                String reader_id, String end_time, String reader_name) {
+                                                    this.checkout_id = checkout_id;
+                                                    this.libr_id = libr_id;
+                                                    this.book_id = book_id;
+                                                    this.book_name = book_name;
+                                                    this.reader_id = reader_id;
+                                                    this.end_time = end_time;
+                                                    this.reader_name = reader_name;                  
+    }
+
     public void setReader_id(String reader_id) {
         this.reader_id = reader_id;
     }

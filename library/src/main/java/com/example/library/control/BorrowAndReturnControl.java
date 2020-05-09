@@ -1,6 +1,6 @@
 /*
-书籍搜索界面
-127.0.0.1:8888/SearchPage
+管理员处理借阅和还书请求的界面
+127.0.0.1:8888/BorrowAndReturn
 */
 package com.example.library.control;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -27,6 +27,11 @@ public class BorrowAndReturnControl
     @RequestMapping(value = "/BorrowAndReturn", method = RequestMethod.GET)
     public ModelAndView getBorrowAndReturn(ModelAndView mv) {
 
+        List<ResvInfo> appointment  = Book.showResvList();
+        List<ReturnInfo> returns = Book.showReturnList();
+        mv.addObject("appointment", appointment);
+        mv.addObject("returns", returns);
+        mv.setViewName("/BorrowAndReturn");
         return mv;
     }
 
@@ -39,5 +44,26 @@ public class BorrowAndReturnControl
         }
 
         return mv;
+    }
+
+    // 批准借阅请求
+    @RequestMapping(value = "BorrowRequest/{resv_id}/{book_id}/{book_name}/{reader_id}/{reader_name}")
+    @ResponseBody
+    public ModelAndView getReserve(@PathVariable ("resv_id") String resv_id, 
+                                                    @PathVariable ("book_id") String book_id, @PathVariable ("book_name") String book_name,
+                                                    @PathVariable ("reader_id") String reader_id, @PathVariable ("reader_name") String reader_name, 
+                                                    HttpServletRequest request, HttpServletResponse response)  throws IOException {
+
+        String checkout_id = Book.getUUID();
+        HttpSession session = request.getSession();
+        String libr_id = session.getAttribute("username").toString();
+        long nowTime = System.currentTimeMillis();
+        Date nowDate = new Date(nowTime);
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String end_time = df.format(nowDate);
+        CheckoutInfo checkoutInfo = new CheckoutInfo(checkout_id, libr_id, book_id, book_name, reader_id, end_time, reader_name);
+        Book.EditResv(resv_id, book_id, true, checkoutInfo);
+
+        return new ModelAndView("redirect:/BorrowAndReturn");
     }
 }
