@@ -396,7 +396,7 @@ public class Book{
     public static void insertreturn(String return_id,String libr_id,String book_id,String book_name,String reader_id,String returntime,BigDecimal fine,String reader_name)
     {
         JdbcTemplate template=new JdbcTemplate(JdbcUtils.getDataSource());
-        String sql="insert into return values(?,?,?,?,?,?,?,?)";
+        String sql="insert into `return` values(?,?,?,?,?,?,?,?)";
         int count=template.update(sql,return_id,libr_id,book_id,book_name,reader_id,returntime,fine,reader_name);
     }
     

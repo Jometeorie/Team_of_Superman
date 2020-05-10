@@ -28,9 +28,9 @@ public class BorrowAndReturnControl
     public ModelAndView getBorrowAndReturn(ModelAndView mv) {
 
         List<ResvInfo> appointment  = Book.showResvList();
-        List<ReturnInfo> returns = Book.showReturnList();
+        // List<ReturnInfo> returns = Book.showReturnList();
         mv.addObject("appointment", appointment);
-        mv.addObject("returns", returns);
+        // mv.addObject("returns", returns);
         mv.setViewName("/BorrowAndReturn");
         return mv;
     }
@@ -63,6 +63,21 @@ public class BorrowAndReturnControl
         String end_time = df.format(nowDate);
         CheckoutInfo checkoutInfo = new CheckoutInfo(checkout_id, libr_id, book_id, book_name, reader_id, end_time, reader_name);
         Book.EditResv(resv_id, book_id, true, checkoutInfo);
+
+        return new ModelAndView("redirect:/BorrowAndReturn");
+    }
+
+    // 批准还书请求
+    @RequestMapping(value = "ReturnRequest/{return_id}/{reader_id}/{return_time}/{book_id}")
+    @ResponseBody
+    public ModelAndView getReturn(@PathVariable("return_id") String return_id, 
+                                                    @PathVariable("reader_id") String reader_id, @PathVariable("return_time") String return_time, 
+                                                    @PathVariable("book_id") String book_id, HttpServletRequest request, 
+                                                    HttpServletResponse response) throws IOException {
+        HttpSession session = request.getSession();
+        String libr_id = session.getAttribute("username").toString();
+
+        Book.BackBook(return_id, book_id, libr_id, reader_id, return_time);
 
         return new ModelAndView("redirect:/BorrowAndReturn");
     }
