@@ -327,7 +327,7 @@
                         <tr>
                             <th>BookId</th>
                             <th>BookName</th>
-                            <th>Reader</th>
+                            <th>Reader_ID</th>
                             <th>Appointment Time</th>
                         </tr>
                     </thead>
@@ -335,8 +335,8 @@
                         <tr th:each="appointment : ${appointment}">
                             <td th:text=${appointment.book_id}></td>
                             <td th:text=${appointment.book_name}></td>
-                            <td th:text=${appointment.reader}></td>
-                            <td th:text=${appointment.time}></td>
+                            <td th:text=${appointment.reader_id}></td>
+                            <td th:text=${appointment.end_time}></td>
                         </tr>
                     </tbody>
                 </table>
@@ -350,7 +350,7 @@
                         <tr>
                             <th>BookId</th>
                             <th>BookName</th>
-                            <th>Reader</th>
+                            <th>Reader_ID</th>
                             <th>Lend Time</th>
                         </tr>
                     </thead>
@@ -358,8 +358,8 @@
                         <tr th:each="lend : ${lend}">
                             <td th:text=${lend.book_id}></td>
                             <td th:text=${lend.book_name}></td>
-                            <td th:text=${lend.reader}></td>
-                            <td th:text=${lend.time}></td>
+                            <td th:text=${lend.reader_id}></td>
+                            <td th:text=${lend.begin_time}></td>
                         </tr>
                     </tbody>
                 </table>
@@ -374,7 +374,7 @@
                         <tr>
                             <th>BookId</th>
                             <th>BookName</th>
-                            <th>Reader</th>
+                            <th>Reader_ID</th>
                             <th>Return Time</th>
                             <th>Penalty</th>
                         </tr>
@@ -383,9 +383,9 @@
                         <tr th:each="return : ${return}">
                             <td th:text=${return.book_id}></td>
                             <td th:text=${return.book_name}></td>
-                            <td th:text=${return.reader}></td>
-                            <td th:text=${return.time}></td>
-                            <td th:text=${return.penalty}></td>
+                            <td th:text=${return.reader_id}></td>
+                            <td th:text=${return.return_time}></td>
+                            <td th:text=${return.fine}></td>
                         </tr>
                     </tbody>
                 </table>
