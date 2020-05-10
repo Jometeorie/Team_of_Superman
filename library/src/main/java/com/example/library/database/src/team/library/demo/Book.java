@@ -480,6 +480,14 @@ public class Book{
             String name=temp.queryForObject(sql2,String.class,info.reader_id);
             info.setReader_name(name);
         }
+        for(int i=0;i<list.size();i++)
+        {
+            if(SearchBookState(list.get(i).book_id)!=2)
+            {
+                list.remove(i);
+                i--;
+            }
+        }
         return list;
     }
 
