@@ -155,6 +155,7 @@ public class Book{
         UUID uuid=UUID.randomUUID();
         String str = uuid.toString(); 
         String uuidStr=str.replace("-", "");
+        uuidStr = uuidStr.substring(0, 16);
         return uuidStr;
       }
       

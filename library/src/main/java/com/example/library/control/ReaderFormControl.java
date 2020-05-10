@@ -24,11 +24,11 @@ public class ReaderFormControl {
     public ModelAndView getReaderForm(ModelAndView mv , HttpServletRequest request) {
         HttpSession session = request.getSession();
         String reader_id=session.getAttribute("username").toString();
-        List<CheckoutInfo> checkout = new Book().showcheckouttoreader(reader_id);
-        mv.addObject("appointment",checkout);
-        List<ResvInfo> lend = new Book().showResvtoreader(reader_id);
-        mv.addObject("lend",lend);
-        List<ReturnInfo> returnform = new Book().showReturntoreader(reader_id);
+        List<CheckoutInfo> checkout = Book.showcheckouttoreader(reader_id);
+        mv.addObject("lend",checkout);
+        List<ResvInfo> lend =  Book.showResvtoreader(reader_id);
+        mv.addObject("appointment",lend);
+        List<ReturnInfo> returnform = Book.showReturntoreader(reader_id);
         mv.addObject("return",returnform);
 
 

@@ -74,8 +74,10 @@ CREATE TABLE `book` (
 /*Data for the table `book` */
 
 insert  into `book`(`BOOK_ID`,`BOOK_NAME`,`AUTHOR`,`LOCATION`,`PRICE`,`CATEGORY`,`STATE`,`INFO`) 
-			values ('00e8682064fa4d1f92f622fc9c5de278','The Catcher in the Rye','J.D.SALINGER','floor2-202-A','20.00','Literature',0,'NULL'),
-				   ('06a139dc758c42e98de260fa5ed0916f','TO KILL A MOCKINGBIRD','Nelle Harper Lee','floor4-434-C','26.00','Literature',0,'NULL');
+			values ('31508679dae4488f','The Catcher in the Rye','J.D.SALINGER','floor2-202-A','20.00','Literature',0,'NULL'),
+				   ('36a89925b74c4d9e','TO KILL A MOCKINGBIRD','Nelle Harper Lee','floor4-434-C','26.00','Literature',0,'NULL'),
+           ('07f7ef47cdd7470a', 'INTRODUCTION TO COMPUTERS', 'Peter Norton', 'floor3-211-B', '60.00', 'Computer', 0, 'NULL'),
+           ('901b92e0a21d4292', 'Computer Networks, 5th Edition', 'Andrew S. Tanenbaum', 'floor3-211-C', '89.50', 'Computer', 0, 'NULL');
 
 
 
