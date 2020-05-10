@@ -408,7 +408,22 @@ public class Book{
         String sql="insert into `return` values(?,?,?,?,?,?,?,?)";
         int count=template.update(sql,return_id,libr_id,book_id,book_name,reader_id,returntime,fine,reader_name);
     }
-    
+
+    //给读者展示借阅记录
+    public static List<ResvInfo> showResvtoreader(String reader_id)
+    {
+        JdbcTemplate template = new JdbcTemplate(JdbcUtils.getDataSource());
+        String sql = "select * from reserve where READER_ID= ? ";
+        List<ResvInfo> list=template.query(sql,new BeanPropertyRowMapper<ResvInfo>(ResvInfo.class) , reader_id);
+        for (ResvInfo info:list) {
+            JdbcTemplate temp=new JdbcTemplate(JdbcUtils.getDataSource());
+            String sql2="select READER_NAME from reader where READER_ID=?";
+            String name=temp.queryForObject(sql2,String.class,info.reader_id);
+            info.setReader_name(name);
+        }
+        return list;
+    }
+
     //给管理员展示借书请求
     public static List<ResvInfo> showResvList()
     {
@@ -437,6 +452,21 @@ public class Book{
         JdbcTemplate template = new JdbcTemplate(JdbcUtils.getDataSource());
         String sql = "select * from `return` ";
         List<ReturnInfo> list=template.query(sql,new BeanPropertyRowMapper<ReturnInfo>(ReturnInfo.class));
+        for (ReturnInfo info:list) {
+            JdbcTemplate temp=new JdbcTemplate(JdbcUtils.getDataSource());
+            String sql2="select READER_NAME from reader where READER_ID=?";
+            String name=temp.queryForObject(sql2,String.class,info.reader_id);
+            info.setReader_name(name);
+        }
+        return list;
+    }
+
+    //给读者展示归还记录
+    public static List<ReturnInfo> showReturntoreader (String reader_id)
+    {
+        JdbcTemplate template = new JdbcTemplate(JdbcUtils.getDataSource());
+        String sql = "select * from `return` where READER_ID= ? ";
+        List<ReturnInfo> list=template.query(sql,new BeanPropertyRowMapper<ReturnInfo>(ReturnInfo.class),reader_id);
         for (ReturnInfo info:list) {
             JdbcTemplate temp=new JdbcTemplate(JdbcUtils.getDataSource());
             String sql2="select READER_NAME from reader where READER_ID=?";

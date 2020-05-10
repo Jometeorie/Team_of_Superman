@@ -6,7 +6,11 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 import com.example.library.database.src.team.library.demo.*;
 
-// import javax.servlet.http.HttpSession;
+import javax.servlet.http.HttpSession;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -17,8 +21,15 @@ import java.util.List;
 @RestController
 public class ReaderFormControl {
     @RequestMapping(value = "/ReaderForm", method = RequestMethod.GET)
-    public ModelAndView getReaderForm(ModelAndView mv,String reader_id) {
+    public ModelAndView getReaderForm(ModelAndView mv , HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        String reader_id=session.getAttribute("username").toString();
         List<CheckoutInfo> checkout = new Book().showcheckouttoreader(reader_id);
+        mv.addObject("appointment",checkout);
+        List<ResvInfo> lend = new Book().showResvtoreader(reader_id);
+        mv.addObject("lend",lend);
+        List<ReturnInfo> returnform = new Book().showReturntoreader(reader_id);
+        mv.addObject("return",returnform);
 
 
 
