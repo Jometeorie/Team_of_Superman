@@ -60,9 +60,9 @@ public class DatabaseController {
         long difference = dateTime1.getTime() - dateTime2.getTime();
         long days = difference / (1000 * 60 * 60 * 24);
         //    罚金金额
-        if(days-systemDate>0){
-            return (days-getSystemDate(adminID))*getSystemFine(adminID);
-        }
+       // if(days-systemDate>0){
+           // return (days-getSystemDate(adminID))*getSystemFine(adminID);
+        //}
        return 0;
     }
 
@@ -70,15 +70,15 @@ public class DatabaseController {
     //    当读者还书时，根据当前系统的单日罚金、期限，设置罚金数
     public void SetPerBookFine(@RequestParam(name = "bookId") String bookId,
                                @RequestParam(name = "readerId") String readerId) throws ParseException {
-        double count =CountPerBookFine(bookId, readerId, getSystemFine(adminID), getSystemDate(adminID));
-        libraryMapper.updateReturnFine(count,readerId,bookId);
+        //double count =CountPerBookFine(bookId, readerId, getSystemFine(adminID), getSystemDate(adminID));
+       // libraryMapper.updateReturnFine(count,readerId,bookId);
 
     }
 
     //更新当前用户的罚金总金额
     public void UpdateReaderSumFine(@RequestParam(name ="readerId") String readerId) throws SQLException, ParseException {
-        double ReaderSumFine =CountPerBookFine(bookId, readerId)+SelectReaderFine(readerId);
-        libraryMapper.updateReaderFine(ReaderSumFine,readerId);
+       // double ReaderSumFine =CountPerBookFine(bookId, readerId)+SelectReaderFine(readerId);
+       // libraryMapper.updateReaderFine(ReaderSumFine,readerId);
     }
 
 }

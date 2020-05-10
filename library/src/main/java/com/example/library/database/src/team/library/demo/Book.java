@@ -15,6 +15,10 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 // import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.text.ParseException;
+import java.util.Date;
 import java.util.List;
 // import java.util.Map;
 import java.util.UUID;
@@ -294,25 +298,106 @@ public class Book{
     }
 
     //管理员授理归还
-    public static void BackBook(String Book_ID, ReturnInfo returninfo, DatebaseController controller3)
+    public static void BackBook(String return_id,String book_id,String libr_id,String reader_id,String return_time)
     {
-        if(SearchBookState(Book_ID)==2)
+        if(SearchBookState(book_id)==2)
         {
-        insertreturn(returninfo.return_id,returninfo.libr_id,returninfo.book_id,returninfo.book_name,returninfo.reader_id,returninfo.return_time,returninfo.reader_name);
-        controller3.CountPerBookFine(returninfo.book_id, returninfo.reader_id);   
-        controller3.SetPerBookFine(returninfo.book_id, returninfo.reader_id);
-        controller3.UpdateReaderSumFine(returninfo.reader_id);
-        EditBookState(Book_ID,0);
+            Date time1=fromstringtodate(getcheckouttime(book_id,reader_id));
+            Date time2=fromstringtodate(return_time);
+            BigDecimal fine=countfine(time1,time2);
+            insertreturn(return_id,libr_id,book_id,getbookname(book_id),reader_id,return_time,fine,getreadername(reader_id));
+            updatefine(reader_id,fine,true);
+        //controller3.CountPerBookFine(returninfo.book_id, returninfo.reader_id);
+        //controller3.SetPerBookFine(returninfo.book_id, returninfo.reader_id);
+        //controller3.UpdateReaderSumFine(returninfo.reader_id);
+            EditBookState(book_id,0);
         }
 	    else{System.out.println("the book has not been checked out");}         
     }
+    //得到读者姓名
+    public static String getreadername(String reader_id)
+    {
+        JdbcTemplate template = new JdbcTemplate(JdbcUtils.getDataSource());
+        String sql = "select READER_NAME from reader where READER_ID=? ";
+        String name=template.queryForObject(sql,String.class,reader_id);
+        return name;
+    }
+    //得打书名
+    public static String getbookname(String book_id)
+    {
+        JdbcTemplate template = new JdbcTemplate(JdbcUtils.getDataSource());
+        String sql = "select BOOK_NAME from book where BOOK_ID=? ";
+        String name=template.queryForObject(sql,String.class,book_id);
+        return name;
+    }
+    public static Date fromstringtodate(String s)
+    {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Date time=null;
+        try {
+            // Fri Feb 24 00:00:00 CST 201
+            time=sdf.parse(s);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return time;
+    }
+    public static void updatefine(String reader_id,BigDecimal count,boolean ifadd)
+    {
+        String sql="";
+        JdbcTemplate template=new JdbcTemplate(JdbcUtils.getDataSource());
+        if(ifadd)
+            sql="update reader set READER_FINE=(READER_FINE+?) where READER_ID=?";
+        else
+            sql="update reader set READER_FINE=(READER_FINE-?) where READER_ID=?";
+       template.update(sql,count,reader_id);
+    }
+
+    public static BigDecimal countfine(Date starttime,Date endtime)
+    {
+        BigDecimal count=new BigDecimal(0);
+        long days=(endtime.getTime()-starttime.getTime())/(1000 * 60 * 60 * 24);
+        if(days>30)
+            count.add(new BigDecimal(days));
+        return count;
+    }
+
+
+    //给读者展示已借阅仍未归还的书
+    public static List<CheckoutInfo> showborrowbooks(String reader_id)
+    {
+        List<CheckoutInfo> list1=showcheckouttoreader(reader_id);
+        JdbcTemplate template = new JdbcTemplate(JdbcUtils.getDataSource());
+        String sql = "select * from return where READER_ID=?";
+        List<ReturnInfo> list2=template.query(sql,new BeanPropertyRowMapper<ReturnInfo>(ReturnInfo.class),reader_id);
+        for(int i=0;i<list2.size();i++)
+        {
+            for(int j=0;j<list1.size();j++)
+            {
+                if(list1.get(j).book_id.equals(list2.get(i).book_id))
+                {
+                    list1.remove(j);
+                    break;
+                }
+            }
+        }
+        return list1;
+    }
+
+    public static String getcheckouttime(String book_id,String reader_id)
+    {
+        JdbcTemplate template = new JdbcTemplate(JdbcUtils.getDataSource());
+        String sql = "select * from checked_out where BOOK_ID=? and READER_ID=? order by END_TIME DESC ";
+        List<CheckoutInfo> list =template.query(sql,new BeanPropertyRowMapper<CheckoutInfo>(CheckoutInfo.class),book_id,reader_id);
+        return list.get(0).end_time;
+    }
 
     //插入归还记录
-    public static void insertreturn(String return_id,String libr_id,String book_id,String book_name,String reader_id,String returntime,String reader_name)
+    public static void insertreturn(String return_id,String libr_id,String book_id,String book_name,String reader_id,String returntime,BigDecimal fine,String reader_name)
     {
         JdbcTemplate template=new JdbcTemplate(JdbcUtils.getDataSource());
-        String sql="insert into return values(?,?,?,?,?,?,?)";
-        int count=template.update(sql,return_id,libr_id,book_id,book_name,reader_id,returntime,reader_name);
+        String sql="insert into return values(?,?,?,?,?,?,?,?)";
+        int count=template.update(sql,return_id,libr_id,book_id,book_name,reader_id,returntime,fine,reader_name);
     }
     
     //给管理员展示借书请求
@@ -365,7 +450,7 @@ public class Book{
     {
         JdbcTemplate template = new JdbcTemplate(JdbcUtils.getDataSource());
         String sql = "select * from checked_out where READER_ID = ? ";
-        List<CheckoutInfo> list=template.query(sql,new BeanPropertyRowMapper<CheckoutInfo>(CheckoutInfo.class));
+        List<CheckoutInfo> list=template.query(sql,new BeanPropertyRowMapper<CheckoutInfo>(CheckoutInfo.class),reader_id);
         for (CheckoutInfo info:list) {
             JdbcTemplate temp=new JdbcTemplate(JdbcUtils.getDataSource());
             String sql2="select READER_NAME from reader where READER_ID=?";
