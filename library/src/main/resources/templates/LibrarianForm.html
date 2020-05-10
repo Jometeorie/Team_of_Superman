@@ -337,8 +337,8 @@
                         <tr th:each="lend : ${lend}">
                             <td th:text=${lend.book_id}></td>
                             <td th:text=${lend.book_name}></td>
-                            <td th:text=${lend.reader}></td>
-                            <td th:text=${lend.time}></td>
+                            <td th:text=${lend.reader_name}></td>
+                            <td th:text=${lend.begin_time}></td>
                         </tr>
                     </tbody>
                 </table>
@@ -361,9 +361,9 @@
                         <tr th:each="return : ${return}">
                             <td th:text=${return.book_id}></td>
                             <td th:text=${return.book_name}></td>
-                            <td th:text=${return.reader}></td>
-                            <td th:text=${return.time}></td>
-                            <td th:text=${return.penalty}></td>
+                            <td th:text=${return.reader_name}></td>
+                            <td th:text=${return.return_time}></td>
+                            <td th:text=${return.fine}></td>
                         </tr>
                     </tbody>
                 </table>
@@ -382,8 +382,8 @@
                     </thead>
                     <tbody>
                         <tr th:each="penalty : ${penalty}">
-                            <td th:text=${penalty.reader}></td>
-                            <td th:text=${penalty.amount}></td>
+                            <td th:text=${penalty.reader_name}></td>
+                            <td th:text=${penalty.reader_fine}></td>
                             <td th:if="${penalty.state==0}" ><button type="button" class="btn btn-success">Paid</button></td>
                             <td th:if="${penalty.state!=0}" ><button type="button" class="btn btn-danger disabled">Unpaid</button></td>
                         </tr>
