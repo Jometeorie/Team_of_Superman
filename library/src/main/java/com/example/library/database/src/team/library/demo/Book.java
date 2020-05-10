@@ -298,11 +298,12 @@ public class Book{
     }
 
     //管理员授理归还
-    public static void BackBook(String return_id,String book_id,String libr_id,String reader_id,String return_time)
+    public static void BackBook(String checkout_id,String return_id,String book_id,String libr_id,String reader_id,String return_time)
     {
         if(SearchBookState(book_id)==2)
         {
-            Date time1=fromstringtodate(getcheckouttime(book_id,reader_id));
+            //Date time1=fromstringtodate(getcheckouttime(book_id,reader_id));
+            Date time1=fromstringtodate(getcheckouttimebyid(checkout_id));
             Date time2=fromstringtodate(return_time);
             BigDecimal fine=countfine(time1,time2);
             insertreturn(return_id,libr_id,book_id,getbookname(book_id),reader_id,return_time,fine,getreadername(reader_id));
@@ -392,6 +393,14 @@ public class Book{
         return list.get(0).end_time;
     }
 
+    public static String getcheckouttimebyid(String checkout_id)
+    {
+        JdbcTemplate template = new JdbcTemplate(JdbcUtils.getDataSource());
+        String sql = "select END_TIME from checked_out where CHECKOUT_ID=? ";
+        String time=template.queryForObject(sql,String.class,checkout_id);
+        return time;
+    }
+
     //插入归还记录
     public static void insertreturn(String return_id,String libr_id,String book_id,String book_name,String reader_id,String returntime,BigDecimal fine,String reader_name)
     {
@@ -451,6 +460,20 @@ public class Book{
         JdbcTemplate template = new JdbcTemplate(JdbcUtils.getDataSource());
         String sql = "select * from checked_out where READER_ID = ? ";
         List<CheckoutInfo> list=template.query(sql,new BeanPropertyRowMapper<CheckoutInfo>(CheckoutInfo.class),reader_id);
+        for (CheckoutInfo info:list) {
+            JdbcTemplate temp=new JdbcTemplate(JdbcUtils.getDataSource());
+            String sql2="select READER_NAME from reader where READER_ID=?";
+            String name=temp.queryForObject(sql2,String.class,info.reader_id);
+            info.setReader_name(name);
+        }
+        return list;
+    }
+    //提供所有借出记录
+    public static List<CheckoutInfo> showallcheckout()
+    {
+        JdbcTemplate template = new JdbcTemplate(JdbcUtils.getDataSource());
+        String sql = "select * from checked_out ";
+        List<CheckoutInfo> list=template.query(sql,new BeanPropertyRowMapper<CheckoutInfo>(CheckoutInfo.class));
         for (CheckoutInfo info:list) {
             JdbcTemplate temp=new JdbcTemplate(JdbcUtils.getDataSource());
             String sql2="select READER_NAME from reader where READER_ID=?";
