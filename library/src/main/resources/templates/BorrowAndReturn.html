@@ -368,7 +368,9 @@
                             <td th:text=${returns.book_id}></td>
                             <td th:text=${returns.reader_name}></td>
                             <td th:text=${returns.return_time}></td>
-                            <td><a th:href="'ReturnRequest/'+${returns.return_id}">
+                            <td><a th:href="'ReturnRequest/'+${returns.return_id} + '/' + 
+                                ${returns.reader_id} + '/' + ${returns.return_time} + '/' + 
+                                ${returns.book_id}">
                                 <button type="button" class="btn btn-info">Return</button>
                             </a></td>
                         </tr>

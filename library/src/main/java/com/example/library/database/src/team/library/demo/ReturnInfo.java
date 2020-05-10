@@ -7,7 +7,7 @@ public class ReturnInfo {
     public String book_name;
     public String reader_id;
     public String return_time;
-    public float fine;
+    public float fine;   //这个不需要后端赋值，我在jdbc里算了
     public String reader_name;
 
     public void setBook_id(String book_id) {

@@ -9,6 +9,8 @@ public class CheckoutInfo {
     public String end_time;
     public String reader_name;
 
+    public CheckoutInfo() {}
+
     public CheckoutInfo(String checkout_id,  String libr_id, String book_id, String book_name, 
                                                 String reader_id, String end_time, String reader_name) {
                                                     this.checkout_id = checkout_id;
