@@ -100,8 +100,8 @@ CREATE TABLE `book_deleted` (
 
 /*Data for the table `book_deleted` */
 
-insert  into `book_deleted`(`BOOK_ID`,`BOOK_NAME`,`LIBR_ID`) 
-					values ('422e4f0f6a1f4e36bbcf75c3ea045e14','hhhhh','17130177001');
+-- insert  into `book_deleted`(`BOOK_ID`,`BOOK_NAME`,`LIBR_ID`) 
+-- 					values ('422e4f0f6a1f4e36bbcf75c3ea045e14','hhhhh','17130177001');
 
 
 
@@ -186,8 +186,8 @@ CREATE TABLE `reserve` (
 
 /*Data for the table `reserve` */
 
-insert into `reserve` (`RESV_ID`, `BOOK_ID`, `BOOK_NAME`, `READER_ID`, `BEGIN_TIME`, `END_TIME`, `STATUS`)
-               values ('45', '06a139dc758c42e98de260fa5ed0916f', 'TO KILL A MOCKINGBIRD', '13512345688', now(), "2021-12-12 23:59:59","WAITING");
+-- insert into `reserve` (`RESV_ID`, `BOOK_ID`, `BOOK_NAME`, `READER_ID`, `BEGIN_TIME`, `END_TIME`, `STATUS`)
+--                values ('45', '06a139dc758c42e98de260fa5ed0916f', 'TO KILL A MOCKINGBIRD', '13512345688', now(), "2021-12-12 23:59:59","WAITING");
 
 
 
@@ -213,8 +213,8 @@ CREATE TABLE `checked_out` (
 
 /*Data for the table `checked_out` */
 
-insert into `checked_out` (`CHECKOUT_ID`, `LIBR_ID`, `BOOK_ID`, `BOOK_NAME`, `READER_ID`, `END_TIME`)
-                 values ('99', '17130177001','06a139dc758c42e98de260fa5ed0916f', 'TO KILL A MOCKINGBIRD', '13512345688', "2021-12-12 23:59:59");
+-- insert into `checked_out` (`CHECKOUT_ID`, `LIBR_ID`, `BOOK_ID`, `BOOK_NAME`, `READER_ID`, `END_TIME`)
+--                  values ('99', '17130177001','06a139dc758c42e98de260fa5ed0916f', 'TO KILL A MOCKINGBIRD', '13512345688', "2021-12-12 23:59:59");
 
 
 
@@ -241,8 +241,8 @@ CREATE TABLE `return` (
 
 /*Data for the table `return` */
 
-insert into `return` (`RETURN_ID`, `LIBR_ID`, `BOOK_ID`, `BOOK_NAME`, `READER_ID`, `RETURN_TIME`, `FINE`, `READER_NAME`)
-              values ('101', '17130177001','06a139dc758c42e98de260fa5ed0916f', 'TO KILL A MOCKINGBIRD', '13512345688', "2022-1-12 23:59:59", '5.00', 'Joey');
+-- insert into `return` (`RETURN_ID`, `LIBR_ID`, `BOOK_ID`, `BOOK_NAME`, `READER_ID`, `RETURN_TIME`, `FINE`, `READER_NAME`)
+--               values ('101', '17130177001','06a139dc758c42e98de260fa5ed0916f', 'TO KILL A MOCKINGBIRD', '13512345688', "2022-1-12 23:59:59", '5.00', 'Joey');
 
 DROP TABLE IF EXISTS `takemoney`;
 
