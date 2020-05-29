@@ -4,8 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ReaderForm</title>
-    <link rel="stylesheet" href="https://formden.com/static/assets/demos/bootstrap-iso/bootstrap-iso/bootstrap-iso.css"> 
+    <link rel="stylesheet" href="https://formden.com/static/assets/demos/bootstrap-iso/bootstrap-iso/bootstrap-iso.css">
+    <title>BorrowAndReturn</title>
     <style>
         @font-face {
             font-family: 'icomoon';
@@ -140,29 +140,37 @@
             position: absolute;
             left: 50%;
             top: 80px;
-            width: 1000px;
+            width: 800px;
             font-size: 50px;
             color: #fff;
             font-weight: 600;
             letter-spacing: 2px;
             font-family: 'Montserrat', sans-serif;
-            margin-left: -500px;
+            margin-left: -400px;
         }
         
         .top .choose {
             position: relative;
             top: 200px;
-            width: 1200px;
+            width: 1000px;
             margin: 0 auto;
         }
         
         .choose_bottom_top {
-            float: left;
+            /* float: left; */
             width: 240px;
             height: 160px;
             background: #fff;
             padding: 30px 30px;
             margin: 0 50px;
+        }
+        
+        .choose_bottom_top1 {
+            float: left;
+        }
+        
+        .choose_bottom_top2 {
+            float: right;
         }
         
         .choose_bottom_top i {
@@ -185,9 +193,8 @@
         }
         /* 三个表格部分 */
         
-        #appointment_form,
-        #lending_form,
-        #return_form {
+        #Penalty,
+        #Deposit {
             display: block;
             color: #fff;
             font-size: 20px;
@@ -208,7 +215,6 @@
         .table > thead > tr > th {
             text-align: center;
         }
-
         /* 页脚 */
         
         .footer {
@@ -261,29 +267,31 @@
     <!-- 头部 -->
     <section class="header" id="header">
         <div class=" nav w">
-            <a href="Mainpage">
+            <a href="MainPage ">
                 <div class="logo "></div>
             </a>
             <ul>
-                <li class="logout "><a href="Mainpage" style="color: #000 "> Log Out</a></li>
+                <li class="logout "><a href="MainPage" style="color: #000 "> Log Out</a></li>
                 <li><a href="#contact " style="color: #000 ">Contact Us</a></li>
                 <li><a href="#about_us" style="color: #000 "> About Us</a></li>
-                <li class="home "> <a href="Mainpage " style="color: #000; ">Home</a> </li>
+                <li class="home "> <a href="MainPage " style="color: #000; ">Home</a> </li>
             </ul>
         </div>
     </section>
-    <!-- <div class="header" id="header"></div> -->
+
     <!-- 顶部盒子 -->
     <div class="top">
         <!-- 顶部蒙版 -->
         <div class="zheceng"></div>
-        <h3>Select the form you want to view</h3>
+        <!-- 标题 -->
+        <h3>View the Income</h3>
         <ul class="choose">
+
             <li class="choose1">
-                <a href="#appointment_form">
-                    <div class="choose_bottom_top">
-                        <i class="icon1"></i>
-                        <h5 class="card-title">Appointment Form</h5>
+                <a href="#Penalty">
+                    <div class="choose_bottom_top choose_bottom_top1">
+                        <i class="icon2"></i>
+                        <h5 class="card-title">Penalty Income</h5>
                         <p class="card-text">...
                         </p>
                     </div>
@@ -291,21 +299,10 @@
 
             </li>
             <li class="choose2">
-                <a href="#lending_form">
-                    <div class="choose_bottom_top">
-                        <i class="icon2"></i>
-                        <h5 class="card-title">Lending Form</h5>
-                        <p class="card-text">...
-                        </p>
-                    </div>
-                </a>
-
-            </li>
-            <li class="choose3">
-                <a href="#return_form">
-                    <div class="choose_bottom_top">
+                <a href="#Deposit">
+                    <div class="choose_bottom_top choose_bottom_top2">
                         <i class="icon3"></i>
-                        <h5 class="card-title">Return Form</h5>
+                        <h5 class="card-title">Deposit Income</h5>
                         <p class="card-text">...
                         </p>
                     </div>
@@ -317,88 +314,56 @@
 
     </div>
 
-    <!-- 三个表格部分 -->
+    <!-- 表格部分 -->
     <section class="forms w">
-        <h3 id="appointment_form">Appointment Form</h3>
+        <h3 id="Penalty">Penalty Income</h3>
         <div class="box1">
             <div class="bootstrap-iso">
                 <table class="table table-hover" style="text-align:center">
                     <thead>
                         <tr>
-                            <th>BookId</th>
-                            <th>BookName</th>
-                            <th>Reader_ID</th>
-                            <th>Appointment Time</th>
+                            <th>Daily</th>
+                            <th>Weekly</th>
+                            <th>Monthly</th>
+                            <th>Time</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr th:each="appointment : ${appointment}">
-                            <td th:text=${appointment.book_id}></td>
-                            <td th:text=${appointment.book_name}></td>
-                            <td th:text=${appointment.reader_id}></td>
-                            <td th:text=${appointment.begin_time}></td>
+                        <tr th:each="penalty : ${penalty}">
+                            <td th:text=${penalty.daily}>
+                            <td th:text=${penalty.weekly}></td>
+                            <td th:text=${penalty.monthly}></td>
+                            <td th:text=${penalty.time}></td>
+                            <!-- time显示年份月份、收入即计算对应月份 -->
                         </tr>
                     </tbody>
                 </table>
             </div>
         </div>
-        <h3 id="lending_form">Lending Form</h3>
-        <div class="box2">
-            <div class="bootstrap-iso">
-                <table class="table table-hover" style="text-align:center">
-                    <thead>
-                        <tr>
-                            <th>BookId</th>
-                            <th>BookName</th>
-                            <th>Reader_ID</th>
-                            <th>Lend Time</th>
-                            <th>Apply for Return</th>
-                            <th></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr th:each="lend : ${lend}">
-                            <td th:text=${lend.book_id}></td>
-                            <td th:text=${lend.book_name}></td>
-                            <td th:text=${lend.reader_id}></td>
-                            <td th:text=${lend.end_time}></td>
-                            <td><a th:href="'ReturnRequest/'+${lend.book_id}+ '/' + 
-                                ${lend.book_name} + '/' + ${lend.reader_id} + '/' + 
-                                ${lend.reader_name}">
-                                <button type="button" class="btn btn-info">Apply</button>
-                            </a></td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-      
-        <h3 id="return_form">Return Form</h3>
+        <h3 id="Deposit">Deposit Income</h3>
         <div class="box3">
             <div class="bootstrap-iso">
                 <table class="table table-hover" style="text-align:center">
                     <thead>
                         <tr>
-                            <th>BookId</th>
-                            <th>BookName</th>
-                            <th>Reader_ID</th>
-                            <th>Return Time</th>
-                            <th>Penalty</th>
+                            <th>Daily</th>
+                            <th>Weekly</th>
+                            <th>Monthly</th>
+                            <th>Time</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr th:each="return : ${return}">
-                            <td th:text=${return.book_id}></td>
-                            <td th:text=${return.book_name}></td>
-                            <td th:text=${return.reader_id}></td>
-                            <td th:text=${return.return_time}></td>
-                            <td th:text=${return.fine}></td>
+                        <tr th:each="deposit : ${deposit}">
+                            <td th:text=${deposit.daily}>
+                            <td th:text=${deposit.weekly}></td>
+                            <td th:text=${deposit.monthly}></td>
+                            <td th:text=${deposit.time}></td>
                         </tr>
                     </tbody>
                 </table>
             </div>
         </div>
-      
+
     </section>
 
 
@@ -430,6 +395,7 @@
         </div>
 
     </section>
+
 
     <!-- 返回顶部按钮 -->
     <a href="#header " class="move-top ">
