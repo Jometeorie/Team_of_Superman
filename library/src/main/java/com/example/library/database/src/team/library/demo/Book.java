@@ -528,7 +528,7 @@ public class Book{
         JdbcTemplate template=new JdbcTemplate(JdbcUtils.getDataSource());
         String sql="insert into takemoney values(?,?,?,?,?,?)";
         int count=template.update(sql,take_id,libr_id,reader_id,take_time,money_Amount,type);
-        if(type==1)
+        if(type==0)
         {
             JdbcTemplate temp=new JdbcTemplate(JdbcUtils.getDataSource());
             String sql1="update reader set READER_FINE=(READER_FINE-?) where READER_ID=?";

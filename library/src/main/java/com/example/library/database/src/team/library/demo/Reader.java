@@ -1,5 +1,7 @@
 package com.example.library.database.src.team.library.demo;
 import com.example.library.database.src.team.library.util.JdbcUtils;
+
+import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -156,6 +158,15 @@ public class Reader {
         String sql = "select * from reader";
         List<ReaderInfo> list2=template.query(sql,new BeanPropertyRowMapper<ReaderInfo>(ReaderInfo.class));
         return list2;
+    }
+
+    //提供读者当前的罚金
+    public BigDecimal getfine(String readerid)
+    {
+        JdbcTemplate template = new JdbcTemplate(JdbcUtils.getDataSource());
+        String sql = "select READER_FINE from reader where READER_ID=?";
+        BigDecimal fine= template.queryForObject(sql,BigDecimal.class,readerid);
+        return fine;
     }
 
 }
