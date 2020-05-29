@@ -352,6 +352,8 @@
                             <th>BookName</th>
                             <th>Reader_ID</th>
                             <th>Lend Time</th>
+                            <th>Apply for Return</th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -360,6 +362,11 @@
                             <td th:text=${lend.book_name}></td>
                             <td th:text=${lend.reader_id}></td>
                             <td th:text=${lend.end_time}></td>
+                            <td><a th:href="'ReturnRequest/'+${lend.book_id}+ '/' + 
+                                ${lend.book_name} + '/' + ${lend.reader_id} + '/' + 
+                                ${lend.reader_name}">
+                                <button type="button" class="btn btn-info">Apply</button>
+                            </a></td>
                         </tr>
                     </tbody>
                 </table>
