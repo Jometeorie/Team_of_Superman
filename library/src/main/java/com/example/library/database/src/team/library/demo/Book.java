@@ -360,7 +360,7 @@ public class Book{
         BigDecimal count=new BigDecimal(0);
         long days=(endtime.getTime()-starttime.getTime())/(1000 * 60 * 60 * 24);
         if(days>Librarian.days)
-            count.add(new BigDecimal(days).multiply(Librarian.fineperday));
+            count.add(new BigDecimal(days).subtract(new BigDecimal(Librarian.days)).multiply(Librarian.fineperday));
         return count;
     }
 
