@@ -359,8 +359,8 @@ public class Book{
     {
         BigDecimal count=new BigDecimal(0);
         long days=(endtime.getTime()-starttime.getTime())/(1000 * 60 * 60 * 24);
-        if(days>30)
-            count.add(new BigDecimal(days));
+        if(days>Librarian.days)
+            count.add(new BigDecimal(days).subtract(new BigDecimal(Librarian.days)).multiply(Librarian.fineperday));
         return count;
     }
 
@@ -528,7 +528,7 @@ public class Book{
         JdbcTemplate template=new JdbcTemplate(JdbcUtils.getDataSource());
         String sql="insert into takemoney values(?,?,?,?,?,?)";
         int count=template.update(sql,take_id,libr_id,reader_id,take_time,money_Amount,type);
-        if(type==1)
+        if(type==0)
         {
             JdbcTemplate temp=new JdbcTemplate(JdbcUtils.getDataSource());
             String sql1="update reader set READER_FINE=(READER_FINE-?) where READER_ID=?";
