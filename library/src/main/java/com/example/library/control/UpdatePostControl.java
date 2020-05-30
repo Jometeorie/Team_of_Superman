@@ -11,6 +11,8 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.example.library.database.src.team.library.demo.Librarian;
+
 import java.io.IOException;
 
 @RestController
@@ -29,6 +31,14 @@ public class UpdatePostControl
             response.sendRedirect("MainPage");
             return mv;
         }
+
+        if (request.getParameter("UpdatePost") != null) {
+            String title = request.getParameter("title");
+            String content = request.getParameter("content");
+            Librarian.title = title;
+            Librarian.content = content;
+        }
+
         return mv;
     }
 }

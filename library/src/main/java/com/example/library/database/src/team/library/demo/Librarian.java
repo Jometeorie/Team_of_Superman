@@ -17,6 +17,8 @@ public class Librarian {
 
     public static BigDecimal fineperday=new BigDecimal(1);
     public static int days=30;
+    public static String title = "No Title";
+    public static String content = "No content";
     /**
      * 登录测试
      * */
