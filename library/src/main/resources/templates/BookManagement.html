@@ -1,125 +1,297 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Managebook</title>
+    <link rel="stylesheet" href="https://formden.com/static/assets/demos/bootstrap-iso/bootstrap-iso/bootstrap-iso.css">
     <link rel="stylesheet" href="https://www.jq22.com/jquery/bootstrap-3.3.4.css">
-    <link rel="stylesheet" href="https://www.jq22.com/jquery/font-awesome.4.7.0.css">
+    <link rel="stylesheet" href="https://www.jq22.com/jquery/font-awesome.4.7.0.css"> 
+    <script language="JavaScript">
+    </script>
     <style>
+        @font-face {
+            font-family: 'icomoon';
+            src: url('fonts/icomoon.eot?smc6kc');
+            src: url('fonts/icomoon.eot?smc6kc#iefix') format('embedded-opentype'), url('fonts/icomoon.ttf?smc6kc') format('truetype'), url('fonts/icomoon.woff?smc6kc') format('woff'), url('fonts/icomoon.svg?smc6kc#icomoon') format('svg');
+            font-weight: normal;
+            font-style: normal;
+            font-display: block;
+        }
+        /* 初始化 */
+        
         * {
-            margin: 0px;
-            margin: 0px;
-            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
         }
-
-        body {
-            background: url("img/timg.jfif");
-            background-size: cover;
-            background-repeat: no-repeat;
+        
+        em,
+        i {
+            font-style: normal;
         }
-
-/*        .box {
-            width: 20px;
-            height: 20px;
-            padding: 2px;
-            border: 1px solid #ccc;
-            border-radius: 2px;
-        }*/
-
-        .mp_head {
-            background-color: white;
-            width: 100%;
-            height: 115px;
+        
+        li {
+            list-style: none;
         }
-
-        .mp_logo {
-            float: left;
-        }
-
-        .mp_title {
-            height: 113px;
-            margin-left: 20px;
-            padding-top: 30px;
-            float: left;
-            font-size: 60px;
-        }
-
-        table tr:first-child {
-            border-right: 3px rgb(71, 51, 87) solid;
-            background-color: lightgoldenrodyellow;
-        }
-
-        table tr:not(:first-child) td {
-            width: 180px;
-            height: 110px;
-            line-height: 40px;
-            border-bottom: 3px rgb(48, 33, 87) solid;
-            background-color: lightpink;
+        
+        img {
+            border: 0;
             vertical-align: middle;
+            width: 100%;
         }
-
-        table {
-            font-size: 20px;
-            color: rgb(63, 48, 87);
+        
+        a {
+            color: #666;
+            text-decoration: none;
+        }
+        
+        a:hover {
+            color: #000;
+        }
+        
+        input {
+            outline: none;
+        }
+        
+        button {
+            cursor: pointer;
+        }
+        /* 背景 */
+        
+        body {
+            padding: 0;
+            margin: 0;
+            background: url(img/bg1.jpg) no-repeat center;
+            background-size: cover;
+            font-family: 'Raleway', sans-serif;
+        }
+        /* 头部 */
+        
+        .w {
+            width: 1110px;
+            margin: 0 auto;
+        }
+        
+        .header {
+            position: relative;
+            height: 120px;
+            background-color: #fff;
+        }
+        
+        .header .nav {
+            padding: 20px 0;
+        }
+        
+        .header .nav .logo {
+            float: left;
+            width: 195px;
+            height: 90px;
+            background: url(img/logo_1.png) no-repeat;
+        }
+        
+        .header .nav ul {
+            padding-top: 20px;
+        }
+        
+        .header .nav ul li {
+            float: right;
+            margin: 20px 10px;
+            height: 40px;
+            line-height: 40px;
+            font-size: 16px;
+            color: #000;
+        }
+        
+        .header .nav ul .home::before {
+            font-family: 'icomoon';
+            content: '\e905';
+            color: #000;
+        }
+        
+        .header .nav ul .logout::before {
+            font-family: 'icomoon';
+            content: '\e909';
+            color: #c81623;
+        }
+        
+        .header .nav ul li:hover {
+            border-bottom: 2px solid #c81623;
+        }
+        /* 标题      */
+        
+        h1 {
             text-align: center;
-            border: 3px rgb(87, 87, 87) solid;
-            margin-left: auto;
-            margin-right: auto;
+            font-size: 45px;
+            margin: 30px 0px;
+            letter-spacing: 3px;
+            color: #fff;
+            font-weight: 500;
+        }
+        
+        h1 span {
+            color: #cc2105;
+        }
+        /* 主体 */
+
+        .box {
+/*            position: relative;*/
+            width: 1000px;
+            height: 560px;
+            margin: 0px auto;
+/*            padding: 50px 50px;*/
+            background-color: rgba(250, 250, 250, 0.6);
+            border-radius: 10px;
+        }
+        
+/*        .BM_center {
+            width: 800px;
+            height: 500px;
+            margin: 0 auto;*/
+            /* background-color: black; */
+/*        }*/
+        
+        .table > thead > tr > th {
+            text-align: center;
         }
 
-        .BC {
+        /* .BC {
             width: 70px;
             height: 100px;
-
+        } */
+        /* 页脚 */
+        
+        .footer {
+            height: 270px;
+            padding-top: 20px;
+            padding-left: 50px;
+            background-color: rgb(39, 35, 35);
+            margin-top: 80px;
         }
-
+        
+        .footer .pic {
+            float: left;
+            width: 280px;
+        }
+        
+        .footer .pic img {
+            width: 100%;
+        }
+        
+        .footer dl {
+            float: left;
+            width: 200px;
+            color: #fff;
+            margin: 10px 85px;
+        }
+        
+        .footer dl dt {
+            font-size: 16px;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+        
+        .footer .con_us::after {
+            font-family: 'icomoon';
+            content: '\e90a';
+            color: #fff;
+        }
     </style>
-<body>
-<div class="mp_head">
-    <div class="mp_logo">
-        <button><a href="MainPage"><img src="img/logo.png"></a></button>
-    </div>
-    <div class="mp_title">
-        <p>Welcome To Mandarin Library</p>
-    </div>
-</div>
+</head>
 
-<div>
-<!--     <div class="row">
-        <div class="col-md-12" style="padding:2em 0;"> -->
-<!--             <div class="table-responsive"> -->
-        <table class="table table-bordered " id="mytable">
-        <thead>
+<body>
+    <!-- 头部 -->
+    <section class="header" id="header">
+        <div class=" nav w">
+            <a href="MainPage">
+                <div class="logo "></div>
+            </a>
+            <ul>
+                <li class="logout "><a href="MainPage" style="color: #000 "> Log Out</a></li>
+                <li><a href="#contact " style="color: #000 ">Contact Us</a></li>
+                <li><a href="#about_us" style="color: #000 "> About Us</a></li>
+                <li class="home "> <a href="MainPage" style="color: #000; ">Home</a> </li>
+            </ul>
+        </div>
+    </section>
+    <h1>MANAGE <span> BOOKS </span></h1>
+    <!-- 表格部分 -->
+    <div class=box>
+        <div class="bootstrap-iso">
+            <table class="table" style="text-align:center" id="mytable">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Author</th>
+                        <th>Location</th>
+                        <th>Price</th>
+                        <th>Category</th>
+                        <th>State</th>
+<!--                         <th>Edit</th> -->
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="book : ${book}">
+                        <td th:text=${book.book_name}></td>
+                        <td th:text=${book.author}></td>
+                        <td th:text=${book.location}></td>
+                        <td th:text=${book.price}></td>
+                        <td th:text=${book.category}></td>
+                        <td th:text=${book.getState()}></td>
+<!--                         <td><button type="button" class="btn btn-info">edit</button>
+                            <button type="button" class="btn btn-info">delete</button>
+                        </td> -->
+                    </tr>
+<!--                         <tr>
+            <td>The Catcher in the Rye</td>
+            <td>J.D.SALINGER</td>
+            <td>floor2-202-A</td>
+            <td>20.00</td>
+            <td>Literature</td>
+            <td>Not Borrered</td>
+
+        </tr>
         <tr>
-            <th>Name</th>
-            <th>Author</th>
-            <th>Location</th>
-            <th>Price</th>
-            <th>Category</th>
-            <th>State</th>
-<!--             <th>Edit</th> -->
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="book : ${book}">
-            <td th:text=${book.book_name}></td>
-            <td th:text=${book.author}></td>
-            <td th:text=${book.location}></td>
-            <td th:text=${book.price}></td>
-            <td th:text=${book.category}></td>
-            <td th:text=${book.getState()}></td>
-<!--             <td><button type="button" class="btn btn-info">edit</button>
-                <button type="button" class="btn btn-info">delete</button>
-            </td> -->
-        </tr>
-        </tbody>
-        </table>
-<!--             </div>
-        </div> -->
-<!--     </div> -->
-</div>
+            <td>TO KILL A MOCKINGBIRD</td>
+            <td>Nelle Harper Lee</td>
+            <td>floor4-434-C</td>
+            <td>26.00</td>
+            <td>Literature</td>
+            <td>Not Borrered</td>
+
+        </tr> -->
+                </tbody>
+            </table>
+        </div>
+
+
+
+    </div>
+
+    <!-- 脚部 -->
+    <section class="footer">
+        <dl class="pic ">
+            <dt></dt>
+            <dd>
+                <img src="img/g5.jpg " alt=" ">
+            </dd>
+        </dl>
+        <dl id="about_us">
+            <dt>About Us</dt>
+            <dd>
+                We are the D5 group of software engineering class 4 from the school of computer science and technology, with 20 members.
+            </dd>
+        </dl>
+        <dl id="contact">
+            <dt class="con_us ">Contact Us </dt>
+            <dd>
+                Address: 266 xinglong section, xifeng road, xi 'an city, shaanxi province, China
+            </dd>
+            <dd>
+                Postcode: 710126
+            </dd>
+        </dl>
+    </section>
 
 <script src="https://www.jq22.com/jquery/jquery-1.10.2.js"></script>
 <script type="text/javascript" src="js/bootstable.js"></script> 
@@ -128,7 +300,10 @@
             $addButton: $('#add')
         });
     </script>
-
+    
 
 </body>
+
+</html>
+
 </html>
