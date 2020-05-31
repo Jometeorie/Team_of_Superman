@@ -54,15 +54,16 @@ public class BorrowAndReturnControl
                                                     @PathVariable ("reader_id") String reader_id, @PathVariable ("reader_name") String reader_name, 
                                                     HttpServletRequest request, HttpServletResponse response)  throws IOException {
 
-        String checkout_id = Book.getUUID();
+        String lend_id = Book.getUUID();
         HttpSession session = request.getSession();
         String libr_id = session.getAttribute("username").toString();
         long nowTime = System.currentTimeMillis();
         Date nowDate = new Date(nowTime);
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        String end_time = df.format(nowDate);
-        CheckoutInfo checkoutInfo = new CheckoutInfo(checkout_id, libr_id, book_id, book_name, reader_id, end_time, reader_name);
-        Book.EditResv(resv_id, book_id, true, checkoutInfo);
+        String lend_time = df.format(nowDate);
+        LendInfo lendInfo = new LendInfo(lend_id,libr_id, book_id, book_name, reader_id, lend_time, reader_name);
+        //CheckoutInfo checkoutInfo = new CheckoutInfo(checkout_id, libr_id, book_id, book_name, reader_id, end_time, reader_name);
+        Book.EditResv(resv_id, book_id, true, lendInfo);
 
         return new ModelAndView("redirect:/BorrowAndReturn");
     }
