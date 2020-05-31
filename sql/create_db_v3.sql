@@ -259,3 +259,19 @@ CREATE TABLE `takemoney` (
   CONSTRAINT `return_fk_5` FOREIGN KEY (`READER_ID`) REFERENCES `reader`(`READER_ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+DROP TABLE IF EXISTS `lend`;
+
+CREATE TABLE `lend` (     
+ `LEND_ID` varchar(33) NOT NULL, 
+ `LIBR_ID` varchar(11) NOT NULL,  
+ `BOOK_ID` varchar(32) NOT NULL,     
+ `BOOK_NAME` varchar(32) NOT NULL, 
+ `READER_ID` varchar(11) NOT NULL,
+ `LEND_TIME` datetime NOT NULL,
+	
+  PRIMARY KEY (`LEND_ID`),
+  CONSTRAINT `lend_fk_1` FOREIGN KEY (`LIBR_ID`) REFERENCES `librarian`(`LIBR_ID`), 
+  CONSTRAINT `lend_fk_2` FOREIGN KEY (`BOOK_ID`) REFERENCES `book`(`BOOK_ID`), 
+  CONSTRAINT `lend_fk_3` FOREIGN KEY (`READER_ID`) REFERENCES `reader`(`READER_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
