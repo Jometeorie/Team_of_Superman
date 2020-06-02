@@ -14,6 +14,11 @@ import java.sql.SQLException;
 // import java.util.Scanner;
 
 public class Librarian {
+
+    public static BigDecimal fineperday=new BigDecimal(1);
+    public static int days=30;
+    public static String title = "No Title";
+    public static String content = "No content";
     /**
      * 登录测试
      * */
@@ -56,6 +61,36 @@ public class Librarian {
             ChangeState(libr_id,true);
         return flag;
     }
+
+    /**
+     * 管理员验证
+     * @return 返回boolean值，false为失败，true为成功
+     * */
+    public boolean isLibrarian(String librarian_id){
+        if(librarian_id==null){
+            return false;
+        }
+        Boolean flag=false;
+        Connection conn=null;
+        ResultSet rs=null;
+        PreparedStatement pstmt =null;
+        try {
+            conn= JdbcUtils.getConnection();
+            String sql="select * from librarian where LIBR_ID=? ";
+            pstmt=conn.prepareStatement(sql);
+            pstmt.setString(1,librarian_id);
+            rs=pstmt.executeQuery();
+            flag= rs.next();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }finally {
+            JdbcUtils.close(rs,pstmt,conn);
+        }
+        if(flag)
+            ChangeState(librarian_id,true);
+        return flag;
+    }
+
     /**
      * 修改状态
      **/
@@ -210,5 +245,14 @@ public class Librarian {
         return new Reader().PasswordModify(Reader_ID, N_Password);
     }
 
+    public static void changefine(BigDecimal fine)
+    {
+        fineperday=fine;
+    }
+
+    public static void changedays(int day)
+    {
+        days=day;
+    }
 
 }
