@@ -18,7 +18,7 @@ public class Librarian {
     public static BigDecimal fineperday=new BigDecimal(1);
     public static int days=30;
     public static String title = "No Title";
-    public static String content = "No content";
+    public static String content = "No content, please contact Librarian to post.";
     /**
      * 登录测试
      * */

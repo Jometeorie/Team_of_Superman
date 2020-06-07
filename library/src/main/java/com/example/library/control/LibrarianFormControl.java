@@ -17,9 +17,9 @@ import java.util.List;
 public class LibrarianFormControl {
     @RequestMapping(value = "/LibrarianForm", method = RequestMethod.GET)
     public ModelAndView getLibrarianForm(ModelAndView mv) {
-        List<ResvInfo> lend = new Book().showResvList();
+        List<ResvInfo> lend = Book.showResvList();
         mv.addObject("lend",lend);
-        List<ReturnInfo> returnform = new Book().showReturnList();
+        List<ReturnInfo> returnform = Book.showReturnList();
         mv.addObject("return",returnform);
         List<ReaderInfo> fine = new Reader().getallreader();
         mv.addObject("penalty",fine);

@@ -35,7 +35,7 @@ public class LibrarianRegisterControl
             // String bond = request.getParameter("bond");
 
             // 判断是否注册成功
-            boolean isRegister =Admin.AdminRegister(tel, username, password);
+            boolean isRegister =Admin.LibrRegister(tel, username, password);
             if (isRegister) {
                 System.out.println("Successed register admin!");
             }
