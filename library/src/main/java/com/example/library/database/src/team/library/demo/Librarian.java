@@ -18,7 +18,7 @@ public class Librarian {
     public static BigDecimal fineperday=new BigDecimal(1);
     public static int days=30;
     public static String title = "No Title";
-    public static String content = "No content, please contact Librarian to post.";
+    public static String content = "No content";
     /**
      * 登录测试
      * */
@@ -61,6 +61,36 @@ public class Librarian {
             ChangeState(libr_id,true);
         return flag;
     }
+
+    /**
+     * 管理员验证
+     * @return 返回boolean值，false为失败，true为成功
+     * */
+    public boolean isLibrarian(String librarian_id){
+        if(librarian_id==null){
+            return false;
+        }
+        Boolean flag=false;
+        Connection conn=null;
+        ResultSet rs=null;
+        PreparedStatement pstmt =null;
+        try {
+            conn= JdbcUtils.getConnection();
+            String sql="select * from librarian where LIBR_ID=? ";
+            pstmt=conn.prepareStatement(sql);
+            pstmt.setString(1,librarian_id);
+            rs=pstmt.executeQuery();
+            flag= rs.next();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }finally {
+            JdbcUtils.close(rs,pstmt,conn);
+        }
+        if(flag)
+            ChangeState(librarian_id,true);
+        return flag;
+    }
+
     /**
      * 修改状态
      **/
@@ -89,7 +119,6 @@ public class Librarian {
 
 
     /**￼
-
      * 管理员个人信息修改测试
      * */
     @Test
@@ -131,7 +160,7 @@ public class Librarian {
      * 找回密码
      * */
     public String  FindPassword(String reader_id,String e_mail){
-       if(reader_id==null||e_mail==null)
+        if(reader_id==null||e_mail==null)
             return null;
         Connection conn=null;
         ResultSet rs=null;
@@ -204,7 +233,7 @@ public class Librarian {
     }
 
     /**管理员修改读者信息
-    * */
+     * */
     public boolean NameModify(String Reader_ID,String N_name)  {
         return new Reader().NameModify(Reader_ID,N_name);
     }
