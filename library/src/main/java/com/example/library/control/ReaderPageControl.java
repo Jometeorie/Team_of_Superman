@@ -7,17 +7,26 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
+import com.example.library.database.src.team.library.demo.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import java.io.IOException;
+
+import java.math.BigDecimal;
 
 @RestController
 public class ReaderPageControl
 {
     @RequestMapping(value = "/ReaderPage", method = RequestMethod.GET)
-    public ModelAndView test(ModelAndView mv) {
+    public ModelAndView test(ModelAndView mv, HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        String readerID=session.getAttribute("username").toString();
+        // 读者要缴纳的罚金
+        BigDecimal payMoney =new Reader().getfine(readerID);
+        mv.addObject("payMoney",payMoney);
         mv.setViewName("/ReaderPage");
         return mv;
     }

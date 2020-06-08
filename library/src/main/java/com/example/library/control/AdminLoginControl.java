@@ -38,6 +38,7 @@ public class AdminLoginControl
                 HttpSession session = request.getSession();
                 // username存入cookie
                 session.setAttribute("username", username);
+                session.setAttribute("identity", "admin");
                 response.sendRedirect("ADPage");
                 // 前端判断登录是否成功的依据，0为成功，非0为失败
                 mv.addObject("value_judg", 0);

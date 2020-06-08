@@ -11,6 +11,8 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.example.library.database.src.team.library.demo.Librarian;
+
 import java.io.IOException;
 
 @RestController
@@ -18,6 +20,8 @@ public class MainPageControl
 {
     @RequestMapping(value = "/MainPage", method = RequestMethod.GET)
     public ModelAndView getMainPage(ModelAndView mv) {
+        mv.addObject("title", Librarian.title);
+        mv.addObject("content", Librarian.content);
         mv.setViewName("/MainPage");
         return mv;
     }

@@ -1,0 +1,145 @@
+* {
+    padding:0;
+    margin:0;
+    box-sizing: border-box;
+}
+@font-face {
+    font-family: 'icomoon';
+    src:  url('fonts/icomoon.eot?r8ji5n');
+    src:  url('fonts/icomoon.eot?r8ji5n#iefix') format('embedded-opentype'),
+      url('fonts/icomoon.ttf?r8ji5n') format('truetype'),
+      url('fonts/icomoon.woff?r8ji5n') format('woff'),
+      url('fonts/icomoon.svg?r8ji5n#icomoon') format('svg');
+    font-weight: normal;
+    font-style: normal;
+    font-display: block;
+  }
+li {
+    list-style-type: none;
+}
+a {
+    text-decoration: none;
+}
+.w {
+    width: 1110px;
+    margin: 0 auto;
+}
+/* 页眉 开始 */
+.header {
+    position: relative;
+    height: 647.73px;
+    background: url(img/bg1.jpg) no-repeat center;
+    background-size: cover;
+}
+.header .nav {
+    padding: 30px 0;
+}
+.header .nav .logo {
+    float: left;
+    width: 195px;
+    height: 90px;
+    background: url(img/logo_1.png) no-repeat;
+}
+.header .nav .key {
+    padding-top: 30px;
+}
+.header .nav .key>li {
+    float: right;
+    margin: 20px 10px;
+    height: 40px;
+    line-height: 40px;
+    font-size: 16px;
+    color: #fff;
+}
+.header .nav .key .log_choose {
+     display: none; 
+}
+
+.header .nav ul .home {
+    border-bottom: 2px solid #c81623;
+}
+.header .nav ul .home::before {
+    font-family: 'icomoon';
+    content: '\e905';
+    color: #fff;
+}
+.header .nav ul li:hover {
+    border-bottom: 2px solid #c81623;
+}
+.header h3 {
+    position: absolute;
+    top: 290px;
+    left: 100px;
+    width: 760px;
+    height: 134px;
+    line-height: 134px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 48px;
+    text-indent: 15px;
+    color: #fff;
+    background: rgba(0,0,0,.3);
+}
+.header .search {
+    position: absolute;
+    top: 513px;
+    left: 346px;
+    width: 570px;
+    height: 36px;
+    border: 2px solid #000;
+}
+.header .search input {
+    float: left;
+    width: 454px;
+    height: 32px;
+    padding-left: 10px;
+    outline: none;
+}
+.header .search img {
+    float: left;
+}
+.header .search button {
+    float: left;
+    width: 80px;
+    height: 32px;
+    border: 0;
+    outline: none;
+    background-color: rgb(39, 35, 35);
+    font-size: 16px;
+    color: #fff;
+    cursor: pointer;
+}
+/* 页眉 结束 */
+/* 页脚 开始 */
+.footer {
+    height: 270px;
+    padding-top: 20px;
+    padding-left: 50px;
+    background-color: rgb(39, 35, 35);
+}
+.footer .pic {
+    float: left;
+    width: 280px;
+}
+.footer .pic img {
+    width: 100%;
+}
+.footer dl {
+    float: left;
+    width: 200px;
+    color: #fff;
+    margin: 10px 85px;
+}
+.footer dl dt {
+    font-size: 16px;
+    margin-bottom: 10px;
+    font-weight: 700;
+}
+.footer dl dd {
+    line-height: 25px;
+}
+.footer .con_us::after {
+    font-family: 'icomoon';
+    content: '\e90a';
+    color: #fff;
+}
+/* 页脚 结束 */

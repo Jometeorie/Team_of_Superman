@@ -1,9 +1,11 @@
 package com.example.library.database.src.team.library.demo;
 
+import com.example.library.database.src.team.library.demo.DatabaseController.*;
+
 import org.junit.Test;
 import org.springframework.jdbc.core.JdbcTemplate;
 
-import com.alibaba.druid.sql.visitor.functions.Now;
+// import com.alibaba.druid.sql.visitor.functions.Now;
 import com.example.library.database.src.team.library.util.JdbcUtils;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 
@@ -13,6 +15,10 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 // import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.text.ParseException;
+import java.util.Date;
 import java.util.List;
 // import java.util.Map;
 import java.util.UUID;
@@ -149,6 +155,7 @@ public class Book{
         UUID uuid=UUID.randomUUID();
         String str = uuid.toString(); 
         String uuidStr=str.replace("-", "");
+        uuidStr = uuidStr.substring(0, 16);
         return uuidStr;
       }
       
@@ -232,7 +239,7 @@ public class Book{
     }
 
     //读者预约书，time格式为"2021-12-12 23:59:59"
-    public static boolean reservebook(String RESV_ID,String Book_ID,String Starttime,String Endtime,String Reader_ID)
+    public static boolean reservebook(String RESV_ID,String Book_ID,String Book_name,String Starttime,String Endtime,String Reader_ID)
     {
         if(SearchBookState(Book_ID)==0) {
             Connection con = null;
@@ -240,34 +247,44 @@ public class Book{
             ResultSet rs = null;
             try {
                 con = JdbcUtils.getConnection();
-                String sql = "insert into reserve values (?,?,?,?,?,?)";
+                String sql = "insert into reserve values (?,?,?,?,?,?,?)";
                 stmt = con.prepareStatement(sql);
                 stmt.setString(1, RESV_ID);
                 stmt.setString(2, Book_ID);
-                stmt.setString(3, Reader_ID);
-                stmt.setString(4, Starttime);
-                stmt.setString(5, Endtime);
-                stmt.setString(6, "Waiting");
+                stmt.setString(3, Book_name);
+                stmt.setString(4, Reader_ID);
+                stmt.setString(5, Starttime);
+                stmt.setString(6, Endtime);
+                stmt.setString(7, "Waiting");
                 stmt.executeUpdate();
             } catch (Exception e) {
                 e.printStackTrace();
             } finally {
                 JdbcUtils.close(rs, stmt, con);
             }
+            EditBookState(Book_ID,1);
             return true;
         }
         return  false;
     }
 
+    public void updatereserve()  //更新预约表，删除超出时间的记录
+    {
+        JdbcTemplate template=new JdbcTemplate(JdbcUtils.getDataSource());
+        String sql="delete from reserve where unix_timestamp(DATE_ADD(BEGIN_TIME,INTERVAL 2 HOUR))<unix_timestamp(now())";
+        int count=template.update(sql);
+    }
+
     //管理员受理借阅
-    public static boolean EditResv(String RESV_ID,String Book_ID,boolean IfAgree)
+    public static boolean EditResv(String RESV_ID,String Book_ID,boolean IfAgree,CheckoutInfo checkedinfo)
     {
         if(IfAgree)
         {
             if(SearchBookState(Book_ID)==0)
             {
-                EditBookState(Book_ID,1);
-                changeResvState(RESV_ID,"Agree");
+                EditBookState(Book_ID,2);
+                deleteResv(RESV_ID);
+                insertcheckout(checkedinfo.checkout_id,checkedinfo.libr_id,checkedinfo.book_id,checkedinfo.book_name,checkedinfo.reader_id,checkedinfo.end_time);
                 return true;
             }
             else
@@ -276,15 +293,136 @@ public class Book{
         else
         {
             changeResvState(RESV_ID,"Disagree");
+            EditBookState(Book_ID,0);
             return true;
         }
     }
 
-    //还书
-    public static void BackBook(String Book_ID,String Backtime)
+    //管理员授理归还
+    public static void BackBook(String checkout_id,String return_id,String book_id,String libr_id,String reader_id,String return_time)
     {
-        EditBookState(Book_ID,0);
-        changeResvState(SearchReserveID(Book_ID), "Back");
+        if(SearchBookState(book_id)==2)
+        {
+            //Date time1=fromstringtodate(getcheckouttime(book_id,reader_id));
+            Date time1=fromstringtodate(getcheckouttimebyid(checkout_id));
+            Date time2=fromstringtodate(return_time);
+            BigDecimal fine=countfine(time1,time2);
+            insertreturn(return_id,libr_id,book_id,getbookname(book_id),reader_id,return_time,fine,getreadername(reader_id));
+            updatefine(reader_id,fine,true);
+        //controller3.CountPerBookFine(returninfo.book_id, returninfo.reader_id);
+        //controller3.SetPerBookFine(returninfo.book_id, returninfo.reader_id);
+        //controller3.UpdateReaderSumFine(returninfo.reader_id);
+            EditBookState(book_id,0);
+        }
+	    else{System.out.println("the book has not been checked out");}         
+    }
+    //得到读者姓名
+    public static String getreadername(String reader_id)
+    {
+        JdbcTemplate template = new JdbcTemplate(JdbcUtils.getDataSource());
+        String sql = "select READER_NAME from reader where READER_ID=? ";
+        String name=template.queryForObject(sql,String.class,reader_id);
+        return name;
+    }
+    //得打书名
+    public static String getbookname(String book_id)
+    {
+        JdbcTemplate template = new JdbcTemplate(JdbcUtils.getDataSource());
+        String sql = "select BOOK_NAME from book where BOOK_ID=? ";
+        String name=template.queryForObject(sql,String.class,book_id);
+        return name;
+    }
+    public static Date fromstringtodate(String s)
+    {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Date time=null;
+        try {
+            // Fri Feb 24 00:00:00 CST 201
+            time=sdf.parse(s);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return time;
+    }
+    public static void updatefine(String reader_id,BigDecimal count,boolean ifadd)
+    {
+        String sql="";
+        JdbcTemplate template=new JdbcTemplate(JdbcUtils.getDataSource());
+        if(ifadd)
+            sql="update reader set READER_FINE=(READER_FINE+?) where READER_ID=?";
+        else
+            sql="update reader set READER_FINE=(READER_FINE-?) where READER_ID=?";
+       template.update(sql,count,reader_id);
+    }
+
+    public static BigDecimal countfine(Date starttime,Date endtime)
+    {
+        BigDecimal count=new BigDecimal(0);
+        long days=(endtime.getTime()-starttime.getTime())/(1000 * 60 * 60 * 24);
+        if(days>Librarian.days)
+            count.add(new BigDecimal(days).subtract(new BigDecimal(Librarian.days)).multiply(Librarian.fineperday));
+        return count;
+    }
+
+
+    //给读者展示已借阅仍未归还的书
+    public static List<CheckoutInfo> showborrowbooks(String reader_id)
+    {
+        List<CheckoutInfo> list1=showcheckouttoreader(reader_id);
+        JdbcTemplate template = new JdbcTemplate(JdbcUtils.getDataSource());
+        String sql = "select * from return where READER_ID=?";
+        List<ReturnInfo> list2=template.query(sql,new BeanPropertyRowMapper<ReturnInfo>(ReturnInfo.class),reader_id);
+        for(int i=0;i<list2.size();i++)
+        {
+            for(int j=0;j<list1.size();j++)
+            {
+                if(list1.get(j).book_id.equals(list2.get(i).book_id))
+                {
+                    list1.remove(j);
+                    break;
+                }
+            }
+        }
+        return list1;
+    }
+
+    public static String getcheckouttime(String book_id,String reader_id)
+    {
+        JdbcTemplate template = new JdbcTemplate(JdbcUtils.getDataSource());
+        String sql = "select * from checked_out where BOOK_ID=? and READER_ID=? order by END_TIME DESC ";
+        List<CheckoutInfo> list =template.query(sql,new BeanPropertyRowMapper<CheckoutInfo>(CheckoutInfo.class),book_id,reader_id);
+        return list.get(0).end_time;
+    }
+
+    public static String getcheckouttimebyid(String checkout_id)
+    {
+        JdbcTemplate template = new JdbcTemplate(JdbcUtils.getDataSource());
+        String sql = "select END_TIME from checked_out where CHECKOUT_ID=? ";
+        String time=template.queryForObject(sql,String.class,checkout_id);
+        return time;
+    }
+
+    //插入归还记录
+    public static void insertreturn(String return_id,String libr_id,String book_id,String book_name,String reader_id,String returntime,BigDecimal fine,String reader_name)
+    {
+        JdbcTemplate template=new JdbcTemplate(JdbcUtils.getDataSource());
+        String sql="insert into `return` values(?,?,?,?,?,?,?,?)";
+        int count=template.update(sql,return_id,libr_id,book_id,book_name,reader_id,returntime,fine,reader_name);
+    }
+
+    //给读者展示借阅记录
+    public static List<ResvInfo> showResvtoreader(String reader_id)
+    {
+        JdbcTemplate template = new JdbcTemplate(JdbcUtils.getDataSource());
+        String sql = "select * from reserve where READER_ID= ? ";
+        List<ResvInfo> list=template.query(sql,new BeanPropertyRowMapper<ResvInfo>(ResvInfo.class) , reader_id);
+        for (ResvInfo info:list) {
+            JdbcTemplate temp=new JdbcTemplate(JdbcUtils.getDataSource());
+            String sql2="select READER_NAME from reader where READER_ID=?";
+            String name=temp.queryForObject(sql2,String.class,info.reader_id);
+            info.setReader_name(name);
+        }
+        return list;
     }
 
     //给管理员展示借书请求
@@ -293,6 +431,12 @@ public class Book{
         JdbcTemplate template = new JdbcTemplate(JdbcUtils.getDataSource());
         String sql = "select * from reserve ";
         List<ResvInfo> list=template.query(sql,new BeanPropertyRowMapper<ResvInfo>(ResvInfo.class));
+        for (ResvInfo info:list) {
+            JdbcTemplate temp=new JdbcTemplate(JdbcUtils.getDataSource());
+            String sql2="select READER_NAME from reader where READER_ID=?";
+            String name=temp.queryForObject(sql2,String.class,info.reader_id);
+            info.setReader_name(name);
+        }
         return list;
     }
 
@@ -302,6 +446,125 @@ public class Book{
         String sql = "select RESV_ID from reserve where BOOK_ID = ?";
         String RESV_ID=template.queryForObject(sql,String.class,Book_id);
         return RESV_ID;
+    }
+
+    public static List<ReturnInfo> showReturnList()
+    {
+        JdbcTemplate template = new JdbcTemplate(JdbcUtils.getDataSource());
+        String sql = "select * from `return` ";
+        List<ReturnInfo> list=template.query(sql,new BeanPropertyRowMapper<ReturnInfo>(ReturnInfo.class));
+        for (ReturnInfo info:list) {
+            JdbcTemplate temp=new JdbcTemplate(JdbcUtils.getDataSource());
+            String sql2="select READER_NAME from reader where READER_ID=?";
+            String name=temp.queryForObject(sql2,String.class,info.reader_id);
+            info.setReader_name(name);
+        }
+        return list;
+    }
+
+    //给读者展示归还记录
+    public static List<ReturnInfo> showReturntoreader (String reader_id)
+    {
+        JdbcTemplate template = new JdbcTemplate(JdbcUtils.getDataSource());
+        String sql = "select * from `return` where READER_ID= ? ";
+        List<ReturnInfo> list=template.query(sql,new BeanPropertyRowMapper<ReturnInfo>(ReturnInfo.class),reader_id);
+        for (ReturnInfo info:list) {
+            JdbcTemplate temp=new JdbcTemplate(JdbcUtils.getDataSource());
+            String sql2="select READER_NAME from reader where READER_ID=?";
+            String name=temp.queryForObject(sql2,String.class,info.reader_id);
+            info.setReader_name(name);
+        }
+        return list;
+    }
+
+    //插入借出记录
+    public static void insertcheckout(String checkout_id,String libr_id,String book_id,String book_name,String reader_id,String checkouttime)
+    {
+        JdbcTemplate template=new JdbcTemplate(JdbcUtils.getDataSource());
+        String sql="insert into checked_out values(?,?,?,?,?,?)";
+        int count=template.update(sql,checkout_id,libr_id,book_id,book_name,reader_id,checkouttime);
+    }
+
+    //向管理员提供该读者的借阅记录
+    public static List<CheckoutInfo> showcheckouttoreader(String reader_id)
+    {
+        JdbcTemplate template = new JdbcTemplate(JdbcUtils.getDataSource());
+        String sql = "select * from checked_out where READER_ID = ? ";
+        List<CheckoutInfo> list=template.query(sql,new BeanPropertyRowMapper<CheckoutInfo>(CheckoutInfo.class),reader_id);
+        for (CheckoutInfo info:list) {
+            JdbcTemplate temp=new JdbcTemplate(JdbcUtils.getDataSource());
+            String sql2="select READER_NAME from reader where READER_ID=?";
+            String name=temp.queryForObject(sql2,String.class,info.reader_id);
+            info.setReader_name(name);
+        }
+        return list;
+    }
+    //提供所有借出记录
+    public static List<CheckoutInfo> showallcheckout()
+    {
+        JdbcTemplate template = new JdbcTemplate(JdbcUtils.getDataSource());
+        String sql = "select * from checked_out ";
+        List<CheckoutInfo> list=template.query(sql,new BeanPropertyRowMapper<CheckoutInfo>(CheckoutInfo.class));
+        for (CheckoutInfo info:list) {
+            JdbcTemplate temp=new JdbcTemplate(JdbcUtils.getDataSource());
+            String sql2="select READER_NAME from reader where READER_ID=?";
+            String name=temp.queryForObject(sql2,String.class,info.reader_id);
+            info.setReader_name(name);
+        }
+        for(int i=0;i<list.size();i++)
+        {
+            if(SearchBookState(list.get(i).book_id)!=2)
+            {
+                list.remove(i);
+                i--;
+            }
+        }
+        return list;
+    }
+
+    //交钱，type为钱的类型，0为罚金，1为保证金
+    public static void takemoney(String take_id,String libr_id,String reader_id,String take_time,BigDecimal money_Amount,int type)
+    {
+        JdbcTemplate template=new JdbcTemplate(JdbcUtils.getDataSource());
+        String sql="insert into takemoney values(?,?,?,?,?,?)";
+        int count=template.update(sql,take_id,libr_id,reader_id,take_time,money_Amount,type);
+        if(type==0)
+        {
+            JdbcTemplate temp=new JdbcTemplate(JdbcUtils.getDataSource());
+            String sql1="update reader set READER_FINE=(READER_FINE-?) where READER_ID=?";
+            temp.update(sql1,money_Amount,reader_id);
+        }
+    }
+
+    //图书馆一段时间内交易记录，0为罚金，1为保证金，2为两者都是
+    public static List<MoneyTakeInfo> showMoneyInfo(String starttime,String endtime,int type)
+    {
+        List<MoneyTakeInfo> list;
+        if(type==0)
+        {
+            JdbcTemplate template = new JdbcTemplate(JdbcUtils.getDataSource());
+            String sql = "select * from takemoney where MONEY_TYPE=0 and unix_timestamp(TAKE_TIME)>? and  unix_timestamp(TAKE_TIME)<?";
+            list=template.query(sql,new BeanPropertyRowMapper<MoneyTakeInfo>(MoneyTakeInfo.class),starttime,endtime);
+        }
+        if(type==1)
+        {
+            JdbcTemplate template = new JdbcTemplate(JdbcUtils.getDataSource());
+            String sql = "select * from takemoney where MONEY_TYPE=1 and unix_timestamp(TAKE_TIME)>? and  unix_timestamp(TAKE_TIME)<?";
+            list=template.query(sql,new BeanPropertyRowMapper<MoneyTakeInfo>(MoneyTakeInfo.class),starttime,endtime);
+        }
+        else
+        {
+            JdbcTemplate template = new JdbcTemplate(JdbcUtils.getDataSource());
+            String sql = "select * from takemoney where unix_timestamp(TAKE_TIME)>? and  unix_timestamp(TAKE_TIME)<?";
+            list=template.query(sql,new BeanPropertyRowMapper<MoneyTakeInfo>(MoneyTakeInfo.class),starttime,endtime);
+        }
+        for (MoneyTakeInfo info:list) {
+            JdbcTemplate temp=new JdbcTemplate(JdbcUtils.getDataSource());
+            String sql2="select READER_NAME from reader where READER_ID=?";
+            String name=temp.queryForObject(sql2,String.class,info.reader_id);
+            info.setReader_name(name);
+        }
+        return list;
     }
 
     public static void main(String[] args)  {

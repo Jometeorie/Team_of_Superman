@@ -3,19 +3,23 @@
 127.0.0.1:8888/SearchPage
 */
 package com.example.library.control;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 import com.example.library.database.src.team.library.demo.*;
 
-// import javax.servlet.http.HttpSession;
+import javax.servlet.http.HttpSession;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.List;
+import java.util.Date;
 
 @RestController
 public class SearchPageControl
@@ -47,6 +51,30 @@ public class SearchPageControl
         else if (request.getParameter("mainpage") != null) {
             response.sendRedirect("MainPage");
         }
+
         return mv;
     }
+
+    // 处理读者预约一本书的响应
+    @RequestMapping(value = "SearchPage/{bookID}/{bookName}")
+    @ResponseBody
+    public ModelAndView getReserve(@PathVariable ("bookID") String bookID, @PathVariable ("bookName") String bookName, HttpServletRequest request, HttpServletResponse response)  throws IOException {
+        long beginTime = System.currentTimeMillis();
+        // EndTime，一小时后自动删除记录（单位毫秒）
+        long endTime = beginTime + 120*60*1000;
+        Date beginDate = new Date(beginTime);
+        Date endDate = new Date(endTime);
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String reserveBeginTime = df.format(beginDate);
+        String reserveEndTime = df.format(endDate);
+
+        HttpSession session = request.getSession();
+        String readerID = session.getAttribute("username").toString();
+
+        Book.reservebook(Book.getUUID(), bookID.split("\\.")[0], bookName, reserveBeginTime, 
+                                                reserveEndTime, readerID);
+
+        return new ModelAndView("redirect:/SearchPage");
+    }
+
 }

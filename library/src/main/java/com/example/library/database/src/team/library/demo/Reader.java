@@ -1,12 +1,17 @@
 package com.example.library.database.src.team.library.demo;
 import com.example.library.database.src.team.library.util.JdbcUtils;
+import org.junit.Test;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
+import org.springframework.jdbc.core.JdbcTemplate;
+
+import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
+
 // import java.util.Scanner;
-import org.junit.Test;
-import org.springframework.jdbc.core.JdbcTemplate;
 
 public class Reader {
     /**
@@ -139,13 +144,30 @@ public class Reader {
      * 读者个人信息修改
      * 修改密码
      * */
-     public boolean PasswordModify(String Reader_ID,String N_Password)  {
+    public boolean PasswordModify(String Reader_ID,String N_Password)  {
          JdbcTemplate template=new JdbcTemplate(JdbcUtils.getDataSource());
          String sql="update reader set PASSWORD=? where READER_ID=?";
          int count=template.update(sql,N_Password,Reader_ID);
          if(count==1)
              return true;
          return false;
+    }
+
+    public List<ReaderInfo> getallreader()
+    {
+        JdbcTemplate template = new JdbcTemplate(JdbcUtils.getDataSource());
+        String sql = "select * from reader";
+        List<ReaderInfo> list2=template.query(sql,new BeanPropertyRowMapper<ReaderInfo>(ReaderInfo.class));
+        return list2;
+    }
+
+    //提供读者当前的罚金
+    public BigDecimal getfine(String readerid)
+    {
+        JdbcTemplate template = new JdbcTemplate(JdbcUtils.getDataSource());
+        String sql = "select READER_FINE from reader where READER_ID=?";
+        BigDecimal fine= template.queryForObject(sql,BigDecimal.class,readerid);
+        return fine;
     }
 
 }
