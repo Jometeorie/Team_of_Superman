@@ -38,6 +38,12 @@ public class ReaderPageControl
             response.sendRedirect("MainPage");
             return mv;
         }
+        if (request.getParameter("search_button") != null) {
+            ModelAndView model = new ModelAndView("redirect:/SearchPage");
+            String  searchName = request.getParameter("search");
+            model.addObject("search_name", searchName);  
+            return model;
+        }
         return mv;
     }
 
