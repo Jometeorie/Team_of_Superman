@@ -1,8 +1,10 @@
 package com.example.library.database.src.team.library.demo;
 
-import com.example.library.database.src.team.library.util.JdbcUtils;
+import com.example.library.database.src.team.library.demo.DatabaseController;
+
 import org.junit.Test;
 import org.springframework.jdbc.core.JdbcTemplate;
+import com.example.library.database.src.team.library.util.JdbcUtils;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -82,15 +84,15 @@ public class Admin {
      * */
     @Test
     public void test3(){
-        System.out.println(Admin.LibrRegister("17130177005","Lora"));//报错可能是数据库中已经有了改用户
+        System.out.println(Admin.LibrRegister("17130177005","Lora", "123456"));//报错可能是数据库中已经有了改用户
     }
     /**
      * 注册管理员账号
      * */
-    public static boolean LibrRegister(String Libr_ID,String name) {
+    public static boolean LibrRegister(String Libr_ID,String name, String password) {
         JdbcTemplate template=new JdbcTemplate(JdbcUtils.getDataSource());
-        String sql="insert into librarian(LIBR_ID,LIBR_NAME)values(?,?)";
-        int count=template.update(sql,Libr_ID,name);
+        String sql="insert into librarian(LIBR_ID,LIBR_NAME, PASSWORD)values(?,?, ?)";
+        int count=template.update(sql,Libr_ID,name, password);
         if(count==1)
             return true;
         return false;

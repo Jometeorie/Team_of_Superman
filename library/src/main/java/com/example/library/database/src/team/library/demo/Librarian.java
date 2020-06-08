@@ -14,6 +14,11 @@ import java.sql.SQLException;
 // import java.util.Scanner;
 
 public class Librarian {
+
+    public static BigDecimal fineperday=new BigDecimal(1);
+    public static int days=30;
+    public static String title = "No Title";
+    public static String content = "No content, please contact Librarian to post.";
     /**
      * 登录测试
      * */
@@ -210,5 +215,14 @@ public class Librarian {
         return new Reader().PasswordModify(Reader_ID, N_Password);
     }
 
+    public static void changefine(BigDecimal fine)
+    {
+        fineperday=fine;
+    }
+
+    public static void changedays(int day)
+    {
+        days=day;
+    }
 
 }
