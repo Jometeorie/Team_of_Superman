@@ -345,8 +345,10 @@
                             <td th:text=${lend.book_name}></td>
                             <td th:text=${lend.reader_name}></td>
                             <td th:text=${lend.begin_time}></td>
-                            <td><a th:href="'EmailRequest/'+${lend.book_id}+ '/' + 
-                                ${lend.book_name} + '/' + ${lend.reader_name} ">
+                            <td>
+                                <!-- <a th:href="'EmailRequest/'+${lend.book_id}+ '/' + 
+                                ${lend.book_name} + '/' + ${lend.reader_name} "> -->
+                                <a th:href="LibrarianForm">
                                 <button type="button" class="btn btn-info" onclick="return check_email()">Email</button>
                             </a></td>
                         </tr>
