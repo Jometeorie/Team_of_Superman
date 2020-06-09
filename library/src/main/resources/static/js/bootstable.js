@@ -13,11 +13,11 @@ Bootstable
 '<button id="bEdit" type="button" class="btn btn-sm btn-default" onclick="rowEdit(this);">' +
 '<span class="glyphicon glyphicon-pencil" > </span>'+
 '</button>'+
-'<button id="bElim" type="button" class="btn btn-sm btn-default" onclick="rowElim(this);">' +
+'<button id="bElim" name="delete" type="button" class="btn btn-sm btn-default" onclick="rowElim(this);">' +
 '<span class="glyphicon glyphicon-trash" > </span>'+
 '</button>'+
 // '<a th:href=" \'BookManagement/\' + ${book.book_name} + \'/\'+${book.author}">'+
-'<button id="bAcep" type="button" class="btn btn-sm btn-default" style="display:none;" onclick="rowAcep(this);">' + 
+'<button id="bAcep" name="add" type="button" class="btn btn-sm btn-default" style="display:none;" onclick="rowAcep(this);">' + 
 '<span class="glyphicon glyphicon-ok" > </span>'+
 '</button>'+
 // '</a>'+
