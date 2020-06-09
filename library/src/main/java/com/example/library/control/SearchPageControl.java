@@ -56,9 +56,11 @@ public class SearchPageControl
     }
 
     // 处理读者预约一本书的响应
-    @RequestMapping(value = "SearchPage/{bookID}/{bookName}")
+    @RequestMapping(value = "SearchPage/{bookID}/{bookName}/{category}")
     @ResponseBody
-    public ModelAndView getReserve(@PathVariable ("bookID") String bookID, @PathVariable ("bookName") String bookName, HttpServletRequest request, HttpServletResponse response)  throws IOException {
+    public ModelAndView getReserve(@PathVariable ("bookID") String bookID, 
+    @PathVariable ("bookName") String bookName, @PathVariable ("category") String category, 
+    HttpServletRequest request, HttpServletResponse response)  throws IOException {
         long beginTime = System.currentTimeMillis();
         // EndTime，一小时后自动删除记录（单位毫秒）
         long endTime = beginTime + 120*60*1000;
@@ -73,6 +75,7 @@ public class SearchPageControl
 
         Book.reservebook(Book.getUUID(), bookID.split("\\.")[0], bookName, reserveBeginTime, 
                                                 reserveEndTime, readerID);
+        Book.addRank(category);
 
         return new ModelAndView("redirect:/SearchPage");
     }

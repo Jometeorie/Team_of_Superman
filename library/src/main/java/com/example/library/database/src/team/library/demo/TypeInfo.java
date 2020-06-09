@@ -19,4 +19,8 @@ public class TypeInfo {
     {
         this.rank=rank;
     }
+
+    public String getTypeName() {
+        return this.typename;
+    }
 }
