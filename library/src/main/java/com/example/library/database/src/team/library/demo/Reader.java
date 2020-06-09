@@ -152,6 +152,19 @@ public class Reader {
          return false;
     }
 
+    /**
+     * 读者个人信息修改
+     * 修改手机
+     * */
+    public boolean TelephoneModify(String Reader_ID,String Telephone)  {
+        JdbcTemplate template=new JdbcTemplate(JdbcUtils.getDataSource());
+        String sql="update reader set READER_ID=? where READER_ID=?";
+        int count=template.update(sql,Telephone,Reader_ID);
+        if(count==1)
+            return true;
+        return false;
+    }
+
     public List<ReaderInfo> getallreader()
     {
         JdbcTemplate template = new JdbcTemplate(JdbcUtils.getDataSource());

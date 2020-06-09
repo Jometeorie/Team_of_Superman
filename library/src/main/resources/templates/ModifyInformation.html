@@ -8,9 +8,9 @@
     <script language="JavaScript">
         function checkForm() {
             var Email = document.getElementById("Email").value;
-            var Telephone = document.getElementById("Telephone").value;
+            var Name = document.getElementById("Name").value;
 
-            if ((Email == null || Email == '') || (Telephone == null || Telephone == '')) {
+            if ((Email == null || Email == '') || (Name == null || Name == '')) {
                 alert("Information cannot be empty");
                 return false;
             } else {
@@ -273,8 +273,8 @@
 
 
                         <tr>
-                            <td class="td_left"><label for="Telephone">Telephone:</label></td>
-                            <td class="td_right"><input type="text" name="Telephone" id="Telephone" placeholder="enter telephone"></td>
+                            <td class="td_left"><label for="Name">Name:</label></td>
+                            <td class="td_right"><input type="text" name="Name" id="Telephone" placeholder="enter name"></td>
                         </tr>
 
 
