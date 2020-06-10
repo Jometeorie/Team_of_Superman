@@ -1,43 +1,63 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SearchPage</title>
-    <link rel="stylesheet" href="https://formden.com/static/assets/demos/bootstrap-iso/bootstrap-iso/bootstrap-iso.css">     
-
+    <title>RankingList</title>
+    <link rel="stylesheet" href="https://formden.com/static/assets/demos/bootstrap-iso/bootstrap-iso/bootstrap-iso.css">
+    <script>
+        function reloadPage(){
+            location.reload()
+        }
+    </script> 
     <style>
-        /* 初始化 */
-        * {
-            padding: 0;
-            margin: 0;
-            box-sizing: border-box;
-        }
-
-        .w {
-            width: 1110px;
-            margin: 0 auto;
-        }
-
         @font-face {
             font-family: 'icomoon';
-            src: url('fonts/icomoon.eot?r8ji5n');
-            src: url('fonts/icomoon.eot?r8ji5n#iefix') format('embedded-opentype'),
-                url('fonts/icomoon.ttf?r8ji5n') format('truetype'),
-                url('fonts/icomoon.woff?r8ji5n') format('woff'),
-                url('fonts/icomoon.svg?r8ji5n#icomoon') format('svg');
+            src: url('fonts/icomoon.eot?smc6kc');
+            src: url('fonts/icomoon.eot?smc6kc#iefix') format('embedded-opentype'), url('fonts/icomoon.ttf?smc6kc') format('truetype'), url('fonts/icomoon.woff?smc6kc') format('woff'), url('fonts/icomoon.svg?smc6kc#icomoon') format('svg');
             font-weight: normal;
             font-style: normal;
             font-display: block;
         }
 
+        /* 初始化 */
+
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        em,
+        i {
+            font-style: normal;
+        }
+
         li {
-            list-style-type: none;
+            list-style: none;
+        }
+
+        img {
+            border: 0;
+            vertical-align: middle;
+            width: 100%;
         }
 
         a {
+            color: #666;
             text-decoration: none;
+        }
+
+        a:hover {
+            color: #000;
+        }
+
+        input {
+            outline: none;
+        }
+
+        button {
+            cursor: pointer;
         }
 
         /* 背景 */
@@ -45,12 +65,17 @@
         body {
             padding: 0;
             margin: 0;
-            background: url(img/bg1.jpg) no-repeat 0px 0px;
+            background: url(img/bg1.jpg) no-repeat center;
             background-size: cover;
             font-family: 'Raleway', sans-serif;
         }
 
-        /* 页眉 */
+        /* 头部 */
+
+        .w {
+            width: 1110px;
+            margin: 0 auto;
+        }
 
         .header {
             position: relative;
@@ -82,9 +107,9 @@
             color: #000;
         }
 
-         .header .nav ul .home {
+        /* .header .nav ul .home {
             border-bottom: 2px solid #c81623;
-        } 
+        } */
 
         .header .nav ul .home::before {
             font-family: 'icomoon';
@@ -102,7 +127,8 @@
             border-bottom: 2px solid #c81623;
         }
 
-        /* searchpage */
+        /* 标题      */
+
         h1 {
             text-align: center;
             font-size: 45px;
@@ -116,66 +142,52 @@
             color: #cc2105;
         }
 
+        /* 主体 */
         .box {
-            position: relative;
-            width: 1400px;
+            width: 800px;
             height: 560px;
-            margin: 90px auto;
+            margin: 0 auto;
             background-color: rgba(250, 250, 250, 0.6);
             border-radius: 10px;
         }
 
-        .sp_search {
-            position: absolute;
-            top: -50px;
+        .box .tab_border {
+            position: relative;
+            top: 40px;
             left: 50%;
-            margin-left: -285px;
-            width: 570px;
-            height: 36px;
-            border: 2px solid #000;
-        }
-
-        .sp_search input {
-            float: left;
-            width: 454px;
-            height: 32px;
-            padding-left: 10px;
-            outline: none;
-        }
-
-        .sp_search img {
-            float: left;
-        }
-
-        .sp_search button {
-            float: left;
-            width: 80px;
-            height: 32px;
-            border: 0;
-            outline: none;
-            background-color: rgb(39, 35, 35);
-            font-size: 16px;
-            color: #fff;
-            cursor: pointer;
+            margin-left: -185px;
+            height: 425px;
+            width: 370px;
+            border: 3px rgb(32, 23, 23) solid;
         }
 
         .table > thead > tr > th {
             text-align: center;
-            vertical-align: middle !important;
-        }
-        td {
-            vertical-align: middle !important;
         }
 
 
-
-        .BC {
-            width: 70px;
-            height: 100px;
-
+        .btn-block {
+            position: relative;
+            top: 64px;
+            left: 50%;
+            margin-left: -61px;
+            color: #fff;
+            background: #cc2105;
+            /* margin: 15px; */
+            outline: none;
+            padding: 15px 20px;
+            letter-spacing: 2px;
+            font-size: 15px;
+            font-weight: 600;
+            border: none;
+            text-transform: uppercase;
+            font-family: 'Raleway', sans-serif;
+            transition: 0.5s all;
+            border-radius: 5px;
         }
 
         /* 页脚 */
+
         .footer {
             height: 270px;
             padding-top: 20px;
@@ -215,8 +227,7 @@
 </head>
 
 <body>
-
-    <!-- 页眉 -->
+    <!-- 头部 -->
     <section class="header" id="header">
         <div class=" nav w">
             <a href="MainPage ">
@@ -230,57 +241,29 @@
             </ul>
         </div>
     </section>
-    <!-- SearchPage -->
-    <h1>SEARCH&nbsp;&nbsp;<span>PAGE</span></h1>
-
+    <h1>RANKING <span>LIST </span></h1>
+    <!-- 主体 -->
     <div class="box">
-        <div class="sp_search">
-            <form action="" method="post">
-                <img src="img/search_1.png" alt="">
-                <input type="text" name="search" id="search" placeholder="Search you're interested">
-                <button type="submit" name="search_button">search </button>
-            </form>
-        </div>
-
-
-            <div class="bootstrap-iso">
-                <table class="table table-hover" style="text-align: center">
+        <div class="tab_border">
+           <div class="bootstrap-iso">
+                <table class="table table-hover" style="text-align:center">
                     <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Author</th>
-                        <th>Location</th>
-                        <th>Cover</th>
-                        <th>Price</th>
-                        <th>Category</th>
-                        <th>State</th>
-                        <th>BarCode</th>
-                        <th>Reservation</th>
-                    </tr>
-                </thead>
-                <!--    后端list成员变量名对应小写 -->
-                <tbody>
-                    <tr th:each="book : ${book}">
-                        <td th:text=${book.book_name}></td>
-                        <td th:text=${book.author}></td>
-                        <td th:text=${book.location}></td>
-                        <td><img th:src="@{${coverPath}+${book.book_id}}" height="200px" width="250px"></td>
-                        <td th:text=${book.price}></td>
-                        <td th:text=${book.category}></td>
-                        <td th:text=${book.getState()}></td>
-                        <td><img th:src="@{${barCodePath}+${book.barCodePath()}}"></td>
-                        <td>
-                            <a th:href="'SearchPage/' + ${book.book_id} + '/' + ${book.book_name} + '/' + ${book.category}">
-                            <button type="submit" class="btn btn-info" name="reservation" >Reservation</button>
-                            </a>
-                        </td>
-                    </tr>
-                </tbody>
-                </table>
-            </div>
-        </div>
+                        <th>CategoryName</th>
+                        <th>ReservationNum</th>
+                    </thead>
+                    <tbody>
+                        <tr th:each="category : ${category}">   
+                            <td th:text=${category.typename}></td>
+                            <td th:text=${category.reservetime}></td>
+                        </tr>
+                    </tbody>
+                 </table> 
+             </div>    
 
-    <!-- 页脚 -->
+        </div>
+        <button type="button" class="btn-block" onclick="reloadPage()"> REFRESH</button>
+    </div>
+    <!-- 脚部 -->
     <section class="footer">
         <dl class="pic ">
             <dt></dt>
@@ -305,6 +288,7 @@
             </dd>
         </dl>
     </section>
+
 </body>
 
 </html>

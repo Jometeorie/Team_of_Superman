@@ -5,6 +5,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LibrarianForm</title>
+    <script type="text/javascript">
+        function check_email(){
+            alert("email has been sent");
+        }
+    </script>
     <link rel="stylesheet" href="https://formden.com/static/assets/demos/bootstrap-iso/bootstrap-iso/bootstrap-iso.css"> 
     <style>
         @font-face {
@@ -331,6 +336,7 @@
                             <th>BookName</th>
                             <th>Reader</th>
                             <th>Lend Time</th>
+                            <th>Email Operation</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -339,6 +345,12 @@
                             <td th:text=${lend.book_name}></td>
                             <td th:text=${lend.reader_name}></td>
                             <td th:text=${lend.begin_time}></td>
+                            <td>
+                                <!-- <a th:href="'EmailRequest/'+${lend.book_id}+ '/' + 
+                                ${lend.book_name} + '/' + ${lend.reader_name} "> -->
+                                <a th:href="LibrarianForm">
+                                <button type="button" class="btn btn-info" onclick="return check_email()">Email</button>
+                            </a></td>
                         </tr>
                     </tbody>
                 </table>

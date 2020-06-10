@@ -20,6 +20,7 @@ import java.text.SimpleDateFormat;
 import java.text.ParseException;
 import java.util.Date;
 import java.util.List;
+import java.util.ArrayList;
 // import java.util.Map;
 import java.util.UUID;
 
@@ -634,6 +635,43 @@ public class Book{
             info.setReader_name(name);
         }
         return list;
+    }
+
+    // public List<TypeInfo> GetTypeRank(String str){
+    //     JdbcTemplate template = new JdbcTemplate(JdbcUtils.getDataSource());
+    //     String sql = "select BOOK_NAME,AUTHOR,LOCATION,PRICE,CATEGORY,STATE,BOOK_ID from book where BOOK_NAME like ?";
+    //     List<BookInfo> list=template.query(sql,new BeanPropertyRowMapper<BookInfo>(BookInfo.class),"%" + str + "%");
+    //     File[] covers=new File("library/src/main/resources/static/cover").listFiles();
+    //     for (BookInfo book:list)
+    //     {
+    //         for (File f:covers)
+    //         {
+    //             if(!f.isDirectory()&&f.getName().contains(book.getBook_id()))
+    //                 book.setBook_id(f.getName());
+    //         }
+    //     }
+    //     return list;
+    // }
+    // public 
+    public static List<TypeInfo> TypeList = new ArrayList<>();
+    public static List<TypeInfo> GetTypeRank() {
+        if (TypeList.size() == 0) {
+            TypeList.add(new TypeInfo("Computer", 5));
+            TypeList.add(new TypeInfo("Literature", 2));
+            TypeList.add(new TypeInfo("Math", 0));
+        }
+
+        return TypeList;
+    }
+
+    public static void addRank(String category) {
+        for (int i = 0; i < TypeList.size(); i++) {
+            TypeInfo temp = TypeList.get(i);
+            if (TypeList.get(i).getTypeName().equals(category)) {
+                TypeList.get(i).AddReserve();
+                break;
+            }
+        }
     }
 
     public static void main(String[] args)  {

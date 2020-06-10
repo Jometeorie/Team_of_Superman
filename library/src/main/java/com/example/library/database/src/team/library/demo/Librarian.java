@@ -3,9 +3,11 @@ package com.example.library.database.src.team.library.demo;
 // import sun.security.util.Password;
 
 import org.junit.Test;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import com.example.library.database.src.team.library.util.JdbcUtils;
 
+import java.awt.*;
 import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -242,6 +244,14 @@ public class Librarian {
     }
     boolean PasswordModify(String Reader_ID,String N_Password)  {
         return new Reader().PasswordModify(Reader_ID, N_Password);
+    }
+    //显示所有管理员
+    public static java.util.List<LibrarianInfo> ShowallLibr()
+    {
+        JdbcTemplate template = new JdbcTemplate(JdbcUtils.getDataSource());
+        String sql = "select * from librarian";
+        java.util.List<LibrarianInfo> list=template.query(sql,new BeanPropertyRowMapper<LibrarianInfo>(LibrarianInfo.class));
+        return list;
     }
 
     public static void changefine(BigDecimal fine)
