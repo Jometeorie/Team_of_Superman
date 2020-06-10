@@ -4,6 +4,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 import com.example.library.database.src.team.library.demo.*;
+import org.springframework.web.bind.annotation.*;
 
 // import javax.servlet.http.HttpSession;
 
@@ -44,4 +45,21 @@ public class LibrarianManagementControl {
 
         return mv;
     }
+
+            // 修改管理员信息
+            @RequestMapping(value = "LibrarianManagement/Modify/{id}/{name}/{password}")
+            @ResponseBody
+            public ModelAndView changeLibrarian(@PathVariable ("id") String id, @PathVariable ("name") String name,
+            @PathVariable ("password") String password, HttpServletRequest request, HttpServletResponse response)  throws IOException {
+    
+               return new ModelAndView("redirect:/LibrarianManagement");
+            }
+        
+            // 删除管理员信息
+            @RequestMapping(value = "LibrarianManagement/Delete/{id}")
+            @ResponseBody
+            public ModelAndView deleteLibrarian(@PathVariable("id") String id, HttpServletRequest request, HttpServletResponse response)  throws IOException {
+    
+               return new ModelAndView("redirect:/LibrarianManagement");
+            }
 }
