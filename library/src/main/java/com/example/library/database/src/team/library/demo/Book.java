@@ -54,7 +54,7 @@ public class Book{
         JdbcTemplate template = new JdbcTemplate(JdbcUtils.getDataSource());
         String sql = "select BOOK_NAME,AUTHOR,LOCATION,PRICE,CATEGORY,STATE,BOOK_ID from book where BOOK_NAME like ?";
         List<BookInfo> list=template.query(sql,new BeanPropertyRowMapper<BookInfo>(BookInfo.class),"%" + str + "%");
-        File[] covers=new File("library/src/main/resources/static/cover").listFiles();
+        File[] covers=new File("src/main/resources/static/cover").listFiles();
         for (BookInfo book:list)
         {
             for (File f:covers)
@@ -633,6 +633,26 @@ public class Book{
             String sql2="select READER_NAME from reader where READER_ID=?";
             String name=temp.queryForObject(sql2,String.class,info.reader_id);
             info.setReader_name(name);
+        }
+        return list;
+    }
+ 
+    //图书馆每月交易额
+    public static List<MoneyTakeMonthlyInfo> showMoneyTakeMonthlyInfo(int type)
+    {
+        List<MoneyTakeMonthlyInfo> list;
+        if(type==0)
+        {
+            JdbcTemplate template = new JdbcTemplate(JdbcUtils.getDataSource());
+            String sql = "select date_format(TAKE_TIME,'%Y-%m') as TIME，sum (MONEY_AMOUNT) as Monthly ,sum (MONEY_AMOUNT)/7 as Weekly ,sum (MONEY_AMOUNT)/30 as Daily from  takemoney where MONEY_TYPE=0 GROUP BY TIME";
+            list=template.query(sql,new BeanPropertyRowMapper<MoneyTakeMonthlyInfo>(MoneyTakeMonthlyInfo.class));return list;
+        }
+        else
+        {
+            JdbcTemplate template = new JdbcTemplate(JdbcUtils.getDataSource());
+            String sql = "select date_format(TAKE_TIME,'%Y-%m') as TIME，sum (MONEY_AMOUNT) as Monthly ,sum (MONEY_AMOUNT)*7/30 as Weekly ,sum (MONEY_AMOUNT)/30 as Daily from  MONEY_TYPE where MONEY_TYPE=1 GROUP BY TIME";
+            list=template.query(sql,new BeanPropertyRowMapper<MoneyTakeMonthlyInfo>(MoneyTakeMonthlyInfo.class));
+
         }
         return list;
     }

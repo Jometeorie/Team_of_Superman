@@ -8,8 +8,8 @@ Bootstable
   //Global variables
   var params = null;  		//Parameters
   var colsEdi =null;
-  var newColHtml = '<div class="btn-group pull-right">'+
-// '<a th:href="\'BookManagement/\' + ${book.book_name} + \'/\'+${book.author}">'+
+  var newColHtml = 
+  '<div class="btn-group pull-right">'+
 '<a th:href=" '+"+'BookManagement/'+"+' ${book.book_name} '+ "+'/'+"+'${book.author}">'+
 '<button id="bEdit" type="button" class="btn btn-sm btn-default" onclick="rowEdit(this);">' +
 '<span class="glyphicon glyphicon-pencil" > </span>'+
@@ -17,18 +17,16 @@ Bootstable
 '<button id="bElim" type="button" class="btn btn-sm btn-default" onclick="rowElim(this);">' +
 '<span class="glyphicon glyphicon-trash" > </span>'+
 '</button>'+
-// '<a th:href="\'BookManagement/\' + ${book.book_name} + \'/\'+${book.author}">'+
+// '<button id="bAcep" name="add" type="submit" class="btn btn-sm btn-default" style="display:none;" onclick="rowAcep(this);">' +
 '<button id="bAcep" name="add" type="submit" class="btn btn-sm btn-default" style="display:none;" onclick="rowAcep(this);">' +
 '<span class="glyphicon glyphicon-ok" > </span>'+
 '</button>'+
-// '</a>'+
-// '<a th:href="\'BookManagement/\' + ${book.book_name} + \'/\'+${book.author}">'+
 '<button id="bCanc" name= "delete" type="button" class="btn btn-sm btn-default" style="display:none;" onclick="rowCancel(this);">' + 
 '<span class="glyphicon glyphicon-remove" > </span>'+
 '</button>'+
 '</a>'+
     '</div>';
-  var colEdicHtml = '<td name="buttons">'+newColHtml+'</td>'; 
+  var colEdicHtml = '<td name="buttons">'+ newColHtml + '</td>'; 
     
   $.fn.SetEditable = function (options) {
     var defaults = {
