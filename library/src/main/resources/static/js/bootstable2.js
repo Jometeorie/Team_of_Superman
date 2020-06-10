@@ -56,9 +56,10 @@ Bootstable
 
 function modify() {
     var jumpHref = 'ReaderManagement/Modify';
+    var id = document.getElementById("edit0").value;
     var name = document.getElementById("edit1").value;
     var e_mail = document.getElementById("edit2").value; 
-    window.location.href=jumpHref + "/" + name + "/" + e_mail;
+    window.location.href=jumpHref + "/" + id+ "/" + name + "/" + e_mail;
 }
 
 function delete_process() {
