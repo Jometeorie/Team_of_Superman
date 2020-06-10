@@ -1,7 +1,5 @@
 package com.example.library.control;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import com.example.library.database.src.team.library.demo.*;
 
@@ -27,6 +25,14 @@ public class BookManagementControl {
         return mv;
     }
 
+
+    @RequestMapping(value = "BookManagement/{bookName}/{author}")
+    @ResponseBody
+    public ModelAndView changemessage(@PathVariable("bookName") String bookName, @PathVariable ("author") String author, HttpServletRequest request, HttpServletResponse response)  throws IOException {
+       Book.Editauthor(author,bookName);
+       return new ModelAndView("redirect:/BookManagement");
+    }
+
     @RequestMapping(value = "/BookManagement", method = RequestMethod.POST)
     public ModelAndView postBookManagement(ModelAndView mv, HttpServletRequest request, HttpServletResponse response)  throws IOException {
         // 页眉Logo按钮
@@ -34,7 +40,9 @@ public class BookManagementControl {
             response.sendRedirect("MainPage");
             return mv;
         }
-
         return mv;
     }
+
+
+
 }

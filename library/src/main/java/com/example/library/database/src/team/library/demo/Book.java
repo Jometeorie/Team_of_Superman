@@ -78,7 +78,6 @@ public class Book{
     public void test2(){
         System.out.println(new Book().EditLocation("floor4-434-C",2));
         System.out.println(new Book().EditBook_Name("i want ",2));
-        System.out.println(new Book().EditPrice(BigDecimal.valueOf(26),2));
         System.out.println(new Book().EditCategory("math",2));
 
     }
@@ -107,14 +106,28 @@ public class Book{
             return true;
         return false;
     }
+
+    /**
+     * 编辑书籍作者
+     * 编辑名称
+     * */
+    public static Boolean Editauthor(String author, String book_Name){
+        JdbcTemplate template=new JdbcTemplate(JdbcUtils.getDataSource());
+        String sql="update book set AUTHOR=? where BOOK_NAME=?";
+        int count=template.update(sql,author,book_Name);
+        if(count==1)
+            return true;
+        return false;
+    }
+
     /**
      * 编辑书籍信息
      * 编辑书籍价格
      * */
-    public Boolean EditPrice(BigDecimal price, int book_id){
+    public Boolean EditPrice(BigDecimal price, String Book_id){
         JdbcTemplate template=new JdbcTemplate(JdbcUtils.getDataSource());
         String sql="update book set PRICE=? where BOOK_ID=?";
-        int count=template.update(sql,price,book_id);
+        int count=template.update(sql,price,Book_id);
         if(count==1)
             return true;
         return false;
