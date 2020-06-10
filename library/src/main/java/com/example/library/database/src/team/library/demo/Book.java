@@ -54,7 +54,7 @@ public class Book{
         JdbcTemplate template = new JdbcTemplate(JdbcUtils.getDataSource());
         String sql = "select BOOK_NAME,AUTHOR,LOCATION,PRICE,CATEGORY,STATE,BOOK_ID from book where BOOK_NAME like ?";
         List<BookInfo> list=template.query(sql,new BeanPropertyRowMapper<BookInfo>(BookInfo.class),"%" + str + "%");
-        File[] covers=new File("src/main/resources/static/cover").listFiles();
+        File[] covers=new File("library/src/main/resources/static/cover").listFiles();
         for (BookInfo book:list)
         {
             for (File f:covers)
