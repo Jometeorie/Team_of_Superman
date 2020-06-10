@@ -61,9 +61,8 @@ function modify() {
     var location = document.getElementById("edit3").value; 
     var price = document.getElementById("edit4").value; 
     var category = document.getElementById("edit5").value;
-    var state = document.getElementById("edit6").value;
     window.location.href=jumpHref + "/" + id + "/" + name + "/" + author + "/" + location
-    + "/" + price + "/" + category + "/" + state;
+    + "/" + price + "/" + category;
 }
 
 function delete_process() {
