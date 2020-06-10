@@ -644,13 +644,13 @@ public class Book{
         if(type==0)
         {
             JdbcTemplate template = new JdbcTemplate(JdbcUtils.getDataSource());
-            String sql = "select date_format(TAKE_TIME,'%Y-%m') as TIME，sum (MONEY_AMOUNT) as Monthly ,sum (MONEY_AMOUNT)/7 as Weekly ,sum (MONEY_AMOUNT)/30 as Daily from  takemoney where MONEY_TYPE=0 GROUP BY TIME";
+            String sql = "select sum(MONEY_AMOUNT) as Monthly, sum(MONEY_AMOUNT)/7 as Weekly, sum(MONEY_AMOUNT)/30 as Daily, date_format(TAKE_TIME,'%Y-%m') as TIME_PERIOD from  teamwork.takemoney where MONEY_TYPE=0 GROUP BY TIME_PERIOD";
             list=template.query(sql,new BeanPropertyRowMapper<MoneyTakeMonthlyInfo>(MoneyTakeMonthlyInfo.class));return list;
         }
         else
         {
             JdbcTemplate template = new JdbcTemplate(JdbcUtils.getDataSource());
-            String sql = "select date_format(TAKE_TIME,'%Y-%m') as TIME，sum (MONEY_AMOUNT) as Monthly ,sum (MONEY_AMOUNT)*7/30 as Weekly ,sum (MONEY_AMOUNT)/30 as Daily from  MONEY_TYPE where MONEY_TYPE=1 GROUP BY TIME";
+            String sql = "select sum(MONEY_AMOUNT) as Monthly, sum(MONEY_AMOUNT)/7 as Weekly, sum(MONEY_AMOUNT)/30 as Daily, date_format(TAKE_TIME,'%Y-%m') as TIME_PERIOD from  teamwork.takemoney where MONEY_TYPE=1 GROUP BY TIME_PERIOD";
             list=template.query(sql,new BeanPropertyRowMapper<MoneyTakeMonthlyInfo>(MoneyTakeMonthlyInfo.class));
 
         }

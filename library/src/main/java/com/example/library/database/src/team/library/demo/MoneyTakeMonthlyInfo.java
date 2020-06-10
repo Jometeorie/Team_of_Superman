@@ -4,28 +4,28 @@ import java.math.BigDecimal;
 
 public class MoneyTakeMonthlyInfo {
 
-        public double Monthly;
-        public double Weekly;
-        public double Daily;
-        public String TIME;
+        public double monthly;
+        public double weekly;
+        public double daily;
+        public String timePeriod;
         public int type ;
 
 
         public void setMonthly(double Monthly) {
-            this.Monthly = Monthly;
+            this.monthly = Monthly;
         }
 
         public void setWeekly(double Weekly) {
-        this.Weekly = Weekly;
+        this.weekly = Weekly;
     }
         public void setDaily(double Daily) {
-        this.Daily = Daily;
+        this.daily = Daily;
     }
         public void setType(int type) {
             this.type = type;
         }
-        public void setTIME(String TIME) {
-        this.TIME = TIME;
+        public void setTimePeriod(String timePeriod) {
+        this.timePeriod = timePeriod;
     }
 
 

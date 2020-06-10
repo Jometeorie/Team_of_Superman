@@ -21,10 +21,11 @@ public class LibraryRevenueControl
 {
     @RequestMapping(value = "/LibraryRevenue", method = RequestMethod.GET)
     public ModelAndView getLibraryRevenue(ModelAndView mv) {
-            List<MoneyTakeMonthlyInfo> Penalty = new Book().showMoneyTakeMonthlyInfo(0);
-            mv.addObject("Penalty",Penalty);
-            List<MoneyTakeMonthlyInfo> Deposit = new Book().showMoneyTakeMonthlyInfo(1);
-            mv.addObject("Deposit",Deposit);
+
+        List<MoneyTakeMonthlyInfo> penalty = Book.showMoneyTakeMonthlyInfo(0);
+        mv.addObject("penalty", penalty);
+        List<MoneyTakeMonthlyInfo> deposit = Book.showMoneyTakeMonthlyInfo(1);
+        mv.addObject("deposit",deposit);
 
 
             mv.setViewName("/LibraryRevenue");
