@@ -4,36 +4,19 @@ Bootstable
  @version 1.1
  @autor Tito Hinostroza
 */
-// <<<<<<< HEAD
-//   "use strict";
-//   //Global variables
-//   var params = null;  		//Parameters
-//   var colsEdi =null;
-//   var newColHtml = 
-//   '<div class="btn-group pull-right">'+
-// '<a th:href=" '+"+'BookManagement/'+"+' ${book.book_name} '+ "+'/'+"+'${book.author}">'+
-// =======
+
 "use strict";
 //Global variables
 var params = null;  		//Parameters
 var colsEdi =null;
-// var jumpHref = 'BookManagement';
 
 var newColHtml = '<div class="btn-group pull-right">'+
-// '<a th:href="\'BookManagement/\' + ${book.book_name} + \'/\'+${book.author}">'+
-// '<a th:href=" '+"+'BookManagement/'+"+' ${book.book_name} '+ "+'/'+"+'${book.author}">'+
-// >>>>>>> 4cb9624d44f95c93464bcb5a11a652afc4d9c78a
 '<button id="bEdit" type="button" class="btn btn-sm btn-default" onclick="rowEdit(this);">' +
 '<span class="glyphicon glyphicon-pencil" > </span>'+
 '</button>'+
-'<button id="bElim" type="button" class="btn btn-sm btn-default" onclick="rowElim(this);">' +
+'<button id="bElim" type="button" class="btn btn-sm btn-default" style="display:none;" onclick="delete_process(); rowElim(this);">' +
 '<span class="glyphicon glyphicon-trash" > </span>'+
 '</button>'+
-// <<<<<<< HEAD
-// // '<button id="bAcep" name="add" type="submit" class="btn btn-sm btn-default" style="display:none;" onclick="rowAcep(this);">' +
-// '<button id="bAcep" name="add" type="submit" class="btn btn-sm btn-default" style="display:none;" onclick="rowAcep(this);">' +
-// =======
-// '<a th:href="\'BookManagement/\' + ${book.book_name} + \'/\'+${book.author}">'+
 '<button id="bAcep" name="add" type="submit" class="btn btn-sm btn-default" style="display:none;" onclick="modify(); rowAcep(this);">' +
 '<span class="glyphicon glyphicon-ok" > </span>'+
 '</button>'+
@@ -41,36 +24,6 @@ var newColHtml = '<div class="btn-group pull-right">'+
 '<span class="glyphicon glyphicon-remove" > </span>'+
 '</button>'+
 '</a>'+
-// <<<<<<< HEAD
-//     '</div>';
-//   var colEdicHtml = '<td name="buttons">'+ newColHtml + '</td>'; 
-    
-//   $.fn.SetEditable = function (options) {
-//     var defaults = {
-//         columnsEd: null,         //Index to editable columns. If null all td editables. Ex.: "1,2,3,4,5"
-//         $addButton: null,        //Jquery object of "Add" button
-//         onEdit: function() {},   //Called after edition
-// 		onBeforeDelete: function() {}, //Called before deletion
-//         onDelete: function() {}, //Called after deletion
-//         onAdd: function() {}     //Called when added a new row
-//     };
-//     params = $.extend(defaults, options);
-//     this.find('thead tr').append('<th name="buttons"></th>');  //encabezado vacío
-//     this.find('tbody tr').append(colEdicHtml);
-// 	var $tabedi = this;   //Read reference to the current table, to resolve "this" here.
-//     //Process "addButton" parameter
-//     if (params.$addButton != null) {
-//         //Se proporcionó parámetro
-//         params.$addButton.click(function() {
-//             rowAddNew($tabedi.attr("id"));
-//         });
-//     }
-//     //Process "columnsEd" parameter
-//     if (params.columnsEd != null) {
-//         //Extract felds
-//         colsEdi = params.columnsEd.split(',');
-//     }
-// =======
   '</div>';
 var colEdicHtml = '<td name="buttons">'+newColHtml+'</td>'; 
   
@@ -82,7 +35,6 @@ $.fn.SetEditable = function (options) {
       onBeforeDelete: function() {}, //Called before deletion
       onDelete: function() {}, //Called after deletion
       onAdd: function() {}     //Called when added a new row
-// >>>>>>> 4cb9624d44f95c93464bcb5a11a652afc4d9c78a
   };
   params = $.extend(defaults, options);
   this.find('thead tr').append('<th name="buttons"></th>');  //encabezado vacío
@@ -113,6 +65,13 @@ function modify() {
     window.location.href=jumpHref + "/" + id + "/" + name + "/" + author + "/" + location
     + "/" + price + "/" + category + "/" + state;
 }
+
+function delete_process() {
+	var jumpHref = 'BookManagement/Delete';
+	var id = document.getElementById("edit0").value;
+	window.location.href=jumpHref + "/" + id;
+}
+
 function IterarCamposEdit($cols, tarea) {
 //Itera por los campos editables de una fila
   var n = 0;
@@ -140,7 +99,7 @@ function FijModoNormal(but) {
   $(but).parent().find('#bAcep').hide();
   $(but).parent().find('#bCanc').hide();
   $(but).parent().find('#bEdit').show();
-  $(but).parent().find('#bElim').show();
+  $(but).parent().find('#bElim').hide();
   var $row = $(but).parents('tr');  //accede a la fila
   $row.attr('id', '');  //quita marca
 }
@@ -148,7 +107,7 @@ function FijModoEdit(but) {
   $(but).parent().find('#bAcep').show();
   $(but).parent().find('#bCanc').show();
   $(but).parent().find('#bEdit').hide();
-  $(but).parent().find('#bElim').hide();
+  $(but).parent().find('#bElim').show();
   var $row = $(but).parents('tr');  //accede a la fila
   $row.attr('id', 'editing');  //indica que está en edición
 }
@@ -193,8 +152,8 @@ function rowEdit(but) {  //Inicia la edición de una fila
   IterarCamposEdit($cols, function($td) {  //itera por la columnas
       var cont = $td.html(); //lee contenido
       var div = '<div style="display: none;">' + cont + '</div>';  //guarda contenido
-      var input = '<input class="form-control input-sm"  value="' + cont + '" id =edit' + id.toString() + " name=" + id + ' />';
-      id++
+      var input = '<input class="form-control input-sm"  value="' + cont + '" id =edit' + id.toString() +' />';
+      id++;
       $td.html(div + input);  //fija contenido
   });
   FijModoEdit(but);

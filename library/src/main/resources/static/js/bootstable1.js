@@ -9,15 +9,14 @@ Bootstable
   var params = null;  		//Parameters
   var colsEdi =null;
   var newColHtml = '<div class="btn-group pull-right">'+
-'<a th:href="\'LibrarianManagement/\' + ${librarian.librarian_id} + \'/\' + ${librarian.librarian_name} + \'/\'+${librarian.librarian_password}">'+
 '<button id="bEdit" type="button" class="btn btn-sm btn-default" onclick="rowEdit(this);">' +
 '<span class="glyphicon glyphicon-pencil" > </span>'+
 '</button>'+
-'<button id="bElim" type="button" class="btn btn-sm btn-default" onclick="rowElim(this);">' +
+'<button id="bElim" type="button" class="btn btn-sm btn-default" style="display:none;" onclick="delete_process(); rowElim(this);">' +
 '<span class="glyphicon glyphicon-trash" > </span>'+
 '</button>'+
 // '<a th:href="\'BookManagement/\' + ${book.book_name} + \'/\'+${book.author}">'+
-'<button id="bAcep" type="button" class="btn btn-sm btn-default" style="display:none;" onclick="rowAcep(this);">' + 
+'<button id="bAcep" type="button" class="btn btn-sm btn-default" style="display:none;" onclick="modify(); rowAcep(this);">' + 
 '<span class="glyphicon glyphicon-ok" > </span>'+
 '</button>'+
 // '</a>'+
@@ -25,8 +24,7 @@ Bootstable
 '<button id="bCanc" type="button" class="btn btn-sm btn-default" style="display:none;" onclick="rowCancel(this);">' + 
 '<span class="glyphicon glyphicon-remove" > </span>'+
 '</button>'+
-'</a>'+
-    '</div>';
+'</div>';
   var colEdicHtml = '<td name="buttons">'+newColHtml+'</td>'; 
     
   $.fn.SetEditable = function (options) {
@@ -55,6 +53,21 @@ Bootstable
         colsEdi = params.columnsEd.split(',');
     }
   };
+
+function modify() {
+    var jumpHref = 'LibrarianManagement/Modify';
+    var id = document.getElementById("edit0").value;
+    var name = document.getElementById("edit1").value; 
+    var password = document.getElementById("edit2").value; 
+    window.location.href=jumpHref + "/" + id + "/" + name + "/" + password;
+}
+
+function delete_process() {
+    var jumpHref = 'LibrarianManagement/Delete';
+    var id = document.getElementById("edit0").value;
+    window.location.href=jumpHref + "/" + id;
+}
+
 function IterarCamposEdit($cols, tarea) {
 //Itera por los campos editables de una fila
     var n = 0;
@@ -82,7 +95,7 @@ function FijModoNormal(but) {
     $(but).parent().find('#bAcep').hide();
     $(but).parent().find('#bCanc').hide();
     $(but).parent().find('#bEdit').show();
-    $(but).parent().find('#bElim').show();
+    $(but).parent().find('#bElim').hide();
     var $row = $(but).parents('tr');  //accede a la fila
     $row.attr('id', '');  //quita marca
 }
@@ -90,7 +103,7 @@ function FijModoEdit(but) {
     $(but).parent().find('#bAcep').show();
     $(but).parent().find('#bCanc').show();
     $(but).parent().find('#bEdit').hide();
-    $(but).parent().find('#bElim').hide();
+    $(but).parent().find('#bElim').show();
     var $row = $(but).parents('tr');  //accede a la fila
     $row.attr('id', 'editing');  //indica que está en edición
 }
@@ -131,10 +144,12 @@ function rowEdit(but) {  //Inicia la edición de una fila
     var $cols = $row.find('td');  //lee campos
     if (ModoEdicion($row)) return;  //Ya está en edición
     //Pone en modo de edición
+    var id = 0;
     IterarCamposEdit($cols, function($td) {  //itera por la columnas
         var cont = $td.html(); //lee contenido
         var div = '<div style="display: none;">' + cont + '</div>';  //guarda contenido
-        var input = '<input class="form-control input-sm"  value="' + cont + '">';
+        var input = '<input class="form-control input-sm"  value="' + cont + '" id =edit' + id.toString()+ ' />';
+        id++;
         $td.html(div + input);  //fija contenido
     });
     FijModoEdit(but);
