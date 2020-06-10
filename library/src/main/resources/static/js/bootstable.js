@@ -4,6 +4,15 @@ Bootstable
  @version 1.1
  @autor Tito Hinostroza
 */
+// <<<<<<< HEAD
+//   "use strict";
+//   //Global variables
+//   var params = null;  		//Parameters
+//   var colsEdi =null;
+//   var newColHtml = 
+//   '<div class="btn-group pull-right">'+
+// '<a th:href=" '+"+'BookManagement/'+"+' ${book.book_name} '+ "+'/'+"+'${book.author}">'+
+// =======
 "use strict";
 //Global variables
 var params = null;  		//Parameters
@@ -13,22 +22,55 @@ var colsEdi =null;
 var newColHtml = '<div class="btn-group pull-right">'+
 // '<a th:href="\'BookManagement/\' + ${book.book_name} + \'/\'+${book.author}">'+
 // '<a th:href=" '+"+'BookManagement/'+"+' ${book.book_name} '+ "+'/'+"+'${book.author}">'+
+// >>>>>>> 4cb9624d44f95c93464bcb5a11a652afc4d9c78a
 '<button id="bEdit" type="button" class="btn btn-sm btn-default" onclick="rowEdit(this);">' +
 '<span class="glyphicon glyphicon-pencil" > </span>'+
 '</button>'+
 '<button id="bElim" type="button" class="btn btn-sm btn-default" onclick="rowElim(this);">' +
 '<span class="glyphicon glyphicon-trash" > </span>'+
 '</button>'+
+// <<<<<<< HEAD
+// // '<button id="bAcep" name="add" type="submit" class="btn btn-sm btn-default" style="display:none;" onclick="rowAcep(this);">' +
+// '<button id="bAcep" name="add" type="submit" class="btn btn-sm btn-default" style="display:none;" onclick="rowAcep(this);">' +
+// =======
 // '<a th:href="\'BookManagement/\' + ${book.book_name} + \'/\'+${book.author}">'+
 '<button id="bAcep" name="add" type="submit" class="btn btn-sm btn-default" style="display:none;" onclick="modify(); rowAcep(this);">' +
 '<span class="glyphicon glyphicon-ok" > </span>'+
 '</button>'+
-// '</a>'+
-// '<a th:href="\'BookManagement/\' + ${book.book_name} + \'/\'+${book.author}">'+
 '<button id="bCanc" name= "delete" type="button" class="btn btn-sm btn-default" style="display:none;" onclick="rowCancel(this);">' + 
 '<span class="glyphicon glyphicon-remove" > </span>'+
 '</button>'+
 '</a>'+
+// <<<<<<< HEAD
+//     '</div>';
+//   var colEdicHtml = '<td name="buttons">'+ newColHtml + '</td>'; 
+    
+//   $.fn.SetEditable = function (options) {
+//     var defaults = {
+//         columnsEd: null,         //Index to editable columns. If null all td editables. Ex.: "1,2,3,4,5"
+//         $addButton: null,        //Jquery object of "Add" button
+//         onEdit: function() {},   //Called after edition
+// 		onBeforeDelete: function() {}, //Called before deletion
+//         onDelete: function() {}, //Called after deletion
+//         onAdd: function() {}     //Called when added a new row
+//     };
+//     params = $.extend(defaults, options);
+//     this.find('thead tr').append('<th name="buttons"></th>');  //encabezado vacío
+//     this.find('tbody tr').append(colEdicHtml);
+// 	var $tabedi = this;   //Read reference to the current table, to resolve "this" here.
+//     //Process "addButton" parameter
+//     if (params.$addButton != null) {
+//         //Se proporcionó parámetro
+//         params.$addButton.click(function() {
+//             rowAddNew($tabedi.attr("id"));
+//         });
+//     }
+//     //Process "columnsEd" parameter
+//     if (params.columnsEd != null) {
+//         //Extract felds
+//         colsEdi = params.columnsEd.split(',');
+//     }
+// =======
   '</div>';
 var colEdicHtml = '<td name="buttons">'+newColHtml+'</td>'; 
   
@@ -40,6 +82,7 @@ $.fn.SetEditable = function (options) {
       onBeforeDelete: function() {}, //Called before deletion
       onDelete: function() {}, //Called after deletion
       onAdd: function() {}     //Called when added a new row
+// >>>>>>> 4cb9624d44f95c93464bcb5a11a652afc4d9c78a
   };
   params = $.extend(defaults, options);
   this.find('thead tr').append('<th name="buttons"></th>');  //encabezado vacío
