@@ -112,10 +112,10 @@ public class Book{
      * 编辑书籍作者
      * 编辑名称
      * */
-    public static Boolean Editauthor(String author, String book_Name){
+    public static Boolean Editauthor(String author, String book_id){
         JdbcTemplate template=new JdbcTemplate(JdbcUtils.getDataSource());
-        String sql="update book set AUTHOR=? where BOOK_NAME=?";
-        int count=template.update(sql,author,book_Name);
+        String sql="update book set AUTHOR=? where BOOK_ID=?";
+        int count=template.update(sql,author,book_id);
         if(count==1)
             return true;
         return false;
