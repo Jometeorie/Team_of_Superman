@@ -20,7 +20,7 @@ var newColHtml = '<div class="btn-group pull-right">'+
 '<span class="glyphicon glyphicon-trash" > </span>'+
 '</button>'+
 // '<a th:href="\'BookManagement/\' + ${book.book_name} + \'/\'+${book.author}">'+
-'<button id="bAcep" name="add" type="submit" class="btn btn-sm btn-default" style="display:none;" onclick="test(); rowAcep(this);">' +
+'<button id="bAcep" name="add" type="submit" class="btn btn-sm btn-default" style="display:none;" onclick="modify(); rowAcep(this);">' +
 '<span class="glyphicon glyphicon-ok" > </span>'+
 '</button>'+
 // '</a>'+
@@ -58,11 +58,17 @@ $.fn.SetEditable = function (options) {
       colsEdi = params.columnsEd.split(',');
   }
 };
-function test() {
-    var jumpHref = 'BookManagement';
-    var book_name = document.getElementById("edit1").value; 
-    var book_author = document.getElementById("edit2").value; 
-    window.location.href=jumpHref + "/" + book_name + "/" + book_author;
+function modify() {
+    var jumpHref = 'BookManagement/Modify';
+    var id = document.getElementById("edit0").value;
+    var name = document.getElementById("edit1").value; 
+    var author = document.getElementById("edit2").value; 
+    var location = document.getElementById("edit3").value; 
+    var price = document.getElementById("edit4").value; 
+    var category = document.getElementById("edit5").value;
+    var state = document.getElementById("edit6").value;
+    window.location.href=jumpHref + "/" + id + "/" + name + "/" + author + "/" + location
+    + "/" + price + "/" + category + "/" + state;
 }
 function IterarCamposEdit($cols, tarea) {
 //Itera por los campos editables de una fila

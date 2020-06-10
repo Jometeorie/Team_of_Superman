@@ -77,6 +77,10 @@ public class BookInfo {
         return this.book_id.split("\\.")[0] + ".png";
     }
 
+    public String getIDWithoutSuffix() {
+        return this.book_id.split("\\.")[0];
+    }
+
     @Override
     public String toString() {
         return "BookInfo{" +

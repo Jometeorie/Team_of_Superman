@@ -26,10 +26,21 @@ public class BookManagementControl {
     }
 
 
-    @RequestMapping(value = "BookManagement/{bookName}/{author}")
+    // 修改书籍信息
+    @RequestMapping(value = "BookManagement/Modify/{bookID}/{bookName}/{author}/{location}/{price}/{category}/{state}")
     @ResponseBody
-    public ModelAndView changemessage(@PathVariable("bookName") String bookName, @PathVariable ("author") String author, HttpServletRequest request, HttpServletResponse response)  throws IOException {
-       Book.Editauthor(author,bookName);
+    public ModelAndView changemessage(@PathVariable("bookID") String bookID, @PathVariable ("bookName") String bookName, 
+    @PathVariable("author") String author, @PathVariable("location") String location, @PathVariable("price") String price, 
+    @PathVariable("category") String category, @PathVariable("state") String state, HttpServletRequest request, HttpServletResponse response)  throws IOException {
+    //    Book.Editauthor(author,bookName);
+       return new ModelAndView("redirect:/BookManagement");
+    }
+
+    // 删除书籍信息
+    @RequestMapping(value = "BookManagement/Delete/{bookID}")
+    @ResponseBody
+    public ModelAndView deletemessage(@PathVariable("bookID") String bookID, HttpServletRequest request, HttpServletResponse response)  throws IOException {
+    //    Book.Editauthor(author,bookName);
        return new ModelAndView("redirect:/BookManagement");
     }
 
@@ -42,7 +53,4 @@ public class BookManagementControl {
         }
         return mv;
     }
-
-
-
 }
