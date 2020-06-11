@@ -43,12 +43,13 @@ public class BookManagementControl {
     }
 
     // 删除书籍信息
-    @RequestMapping(value = "BookManagement/Delete/{bookID}")
+    @RequestMapping(value = "BookManagement/Delete/{bookID}/{bookName}")
     @ResponseBody
-    public ModelAndView deletemessage(@PathVariable("bookID") String bookID, HttpServletRequest request, HttpServletResponse response)  throws IOException {
-       // HttpSession session = request.getSession();
-        //String Libr_id=session.getAttribute("username").toString();
-        //Book.DeleteBook(Libr_id,bookID,bookName);
+    public ModelAndView deletemessage(@PathVariable("bookID") String bookID, @PathVariable("bookName") String bookName, 
+    HttpServletRequest request, HttpServletResponse response)  throws IOException {
+       HttpSession session = request.getSession();
+        String Libr_id=session.getAttribute("username").toString();
+        Book.DeleteBook(Libr_id,bookID,bookName);
        return new ModelAndView("redirect:/BookManagement");
     }
 
