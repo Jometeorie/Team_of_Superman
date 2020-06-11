@@ -35,7 +35,7 @@ public  class AddBookTypeControl
             int isAdd = Book.addType(bookType);
             mv.addObject("isAdd", isAdd);
 
-            mv.setViewName("/ADSet");
+            mv.setViewName("/AddBookType");
         }
             // 页眉Logo按钮
         else if (request.getParameter("mainpage") != null) {
