@@ -595,6 +595,8 @@ public class Book{
     //交钱，type为钱的类型，0为罚金，1为保证金
     public static void takemoney(String take_id,String libr_id,String reader_id,String take_time,BigDecimal money_Amount,int type)
     {
+        if(type==1)
+            money_Amount=Librarian.getDeposit();
         JdbcTemplate template=new JdbcTemplate(JdbcUtils.getDataSource());
         String sql="insert into takemoney values(?,?,?,?,?,?)";
         int count=template.update(sql,take_id,libr_id,reader_id,take_time,money_Amount,type);

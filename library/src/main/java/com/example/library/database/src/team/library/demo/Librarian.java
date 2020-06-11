@@ -19,6 +19,7 @@ public class Librarian {
 
     public static BigDecimal fineperday=new BigDecimal(1);
     public static int days=30;
+    public static BigDecimal deposit=new BigDecimal(300);
     public static String title = "No Title";
     public static String content = "No content";
     /**
@@ -264,4 +265,20 @@ public class Librarian {
         days=day;
     }
 
+    public static void changedeposit(BigDecimal newdeposi)
+    {
+        deposit=newdeposi;
+    }
+
+    public static BigDecimal getDeposit() {
+        return deposit;
+    }
+
+    public static BigDecimal getFineperday() {
+        return fineperday;
+    }
+
+    public static int getDays() {
+        return days;
+    }
 }
