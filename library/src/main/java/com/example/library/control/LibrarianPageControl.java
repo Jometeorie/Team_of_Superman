@@ -26,25 +26,38 @@ public class LibrarianPageControl
     }
     
     @RequestMapping(value = "/LibrarianPage", method = RequestMethod.POST) 
-    public void postLibrarianPage(ModelAndView mv, HttpServletRequest request, HttpServletResponse response)  throws IOException {
+    public ModelAndView postLibrarianPage(ModelAndView mv, HttpServletRequest request, HttpServletResponse response)  throws IOException {
         if (request.getParameter("ReaderRegister") != null) {
             // 跳转至读者注册界面
-            response.sendRedirect("ReaderRegister");
+            ModelAndView model = new ModelAndView("redirect:/ReaderRegister");
+            return model;
         }
 
         else if (request.getParameter("AddBooks") != null) {
             // 跳转至添加书籍界面
-            response.sendRedirect("AddBook");
+            ModelAndView model = new ModelAndView("redirect:/AddBook");
+            return model;
         }
 
         else if (request.getParameter("DeleteBooks") != null) {
             // 跳转至删除书籍界面
-            response.sendRedirect("DeleteBook");
+            ModelAndView model = new ModelAndView("redirect:/BookManagement");
+            return model;
         }
 
         // 页眉Logo按钮
         else if (request.getParameter("mainpage") != null) {
-            response.sendRedirect("MainPage");
+            ModelAndView model = new ModelAndView("redirect:/MainPage");
+            return model;
         }
+
+        if (request.getParameter("search_button") != null) {
+            ModelAndView model = new ModelAndView("redirect:/BookManagement");
+            String  searchName = request.getParameter("search");
+            model.addObject("search_name", searchName);  
+            return model;
+        }
+
+        return mv;
     }
 }

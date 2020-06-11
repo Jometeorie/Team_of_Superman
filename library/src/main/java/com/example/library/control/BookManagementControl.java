@@ -16,9 +16,9 @@ import java.util.List;
 @RestController
 public class BookManagementControl {
     @RequestMapping(value = "/BookManagement", method = RequestMethod.GET)
-    public ModelAndView getBookManagement(ModelAndView mv) {
+    public ModelAndView getBookManagement(ModelAndView mv, String search_name) {
 
-        List<BookInfo> book = new Book().SearchBook("");
+        List<BookInfo> book = new Book().SearchBook(search_name);
         mv.addObject("book", book);
         mv.addObject("coverPath", "cover/");
         mv.addObject("barCodePath", "BarCode/");
@@ -26,6 +26,10 @@ public class BookManagementControl {
         mv.setViewName("/BookManagement");
         return mv;
     }
+    public ModelAndView getBookManagement(ModelAndView mv) {
+        String search_name = new String("");
+        return getBookManagement(mv, search_name);
+    } 
 
 
     // 修改书籍信息
