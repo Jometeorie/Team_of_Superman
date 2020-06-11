@@ -59,7 +59,8 @@ function modify() {
     var id = document.getElementById("edit0").value;
     var name = document.getElementById("edit1").value;
     var e_mail = document.getElementById("edit2").value; 
-    window.location.href=jumpHref + "/" + id+ "/" + name + "/" + e_mail;
+    var password = document.getElementById("edit3").value;
+    window.location.href=jumpHref + "/" + id+ "/" + name + "/" + e_mail+ "/" + password;
 }
 
 function delete_process() {
