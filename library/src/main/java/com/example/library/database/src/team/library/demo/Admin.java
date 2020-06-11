@@ -109,7 +109,7 @@ public class Admin {
     /**
      * 删除图书管理员账号
      * */
-    private static boolean DeleteLibr(String Libr_ID) {
+    public static boolean DeleteLibr(String Libr_ID) {
         JdbcTemplate template=new JdbcTemplate(JdbcUtils.getDataSource());
         String sql="delete from librarian where LIBR_ID=?";
         int count=template.update(sql,Libr_ID);

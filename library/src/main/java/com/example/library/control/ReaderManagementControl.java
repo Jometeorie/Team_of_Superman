@@ -59,7 +59,10 @@ public class ReaderManagementControl {
         @ResponseBody
         public ModelAndView changeReader(@PathVariable ("id") String id, @PathVariable("name") String name, 
         @PathVariable ("e_mail") String e_mail, HttpServletRequest request, HttpServletResponse response)  throws IOException {
-
+            Reader.E_mailModify(id,e_mail);
+            Reader.NameModify(id,name);
+            //Reader.PasswordModify(id,password);
+            //Reader.TelephoneModify(id,telephone);
            return new ModelAndView("redirect:/ReaderManagement");
         }
     
@@ -67,7 +70,7 @@ public class ReaderManagementControl {
         @RequestMapping(value = "ReaderManagement/Delete/{id}")
         @ResponseBody
         public ModelAndView deleteReader(@PathVariable("id") String id, HttpServletRequest request, HttpServletResponse response)  throws IOException {
-
+            Librarian.DeleteReader(id);
            return new ModelAndView("redirect:/ReaderManagement");
         }
 }

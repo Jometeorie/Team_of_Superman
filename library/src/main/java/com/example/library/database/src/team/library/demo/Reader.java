@@ -119,7 +119,7 @@ public class Reader {
      * 读者个人信息修改
      * 修改姓名
     * */
-    public boolean NameModify(String Reader_ID,String N_name)  {
+    public static boolean NameModify(String Reader_ID,String N_name)  {
         JdbcTemplate template=new JdbcTemplate(JdbcUtils.getDataSource());
         String sql="update reader set READER_NAME=? where READER_ID=?";
         int count=template.update(sql,N_name,Reader_ID);
@@ -131,7 +131,7 @@ public class Reader {
      * 读者个人信息修改
      * 修改邮箱
      * */
-    public boolean E_mailModify(String Reader_ID,String N_Email)  {
+    public static boolean E_mailModify(String Reader_ID,String N_Email)  {
         JdbcTemplate template=new JdbcTemplate(JdbcUtils.getDataSource());
         String sql="update reader set E_MAIL=? where READER_ID=?";
         int count=template.update(sql,N_Email,Reader_ID);
@@ -143,7 +143,7 @@ public class Reader {
      * 读者个人信息修改
      * 修改密码
      * */
-    public boolean PasswordModify(String Reader_ID,String N_Password)  {
+    public static boolean PasswordModify(String Reader_ID,String N_Password)  {
          JdbcTemplate template=new JdbcTemplate(JdbcUtils.getDataSource());
          String sql="update reader set PASSWORD=? where READER_ID=?";
          int count=template.update(sql,N_Password,Reader_ID);
@@ -156,7 +156,7 @@ public class Reader {
      * 读者个人信息修改
      * 修改手机
      * */
-    public boolean TelephoneModify(String Reader_ID,String Telephone)  {
+    public static boolean TelephoneModify(String Reader_ID,String Telephone)  {
         JdbcTemplate template=new JdbcTemplate(JdbcUtils.getDataSource());
         String sql="update reader set READER_ID=? where READER_ID=?";
         int count=template.update(sql,Telephone,Reader_ID);
