@@ -7,7 +7,7 @@ import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import com.example.library.database.src.team.library.util.JdbcUtils;
 
-import java.awt.*;
+// import java.awt.*;
 import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -126,8 +126,8 @@ public class Librarian {
      * */
     @Test
     public void test3() {
-        System.out.println(new Librarian().LPasswordModify("17130177001", "1234555"));//true
-        System.out.println(new Librarian().LNameModify("17130177001", "Tracy"));//true
+        System.out.println(Librarian.LPasswordModify("17130177001", "1234555"));//true
+        System.out.println(Librarian.LNameModify("17130177001", "Tracy"));//true
     }
 
     /**
@@ -191,7 +191,7 @@ public class Librarian {
     @Test
     public void test5(){
         System.out.println(new Librarian().ReaderRegister("13412345655","Momo","1234678@qq.com"));
-        System.out.println(new Librarian().DeleteReader("13412345655"));
+        System.out.println(Librarian.DeleteReader("13412345655"));
 
     }
 
@@ -238,13 +238,13 @@ public class Librarian {
     /**管理员修改读者信息
      * */
     public boolean NameModify(String Reader_ID,String N_name)  {
-        return new Reader().NameModify(Reader_ID,N_name);
+        return Reader.NameModify(Reader_ID,N_name);
     }
     public boolean E_mailModify(String Reader_ID,String N_Email)  {
-        return new Reader().E_mailModify(Reader_ID,N_Email);
+        return Reader.E_mailModify(Reader_ID,N_Email);
     }
     boolean PasswordModify(String Reader_ID,String N_Password)  {
-        return new Reader().PasswordModify(Reader_ID, N_Password);
+        return Reader.PasswordModify(Reader_ID, N_Password);
     }
     //显示所有管理员
     public static java.util.List<LibrarianInfo> ShowallLibr()

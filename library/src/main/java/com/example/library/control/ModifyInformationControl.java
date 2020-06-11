@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
-import java.util.List;
+// import java.util.List;
 
 @RestController
 public class ModifyInformationControl {
@@ -43,8 +43,8 @@ public class ModifyInformationControl {
 
             HttpSession session = request.getSession();
             String readerID = session.getAttribute("username").toString();
-            new Reader().E_mailModify(readerID, email);
-            new Reader().NameModify(readerID, name);
+            Reader.E_mailModify(readerID, email);
+            Reader.NameModify(readerID, name);
 
             response.sendRedirect("ReaderPage");
             return mv;

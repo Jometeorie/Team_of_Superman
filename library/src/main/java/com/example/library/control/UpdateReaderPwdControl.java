@@ -31,7 +31,7 @@ public class UpdateReaderPwdControl {
             String username = request.getSession().getAttribute("username").toString();
             String password = request.getParameter("new_password");
 
-            boolean isUpdate = new Reader().PasswordModify(username, password);
+            boolean isUpdate = Reader.PasswordModify(username, password);
             if (isUpdate) {
                 System.out.println("Successed update!");
                 HttpSession session = request.getSession();

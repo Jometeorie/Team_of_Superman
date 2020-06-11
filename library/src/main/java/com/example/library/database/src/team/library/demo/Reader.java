@@ -111,9 +111,9 @@ public class Reader {
      * */
     @Test
     public void test3(){
-        System.out.println(new Reader().NameModify("13512345678","Amy"));//true
-        System.out.println(new Reader().E_mailModify("13512345678","1234567777@463.com"));//true
-        System.out.println(new Reader().PasswordModify("13512345678","123252"));//true
+        System.out.println(Reader.NameModify("13512345678","Amy"));//true
+        System.out.println(Reader.E_mailModify("13512345678","1234567777@463.com"));//true
+        System.out.println(Reader.PasswordModify("13512345678","123252"));//true
     }
     /**
      * 读者个人信息修改

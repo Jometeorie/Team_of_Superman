@@ -12,10 +12,10 @@ import javax.servlet.http.HttpSession;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+// import javax.servlet.http.HttpSession;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+// import javax.servlet.http.HttpServletRequest;
+// import javax.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -69,12 +69,12 @@ public class ReaderFormControl {
                                                     @PathVariable("book_name") String book_name, @PathVariable("reader_id") String reader_id, 
                                                     @PathVariable("lend_time") String lend_time, HttpServletRequest request, 
                                                     HttpServletResponse response) throws IOException {
-        HttpSession session = request.getSession();
+        // HttpSession session = request.getSession();
         String libr_id = Book.getLibrID(book_id);
         String checkout_id = Book.getUUID();
         long nowTime = System.currentTimeMillis();
         Date nowDate = new Date(nowTime);
-        String reader_name = Book.getreadername(reader_id);
+        // String reader_name = Book.getreadername(reader_id);
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String return_time = df.format(nowDate);
         Book.returnBook(checkout_id, libr_id, book_id, book_name, reader_id, return_time);

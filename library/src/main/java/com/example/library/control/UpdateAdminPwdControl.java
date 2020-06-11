@@ -31,7 +31,7 @@ public class UpdateAdminPwdControl {
             String username = request.getSession().getAttribute("username").toString();
             String password = request.getParameter("new_password");
 
-            boolean isUpdate = new Librarian().LPasswordModify(username, password);
+            boolean isUpdate = Librarian.LPasswordModify(username, password);
             if (isUpdate) {
                 System.out.println("Successed update!");
                 HttpSession session = request.getSession();

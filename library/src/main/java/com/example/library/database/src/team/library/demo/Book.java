@@ -1,6 +1,6 @@
 package com.example.library.database.src.team.library.demo;
 
-import com.example.library.database.src.team.library.demo.DatabaseController.*;
+// import com.example.library.database.src.team.library.demo.DatabaseController.*;
 
 import org.junit.Test;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -15,7 +15,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 // import java.sql.SQLException;
-import java.text.DateFormat;
+// import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.text.ParseException;
 import java.util.Date;
@@ -77,9 +77,9 @@ public class Book{
      * */
     @Test
     public void test2(){
-        System.out.println(new Book().EditLocation("floor4-434-C","2"));
-        System.out.println(new Book().EditBook_Name("i want ","2"));
-        System.out.println(new Book().EditCategory("math","2"));
+        System.out.println(Book.EditLocation("floor4-434-C","2"));
+        System.out.println(Book.EditBook_Name("i want ","2"));
+        System.out.println(Book.EditCategory("math","2"));
 
     }
     /**
@@ -688,7 +688,6 @@ public class Book{
 
     public static void addRank(String category) {
         for (int i = 0; i < TypeList.size(); i++) {
-            TypeInfo temp = TypeList.get(i);
             if (TypeList.get(i).getTypeName().equals(category)) {
                 TypeList.get(i).AddReserve();
                 break;

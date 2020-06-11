@@ -1,18 +1,18 @@
 package com.example.library.database.src.team.library.demo;
 
 // import com.example.one.mapper.LibraryMapper;
-import com.example.library.database.src.team.library.demo.LibraryMapper.*;
+// import com.example.library.database.src.team.library.demo.LibraryMapper.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
+// import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.sql.ResultSet;
+// import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+// import java.text.SimpleDateFormat;
+// import java.util.ArrayList;
+// import java.util.Date;
+// import java.util.List;
 
 public class DatabaseController {
     @Autowired(required = false)
@@ -54,11 +54,11 @@ public class DatabaseController {
     public double CountPerBookFine(@RequestParam(name = "bookId") String bookId,
                                  @RequestParam(name = "readerId") String readerId) throws ParseException {
 
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        Date dateTime1 = sdf.parse(getBorrowTime(bookId,readerId));
-        Date dateTime2 = sdf.parse(getReturnTime(bookId,readerId));
-        long difference = dateTime1.getTime() - dateTime2.getTime();
-        long days = difference / (1000 * 60 * 60 * 24);
+        // SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        // Date dateTime1 = sdf.parse(getBorrowTime(bookId,readerId));
+        // Date dateTime2 = sdf.parse(getReturnTime(bookId,readerId));
+        // long difference = dateTime1.getTime() - dateTime2.getTime();
+        // long days = difference / (1000 * 60 * 60 * 24);
         //    罚金金额
        // if(days-systemDate>0){
            // return (days-getSystemDate(adminID))*getSystemFine(adminID);

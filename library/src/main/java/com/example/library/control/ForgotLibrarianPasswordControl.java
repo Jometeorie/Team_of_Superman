@@ -28,7 +28,7 @@ public class ForgotLibrarianPasswordControl {
         if (request.getParameter("ForgotLibrarianPassword") != null) {
             mv.setViewName("/ForgotLibrarianPassword");
             String username = request.getParameter("username");
-            String email = request.getParameter("email");
+            // String email = request.getParameter("email");
 
             // 判断是否成功
             boolean isLibr =new Librarian().isLibrarian(username);

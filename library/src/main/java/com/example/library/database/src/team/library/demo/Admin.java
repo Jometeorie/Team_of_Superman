@@ -1,6 +1,6 @@
 package com.example.library.database.src.team.library.demo;
 
-import com.example.library.database.src.team.library.demo.DatabaseController;
+// import com.example.library.database.src.team.library.demo.DatabaseController;
 
 import org.junit.Test;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -132,14 +132,14 @@ public class Admin {
      * 修改密码
      * */
     public boolean LPasswordModify(String Libr_ID,String N_Password)  {
-        return new Librarian().LPasswordModify(Libr_ID,N_Password);
+        return Librarian.LPasswordModify(Libr_ID,N_Password);
     }
     /**
      * 超级管理员修改管理员个人信息
      * 修改姓名
      * */
     public boolean LNameModify(String Libr_ID,String N_Name)  {
-        return new Librarian().LNameModify(Libr_ID,N_Name);
+        return Librarian.LNameModify(Libr_ID,N_Name);
     }
 
     /**
