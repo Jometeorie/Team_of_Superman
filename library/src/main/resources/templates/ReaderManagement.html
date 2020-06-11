@@ -244,10 +244,10 @@
                 <table class="table" style="text-align:center" id="mytable">
                     <thead>
                     <tr>
-                        <th>Reader_id</th>
+                        <th>Reader_id(TEL)</th>
                         <th>Name</th>
                         <th>Email</th>
-                        <th>Telephone</th>
+                        <th>Password</th>
                     </tr>
                 </thead>
                 <!--    后端list成员变量名对应小写 -->
@@ -256,7 +256,7 @@
                         <td th:text=${reader.reader_id}></td>
                         <td th:text=${reader.reader_name}></td>
                         <td th:text=${reader.e_mail}></td>
-                        <td th:text=${reader.reader_id}></td>
+                        <td th:text=${reader.password}></td>
                     </tr>
 <!--                 <tr>
                     <td>17130177001</td>
