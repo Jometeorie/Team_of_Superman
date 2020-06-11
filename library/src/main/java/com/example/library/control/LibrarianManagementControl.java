@@ -59,7 +59,8 @@ public class LibrarianManagementControl {
             @ResponseBody
             public ModelAndView changeLibrarian(@PathVariable ("id") String id, @PathVariable ("name") String name,
             @PathVariable ("password") String password, HttpServletRequest request, HttpServletResponse response)  throws IOException {
-    
+                Librarian.LNameModify(id,name);
+                Librarian.LPasswordModify(id,password);
                return new ModelAndView("redirect:/LibrarianManagement");
             }
         
@@ -67,7 +68,7 @@ public class LibrarianManagementControl {
             @RequestMapping(value = "LibrarianManagement/Delete/{id}")
             @ResponseBody
             public ModelAndView deleteLibrarian(@PathVariable("id") String id, HttpServletRequest request, HttpServletResponse response)  throws IOException {
-    
-               return new ModelAndView("redirect:/LibrarianManagement");
+                Admin.DeleteLibr(id);
+                return new ModelAndView("redirect:/LibrarianManagement");
             }
 }

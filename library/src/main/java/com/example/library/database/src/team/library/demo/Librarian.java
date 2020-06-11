@@ -133,7 +133,7 @@ public class Librarian {
      * 管理员个人信息修改
      * 修改姓名
      * */
-    public boolean LNameModify(String Libr_ID,String N_Name)  {
+    public static boolean LNameModify(String Libr_ID,String N_Name)  {
         JdbcTemplate template=new JdbcTemplate(JdbcUtils.getDataSource());
         String sql="update librarian set LIBR_NAME=? where LIBR_ID=?";
         int count=template.update(sql,N_Name,Libr_ID);
@@ -145,7 +145,7 @@ public class Librarian {
      * 管理员个人信息修改
      * 修改密码
      * */
-    public boolean LPasswordModify(String Libr_ID,String N_Password)  {
+    public static boolean LPasswordModify(String Libr_ID,String N_Password)  {
         JdbcTemplate template=new JdbcTemplate(JdbcUtils.getDataSource());
         String sql="update librarian set PASSWORD=? where LIBR_ID=?";
         int count=template.update(sql,N_Password,Libr_ID);
@@ -210,7 +210,7 @@ public class Librarian {
     /**
      * 通过管理员删除读者账号
      * */
-    public boolean DeleteReader(String Reader_ID) {
+    public static boolean DeleteReader(String Reader_ID) {
         Connection con=null;
         PreparedStatement stmt=null;
         ResultSet rs =null;
