@@ -160,7 +160,7 @@ public class Book{
      * */
     @Test
     public void test3(){
-        System.out.println(Book.InsertBook(getUUID(), "hhhhh","lam","floor4-434-F", BigDecimal.valueOf(25)));
+        //System.out.println(Book.InsertBook(getUUID(), "hhhhh","lam","floor4-434-F", BigDecimal.valueOf(25)));
     }
     /**
      * 添加书籍
@@ -173,10 +173,10 @@ public class Book{
         return uuidStr;
       }
       
-    public static boolean InsertBook(String B_ID, String B_Name,String author,String location,BigDecimal price ) {
+    public static boolean InsertBook(String B_ID, String B_Name,String author,String location,BigDecimal price,String category ) {
         JdbcTemplate template=new JdbcTemplate(JdbcUtils.getDataSource());
-        String sql="insert into book(BOOK_ID, BOOK_NAME,AUTHOR,LOCATION,PRICE) values(?,?,?,?,?)";
-        int count=template.update(sql,B_ID,B_Name,author,location,price);
+        String sql="insert into book(BOOK_ID, BOOK_NAME,AUTHOR,LOCATION,PRICE,CATEGORY) values(?,?,?,?,?.?)";
+        int count=template.update(sql,B_ID,B_Name,author,location,price,category);
         if(count==1)
             return true;
         return false;
