@@ -10,6 +10,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.example.library.database.src.team.library.demo.Librarian;
 
@@ -33,6 +34,15 @@ public class MainPageControl
             response.sendRedirect("MainPage");
             return mv;
         }
+
+        else if (request.getParameter("logout") != null) {
+            HttpSession session = request.getSession();
+            session.setAttribute("username", "");
+            session.setAttribute("identity", "");
+            response.sendRedirect("MainPage");
+            return mv;
+        }
+
         return mv;
     }
 }

@@ -38,7 +38,16 @@ public class ReaderPageControl
             response.sendRedirect("MainPage");
             return mv;
         }
-        if (request.getParameter("search_button") != null) {
+
+        else if (request.getParameter("logout") != null) {
+            HttpSession session = request.getSession();
+            session.setAttribute("username", "");
+            session.setAttribute("identity", "");
+            response.sendRedirect("MainPage");
+            return mv;
+        }
+
+        else if (request.getParameter("search_button") != null) {
             ModelAndView model = new ModelAndView("redirect:/SearchPage");
             String  searchName = request.getParameter("search");
             model.addObject("search_name", searchName);  

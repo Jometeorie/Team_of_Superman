@@ -13,6 +13,7 @@ import java.io.IOException;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 @RestController
 public class LibrarianRegisterControl
@@ -49,6 +50,15 @@ public class LibrarianRegisterControl
             response.sendRedirect("MainPage");
             return mv;
         }
+
+        else if (request.getParameter("logout") != null) {
+            HttpSession session = request.getSession();
+            session.setAttribute("username", "");
+            session.setAttribute("identity", "");
+            response.sendRedirect("MainPage");
+            return mv;
+        }
+
         return mv;
     }
 }
