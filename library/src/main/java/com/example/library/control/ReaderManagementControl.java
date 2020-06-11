@@ -55,14 +55,15 @@ public class ReaderManagementControl {
     }
 
         // 修改读者信息
-        @RequestMapping(value = "ReaderManagement/Modify/{id}/{name}/{e_mail}")
+        @RequestMapping(value = "ReaderManagement/Modify/{id}/{name}/{e_mail}/{password}")
         @ResponseBody
         public ModelAndView changeReader(@PathVariable ("id") String id, @PathVariable("name") String name, 
-        @PathVariable ("e_mail") String e_mail, HttpServletRequest request, HttpServletResponse response)  throws IOException {
+        @PathVariable ("e_mail") String e_mail, HttpServletRequest request, HttpServletResponse response, 
+        @PathVariable ("password") String password)  throws IOException {
             Reader.E_mailModify(id,e_mail);
             Reader.NameModify(id,name);
-            //Reader.PasswordModify(id,password);
-            //Reader.TelephoneModify(id,telephone);
+            Reader.PasswordModify(id,password);
+
            return new ModelAndView("redirect:/ReaderManagement");
         }
     

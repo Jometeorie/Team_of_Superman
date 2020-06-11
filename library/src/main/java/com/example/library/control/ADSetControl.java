@@ -23,21 +23,29 @@ public  class ADSetControl
 {
     @RequestMapping(value = "/ADSet", method = RequestMethod.GET)
     public ModelAndView getADSet(ModelAndView mv) {
+        mv.addObject("penalty", Librarian.getFineperday());
+        mv.addObject("period", Librarian.getDays());
+        mv.addObject("depositPaid", Librarian.getDeposit());
         mv.setViewName("/ADSet");
         return mv;
     }
 
     @RequestMapping(value = "/ADSet", method = RequestMethod.POST)
     public ModelAndView postADSet(ModelAndView mv, HttpServletRequest request, HttpServletResponse response)  throws IOException {
-        if (request.getParameter("ADSet") != null) {
-
-            String penalty = request.getParameter("penalty");
+        if (request.getParameter("ADSetChange") != null) {
+            String penalty = request.getParameter("penaltytxt");
             BigDecimal fine = new BigDecimal (penalty);
             Librarian.changefine(fine);
-            String period = request.getParameter("period");
+            String period = request.getParameter("periodtxt");
             int days =Integer.parseInt(period);
             Librarian.changedays(days);
-            String depositPaid = request.getParameter("depositPaid");
+            String depositPaidString = request.getParameter("depositPaidtxt");Librarian.getDeposit();
+            BigDecimal depositPaid = new BigDecimal (depositPaidString);
+            Librarian.changedeposit(depositPaid);
+            mv.addObject("penalty", penalty);
+            mv.addObject("period", period);
+            mv.addObject("depositPaid", depositPaidString);
+            mv.setViewName("/ADSet");
         }
             // 页眉Logo按钮
         else if (request.getParameter("mainpage") != null) {

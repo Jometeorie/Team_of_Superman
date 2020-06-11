@@ -285,7 +285,7 @@
 
                         <tr>
                             <td class="td_left1"><label for="penalty">penalty:<br> (for overdue books)</label></td>
-                            <td class="td_right1"><input type="text" name="penalty" id="penalty" placeholder="The default is ￥1/day">￥</td>
+                            <td class="td_right1"><input type="text" name="penaltytxt" id="penalty" placeholder="The default is ￥1/day">￥</td>
                             <td class="td_left2"><label for="">current value:</label> </td>
                             <td class="td_right2"><label for=""><span th:text = ${penalty}></span></label></td>
                         </tr>
@@ -293,21 +293,21 @@
 
                         <tr>
                             <td class="td_left1"><label for="period">book return period:</label></td>
-                            <td class="td_right1"><input type="text" name="period" id="period" placeholder="The default is 30 days">days</td>
+                            <td class="td_right1"><input type="text" name="periodtxt" id="period" placeholder="The default is 30 days">days</td>
                             <td class="td_left2"><label for="">current value:</label></td>
                             <td class="td_right2"><label for=""><span th:text = ${period}></span></label></td>
                         </tr>
 
                         <tr>
                             <td class="td_left1"><label for="depositPaid">deposit paid:</label></td>
-                            <td class="td_right1"><input type="text" name="depositPaid" id="depositPaid" placeholder="The default value is ￥ 300">￥</td>
+                            <td class="td_right1"><input type="text" name="depositPaidtxt" id="depositPaid" placeholder="The default value is ￥ 300">￥</td>
                             <td class="td_left2"><label for="">current value:</label></td>
                             <td class="td_right2"><label for=""><span th:text = ${depositPaid}></span></label></td>
                         </tr>
 
                         <tr>
                             <td colspan="4" align="center">
-                                <button type="submit" class="btn-block" onclick="return checkForm()" name="AddBook">confirm</button>
+                                <button type="submit" class="btn-block" onclick="return checkForm()" name="ADSetChange">confirm</button>
                             </td>
                         </tr>
 
