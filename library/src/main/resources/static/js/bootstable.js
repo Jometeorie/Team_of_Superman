@@ -68,7 +68,8 @@ function modify() {
 function delete_process() {
 	var jumpHref = 'BookManagement/Delete';
 	var id = document.getElementById("edit0").value;
-	window.location.href=jumpHref + "/" + id;
+	var name = document.getElementById("edit1").value;
+	window.location.href=jumpHref + "/" + id + "/" + name;
 }
 
 function IterarCamposEdit($cols, tarea) {
