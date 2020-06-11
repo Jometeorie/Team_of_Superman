@@ -6,6 +6,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LibrarianPage</title>
     <link rel="stylesheet" href="common.css">
+    <script type="text/javascript">
+        function getItemValue() {
+        var thisItem=$(event.target);
+        var thisItemIndex=thisItem.index();
+        var thisItemAttr=thisItem.parents('.parents-item').data('name');
+        console.log(thisItemAttr+thisItemIndex);
+    }
+ 
+    $('.key li').on('click',function(){
+    getItemValue();
+    </script>
     <style>
         em,
         i {
@@ -193,8 +204,9 @@
             <a href="MainPage">
                 <div class="logo"></div>
             </a>
-            <ul class="key">
+            <ul class="key parents-item" date-name="log">
                 <li class="logout "><a href="MainPage" style="color: #fff"> Log Out</a></li>
+                <!-- <li class="logout "> Log Out </li> -->
                 <li><a href="#contact_us" style="color: #fff">Contact Us</a></li>
                 <li><a href="#about_us" style="color: #fff"> About Us</a></li>
                 <li class="home"> <a href="MainPage" style="color: #fff;">Home</a> </li>
