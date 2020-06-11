@@ -686,6 +686,16 @@ public class Book{
         return TypeList;
     }
 
+    public static int addType(String bookType) {
+        for (int i = 0; i < TypeList.size(); i++) {
+            if (TypeList.get(i).getTypeName().equals(bookType)) {
+                return 0;
+            }
+        }
+        TypeList.add(new TypeInfo(bookType, 0));
+        return 1;
+    }
+
     public static void addRank(String category) {
         for (int i = 0; i < TypeList.size(); i++) {
             if (TypeList.get(i).getTypeName().equals(category)) {
