@@ -1,7 +1,7 @@
 package com.example.library.database.src.team.library.demo;
 
 import com.example.library.database.src.team.library.util.JdbcUtils;
-import org.junit.Test;
+// import org.junit.Test;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 

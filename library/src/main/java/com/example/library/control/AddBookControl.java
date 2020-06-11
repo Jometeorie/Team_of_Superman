@@ -10,7 +10,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.example.library.database.src.team.library.demo.*;
 import com.example.library.utils.*;
 
-// import javax.servlet.http.HttpSession;
+import javax.servlet.http.HttpSession;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -72,6 +72,15 @@ public class AddBookControl
             response.sendRedirect("MainPage");
             return mv;
         }
+        
+        else if (request.getParameter("logout") != null) {
+            HttpSession session = request.getSession();
+            session.setAttribute("username", "");
+            session.setAttribute("identity", "");
+            response.sendRedirect("MainPage");
+            return mv;
+        }
+
         return mv;
     }
 

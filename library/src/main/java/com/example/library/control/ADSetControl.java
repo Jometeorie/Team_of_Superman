@@ -13,6 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import java.io.IOException;
 import java.math.BigDecimal;
@@ -40,6 +41,14 @@ public  class ADSetControl
         }
             // 页眉Logo按钮
         else if (request.getParameter("mainpage") != null) {
+            response.sendRedirect("MainPage");
+            return mv;
+        }
+
+        else if (request.getParameter("logout") != null) {
+            HttpSession session = request.getSession();
+            session.setAttribute("username", "");
+            session.setAttribute("identity", "");
             response.sendRedirect("MainPage");
             return mv;
         }

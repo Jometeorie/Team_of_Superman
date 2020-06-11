@@ -6,7 +6,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.example.library.database.src.team.library.demo.*;
 import org.springframework.web.bind.annotation.*;
 
-// import javax.servlet.http.HttpSession;
+import javax.servlet.http.HttpSession;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -39,6 +39,14 @@ public class ReaderManagementControl {
 
         // 页眉Logo按钮
         if (request.getParameter("mainpage") != null) {
+            response.sendRedirect("MainPage");
+            return mv;
+        }
+
+        else if (request.getParameter("logout") != null) {
+            HttpSession session = request.getSession();
+            session.setAttribute("username", "");
+            session.setAttribute("identity", "");
             response.sendRedirect("MainPage");
             return mv;
         }
