@@ -154,14 +154,14 @@
         }
         
         .rg_center {
-            width: 600px;
+            width: 700px;
             margin: 0 auto;
             padding-top: 50px;
             padding-left: 20px;
             /* background-color: pink; */
         }
         
-        .td_left {
+        .td_left1 {
             width: 200px;
             text-align: left;
             font-size: 17px;
@@ -169,17 +169,33 @@
             /* background-color: skyblue; */
         }
         
-        .td_right {
+        .td_left2 {
+            width: 140px;
+            color: rgba(0, 0, 0, .7);
+            text-align: right;
+            font-size: 17px;
+            height: 50px;
+            /* background-color: skyblue; */
+        }
+        
+        .td_right1 {
             text-align: left;
             line-height: 50px;
             font-size: 17px;
+        }
+        
+        .td_right2 {
+            text-align: left;
+            line-height: 50px;
+            font-size: 17px;
+            color: rgba(0, 0, 0, .7);
         }
         
         #penalty,
         #period,
         #depositPaid {
             float: left;
-            width: 300px;
+            width: 200px;
             height: 40px;
             border: 1px solid grey;
             border-radius: 8px;
@@ -268,23 +284,29 @@
                     <table>
 
                         <tr>
-                            <td class="td_left"><label for="penalty">penalty:<br> (for overdue books)</label></td>
-                            <td class="td_right"><input type="text" name="penalty" id="penalty" placeholder="The default is ￥1/day">￥</td>
+                            <td class="td_left1"><label for="penalty">penalty:<br> (for overdue books)</label></td>
+                            <td class="td_right1"><input type="text" name="penalty" id="penalty" placeholder="The default is ￥1/day">￥</td>
+                            <td class="td_left2"><label for="">current value:</label> </td>
+                            <td class="td_right2"><label for=""><span th:text = ${penalty}></span></label></td>
                         </tr>
 
 
                         <tr>
-                            <td class="td_left"><label for="period">book return period:</label></td>
-                            <td class="td_right"><input type="text" name="period" id="period" placeholder="The default is 30 days">days</td>
+                            <td class="td_left1"><label for="period">book return period:</label></td>
+                            <td class="td_right1"><input type="text" name="period" id="period" placeholder="The default is 30 days">days</td>
+                            <td class="td_left2"><label for="">current value:</label></td>
+                            <td class="td_right2"><label for=""><span th:text = ${period}></span></label></td>
                         </tr>
 
                         <tr>
-                            <td class="td_left"><label for="depositPaid">deposit paid:</label></td>
-                            <td class="td_right"><input type="text" name="depositPaid" id="depositPaid" placeholder="The default value is ￥ 300">￥</td>
+                            <td class="td_left1"><label for="depositPaid">deposit paid:</label></td>
+                            <td class="td_right1"><input type="text" name="depositPaid" id="depositPaid" placeholder="The default value is ￥ 300">￥</td>
+                            <td class="td_left2"><label for="">current value:</label></td>
+                            <td class="td_right2"><label for=""><span th:text = ${depositPaid}></span></label></td>
                         </tr>
 
                         <tr>
-                            <td colspan="2" align="center">
+                            <td colspan="4" align="center">
                                 <button type="submit" class="btn-block" onclick="return checkForm()" name="AddBook">confirm</button>
                             </td>
                         </tr>
