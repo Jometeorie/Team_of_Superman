@@ -30,13 +30,13 @@ public class ReaderRegisterControl
         if (request.getParameter("ReaderRegister") != null) {
             String username = request.getParameter("username");
             String password = request.getParameter("password");
-            // String email = request.getParameter("email");
+            String email = request.getParameter("email");
             // String name = request.getParameter("name");
             String tel = request.getParameter("tel");
             // String gender = request.getParameter("gender");
             // String bond = request.getParameter("bond");
     
-            boolean isRegister =new Librarian().ReaderRegister(tel, username, password);
+            boolean isRegister =new Librarian().ReaderRegister(tel, username, email);
             // 判断是否注册成功
             if (isRegister) {
                 System.out.println("Successed register admin!");

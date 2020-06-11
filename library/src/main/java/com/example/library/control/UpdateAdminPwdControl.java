@@ -31,12 +31,12 @@ public class UpdateAdminPwdControl {
             String username = request.getSession().getAttribute("username").toString();
             String password = request.getParameter("new_password");
 
-            boolean isUpdate = Librarian.LPasswordModify(username, password);
+            boolean isUpdate = new Admin().APasswordModify(username, password);
             if (isUpdate) {
                 System.out.println("Successed update!");
                 HttpSession session = request.getSession();
                 session.setAttribute("username", username);
-                response.sendRedirect("LibrarianLogin");
+                response.sendRedirect("AdminLogin");
                 // 前端判断是否成功的依据，0为成功，非0为失败
                 mv.addObject("value_judg", 0);
             }

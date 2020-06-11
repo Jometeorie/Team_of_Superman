@@ -25,6 +25,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 
 import java.util.List;
+import java.util.Locale.Category;
 
 @RestController
 public class AddBookControl
@@ -56,9 +57,10 @@ public class AddBookControl
             String author = request.getParameter("author");
             String place = request.getParameter("place");
             BigDecimal price = new BigDecimal(request.getParameter("price"));
+            String category = request.getParameter("category");
             // String intro = request.getParameter("intro");
             // 判断是否添加书籍成功
-            boolean isInsert = Book.InsertBook(bookID, bookName, author, place, price);
+            boolean isInsert = Book.InsertBook(bookID, bookName, author, place, price, category);
             if (isInsert) {
                 // 添加条形码
                 BarCode.generateFile(bookID, "library/src/main/resources/static/BarCode/" + bookID + ".png");

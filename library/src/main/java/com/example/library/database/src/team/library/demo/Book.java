@@ -175,7 +175,7 @@ public class Book{
       
     public static boolean InsertBook(String B_ID, String B_Name,String author,String location,BigDecimal price,String category ) {
         JdbcTemplate template=new JdbcTemplate(JdbcUtils.getDataSource());
-        String sql="insert into book(BOOK_ID, BOOK_NAME,AUTHOR,LOCATION,PRICE,CATEGORY) values(?,?,?,?,?.?)";
+        String sql="insert into book(BOOK_ID, BOOK_NAME,AUTHOR,LOCATION,PRICE,CATEGORY) values(?,?,?,?,?,?)";
         int count=template.update(sql,B_ID,B_Name,author,location,price,category);
         if(count==1)
             return true;
