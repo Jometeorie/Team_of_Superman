@@ -28,6 +28,7 @@ public class BookManagementControl {
     }
     public ModelAndView getBookManagement(ModelAndView mv) {
         String search_name = new String("");
+        System.out.println("xxxxxxxxxx");
         return getBookManagement(mv, search_name);
     } 
 
@@ -59,6 +60,12 @@ public class BookManagementControl {
 
     @RequestMapping(value = "/BookManagement", method = RequestMethod.POST)
     public ModelAndView postBookManagement(ModelAndView mv, HttpServletRequest request, HttpServletResponse response)  throws IOException {
+        // 书籍搜索按钮
+        if (request.getParameter("search_button") != null) {
+            String search_name = request.getParameter("search");
+            return getBookManagement(mv, search_name);
+        }
+        
         // 页眉Logo按钮
         if (request.getParameter("mainpage") != null) {
             response.sendRedirect("MainPage");

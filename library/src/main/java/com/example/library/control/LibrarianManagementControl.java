@@ -46,7 +46,7 @@ public class LibrarianManagementControl {
         return mv;
     }
 
-            // 修改管理员信息
+        // 修改管理员信息
             @RequestMapping(value = "LibrarianManagement/Modify/{id}/{name}/{password}")
             @ResponseBody
             public ModelAndView changeLibrarian(@PathVariable ("id") String id, @PathVariable ("name") String name,
